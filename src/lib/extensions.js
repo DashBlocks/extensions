@@ -606,9 +606,7 @@ const pmExtensions = [
 
 export {extensions, pmExtensions}
 
-function clickExtension(ext) {
-    
-}
+let Exts = JSON.stringify(extensions)
 
 function innerHTML(p1, p2) {
   document.getElementById(p1).innerHTML = p2
@@ -617,7 +615,18 @@ function TextContent(p1, p2) {
   document.getElementById(p1).textContent = p2
 }
 
-let Exts = JSON.stringify(extensions)
+function clickExtension(ext) {
+    let contend = document.getElementById(ext)
+    for(let i = 0; i < Exts.length; i++) {
+        if (Exts[i].id == ext) {
+            let ExtCode = Exts[i].code
+        }
+    }
+    let ExtCode = `https://dashblocks.github.io/extensions/static/${ExtCode}`
+    let contend = `${contend} <a href=\"https://dashblocks.github.io/editor.html?extension=\"${ExtCode}\"\"></a>`
+    innerHTML(ext, contend)
+}
+
 let contend = ''
 for(let i = 0; i < Exts.length; i++) {
     let Ext = Exts[i]
