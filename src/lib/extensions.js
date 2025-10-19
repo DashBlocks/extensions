@@ -605,3 +605,40 @@ const pmExtensions = [
 ];
 
 export {extensions, pmExtensions}
+
+function clickExtension(ext) {
+    
+}
+
+function innerHTML(p1, p2) {
+  document.getElementById(p1).innerHTML = p2
+}
+function TextContent(p1, p2) {
+  document.getElementById(p1).textContent = p2
+}
+
+let Exts = JSON.stringify(extensions)
+let contend = ''
+for(let i = 0; i < Exts.length; i++) {
+    let Ext = Exts[i]
+    let ExtId = Ext.id
+    let ExtImage = Ext.banner
+    let ExtName = Ext.name
+    let ExtDescription = Ext.description
+    let ExtCreators = Ext.creator
+    let ExtCreator = ''
+    for(let i2 = 0; i2 < ExtCreator.length; i2++) {
+        let i3 = ExtCreators[i2]
+        let ExtCreator = `${ExtCreator}, ${i3}`
+    }
+    let content = `
+        ${contend}
+        <div class="extension" id=\"${ExtId}\" onclick=\"clickExtension(\'${ExtId}\')\">
+          <img src=\"/src/extensions/static/images/${ExtImage}/\">
+          <h3>${ExtName}</h3>
+          <p>${ExtDescription}</p>
+          <p>Created by ${ExtCreator}</p>
+        </div>
+`
+}
+innerHTML('extensions', contend)
