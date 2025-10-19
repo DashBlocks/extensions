@@ -622,7 +622,7 @@ function clickExtension(ext) {
             let ExtCode = Exts[i].code
         }
     }
-    let ExtCode = `https://dashblocks.github.io/extensions/static/${ExtCode}`
+    let ExtCode = `https://dashblocks.github.io/extensions/static/extensions/${ExtCode}`
     let contend = `${contend} <a href=\"https://dashblocks.github.io/editor.html?extension=\"${ExtCode}\"\"></a>`
     innerHTML(ext, contend)
 }
