@@ -111,6 +111,7 @@ const extensions = [
         code: "shaman2016/ModHTTP.js",
         // banner: "shaman2016/ModHTTP.svg",
         creator: "SHAMAN2016",
+        notes: "Beta-version. Testing extension. There may be errors in the extension.",
     },
 ];
 
