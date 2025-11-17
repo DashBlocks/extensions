@@ -2,6 +2,7 @@
 // ID: ModHttpShaman2016
 // Description: Extension for http requests
 // By: SHAMAN2016 <https://scratch.mit.edu/users/shaman2016/>
+// WARNING! EXTENSION BETA-VERSION!
 
 (function (Scratch) {
   "use strict";
