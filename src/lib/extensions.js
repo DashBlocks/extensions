@@ -99,9 +99,9 @@ const extensions = [
     {
         name: "JavaScript",
         id: "JavaScriptRunner",
-        description: "Run the JavaScript code directly in Dash!",
+        description: "Run the JavaScript code directly in Dash! (version 2.1)",
         code: "shaman2016/JavaScriptRunner.js",
-        // banner: "shaman2016/JavaScriptRunner.svg",
+        banner: "shaman2016/JavaScriptRunner.svg",
         creator: "SHAMAN2016",
     },
 ];
