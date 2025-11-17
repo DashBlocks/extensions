@@ -104,6 +104,14 @@ const extensions = [
         banner: "shaman2016/JavaScriptRunner.svg",
         creator: "SHAMAN2016",
     },
+    {
+        name: "Modification Http",
+        id: "ModHttpShaman2016",
+        description: "Extension for http requests",
+        code: "shaman2016/ModHTTP.js",
+        // banner: "shaman2016/ModHTTP.svg",
+        creator: "SHAMAN2016",
+    },
 ];
 
 // This is PenguinMod's extensions. Added here for IDs addition
