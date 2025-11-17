@@ -632,7 +632,21 @@
                         opcode: 'clearUpdates',  
                         blockType: Scratch.BlockType.COMMAND,  
                         text: 'очистить обновления'  
-                    },  
+                    }, 
+                    {  
+                        opcode: 'GetAllUpdates',  
+                        blockType: Scratch.BlockType.ARRAY,  
+                        text: 'Список всех сообщений (json)',
+                    },
+                    {
+                        blockType: Scratch.BlockType.LABEL,
+                        text: "Информация о боте"
+                    },
+                    {  
+                        opcode: 'GetBotInfo',  
+                        blockType: Scratch.BlockType.OBJECT,  
+                        text: 'Объект бота'  
+                    },
                 ],  
                 menus: {
                     PARSE_MODE_MENU: {
@@ -1334,6 +1348,24 @@
                     }
                 }
             });  
+        }
+        async GetAllUpdates() {
+            const url = `https://api.telegram.org/bot${this.token}/getUpdates`;
+            await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).catch(error => console.error("Ошибка при получении списка обновлений:", error));
+        }
+        async GetBotInfo() {
+            const url = `https://api.telegram.org/bot${this.token}/getMe`;
+            await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).catch(error => console.error("Ошибка при получении информации о боте: ", error));
         }
     }  
  
