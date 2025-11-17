@@ -556,6 +556,12 @@
                             }
                         }
                     }, 
+                    {  
+                        opcode: 'getJsonMessage',  
+                        blockType: Scratch.BlockType.OBJECT,  
+                        text: "получить JSON последнего сообщения",
+                        arguments: {}
+                    },
                     {
                         blockType: Scratch.BlockType.LABEL,
                         text: "2. Коллбэки"
@@ -1351,7 +1357,7 @@
         }
         async GetAllUpdates() {
             const url = `https://api.telegram.org/bot${this.token}/getUpdates`;
-            await fetch(url, {
+            return fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -1360,12 +1366,15 @@
         }
         async GetBotInfo() {
             const url = `https://api.telegram.org/bot${this.token}/getMe`;
-            await fetch(url, {
+            return fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
             }).catch(error => console.error("Ошибка при получении информации о боте: ", error));
+        }
+        async getJsonMessage() {
+            return lastUpdate.message
         }
     }  
  
