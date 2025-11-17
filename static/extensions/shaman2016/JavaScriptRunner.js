@@ -12,8 +12,31 @@
     const Cast = Scratch.Cast;
     let sandboxed = true;
 
-    const functions = `
-        function output(out) {return out;}; function error(err) {output(`Error: ${err}`)}
+    const RunnerDopFunc = `
+        per = {}
+        const RunnerVersion = '2.1'
+        const RunnerData = {
+            "name": "JavaScript Runner",
+            "By": [
+                {
+                  "nickname": "SHAMAN2016",
+                  "Scratch": "https://scratch.mit.edu/users/SHAMAN2016",
+                  "Github": "https://github.com/shaman2016scratch"
+                }
+            ],
+            "version": "2.1",
+            "id": "shaman2016JavaScriptRunner"
+        }
+        const RunnerFunc = {}
+        function output(out) {
+            return out;
+        }
+        function error(err) {
+            return \`Error: \${err}\`
+        }
+        function warn(war) {
+            return \`Warning: \${war}\`
+        }
     `
 
     class JavaScriptExtension {
@@ -39,7 +62,7 @@
                             }
                         }
                     },
-                    /*{
+                    {
                         "opcode": "reporter",
                         "text": "reporter [CODE]",
                         "blockType": Scratch.BlockType.REPORTER,
@@ -60,29 +83,7 @@
                                 "defaultValue": "output(1 < 2)"
                             }
                         }
-                    },
-                    {
-                        "opcode": "array",
-                        "text": "array [CODE]",
-                        "blockType": Scratch.BlockType.ARRAY,
-                        "arguments": {
-                            "CODE": {
-                                "type": Scratch.ArgumentType.STRING,
-                                "defaultValue": "output([\"apple\", \"banana\"])"
-                            }
-                        }
-                    },
-                    {
-                        "opcode": "object",
-                        "text": "object [CODE]",
-                        "blockType": Scratch.BlockType.OBJECT,
-                        "arguments": {
-                            "CODE": {
-                                "type": Scratch.ArgumentType.STRING,
-                                "defaultValue": "output({\"apple\": \"banana\"})"
-                            }
-                        }
-                    }*/
+                    }
                 ]
             }
         }
@@ -91,14 +92,14 @@
             sandboxed = !sandboxed;
             Scratch.vm.extensionManager.refreshBlocks();
         }
-        _execute (code) {
+        SandboxJsRun (code) {
             new Promise((resolve, reject) => {
                 const script = document.createElement('script');
                 if (!sandboxed) {
                     script.onerror = () => {
                         reject(new Error(`Error in unsandboxed script. Check console for more info`));
                     };
-                    script.src = `data:application/javascript,${encodeURIComponent(functions)};${encodeURIComponent(code)}`;
+                    script.src = `data:application/javascript,${encodeURIComponent(RunnerDopFunc)};${encodeURIComponent(code)}`;
                     document.body.appendChild(script);
                     return;
                 }
@@ -106,29 +107,21 @@
                 script.onerror = () => {
                     reject(new Error(`Error in sandboxed script. Check the console for more info`));
                 };
-                script.src = `data:application/javascript,${encodeURIComponent(functions)};${encodeURIComponent(code)}`;
+                script.src = `data:application/javascript,${encodeURIComponent(RunnerDopFunc)};${encodeURIComponent(code)}`;
                 document.body.appendChild(script);
             })
         }
 
         command (args) {
-            this._execute(args.CODE);
+            this.SandboxJsRun(args.CODE);
         }
         reporter (args) {
-            const string = Cast.toString(this._execute(args.CODE));
+            const string = Cast.toString(this.SandboxJsRun(args.CODE));
             return string;
         }
         boolean (args) {
-            const boolean = Cast.toBoolean(this._execute(args.CODE));
+            const boolean = Cast.toBoolean(this.SandboxJsRun(args.CODE));
             return boolean;
-        }
-        array (args) {
-            const array = Cast.toList(this._execute(args.CODE));
-            return array;
-        }
-        object (args) {
-            const object = Cast.toObject(this._execute(args.CODE));
-            return object;
         }
     }
 
