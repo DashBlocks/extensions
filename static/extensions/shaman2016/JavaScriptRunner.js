@@ -44,6 +44,7 @@
             return {
                 "id": "shaman2016JavaScriptRunner",
                 "name": "JavaScript Runner",
+                "docs": "https://shaman2016scratch.github.io/shaman2016.github.io/extensions/extension6/docs/"
                 "color1": "#0fbd8c",
                 "blocks": [
                     {
