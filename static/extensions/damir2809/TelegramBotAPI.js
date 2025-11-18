@@ -39,7 +39,7 @@
                 id: 'TelegramBotAPI',  
                 name: 'Telegram Bot API',  
                 menuIconURI: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/768px-Telegram_2019_Logo.svg.png",
-                docsURI: "https://github.com/DBDev-git/TelegramBotAPI",
+                docsURI: "https://github.com/DBDev-IT/TelegramBotAPI",
                 color1: '#0088CC',  
                 color2: '#006699',  
                 blocks: [  
