@@ -109,7 +109,7 @@ const extensions = [
         id: "ModHttpShaman2016",
         description: "Extension for http requests",
         code: "shaman2016/ModHTTP.js",
-        // banner: "shaman2016/ModHTTP.svg",
+        banner: "unknown.svg",
         creator: "SHAMAN2016",
         notes: "Beta-version. Testing extension. There may be errors in the extension.",
     },
