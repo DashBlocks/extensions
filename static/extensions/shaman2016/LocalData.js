@@ -87,6 +87,11 @@
               blockType: Scratch.BlockType.OBJECT,
               text: "Get All Cookies",
               arguments: {},
+            }, {
+              opcode: "GetAllCookie2",
+              blockType: Scratch.BlockType.ARRAY,
+              text: "Get All Cookies list",
+              arguments: {},
             },
           ],
         };
@@ -120,6 +125,9 @@ GetAllCookie(args) {
     key[Cookies[i].split("=")[0]] = Cookies[i].split("=")[1]
   }
   return keys
+}
+GetAllCookie2(args) {
+  return document.cookie.split("; ")
 }
     }
     Scratch.extensions.register(new LocalData());
