@@ -113,6 +113,14 @@ const extensions = [
         creator: "SHAMAN2016",
         notes: "Beta-version. Testing extension. There may be errors in the extension.",
     },
+    {
+        name: "Local Data Extension",
+        id: "LocalDataByShaman2016",
+        description: "An extension for interacting with cookies and with local storage.",
+        code: "shaman2016/LocalData.js",
+        banner: "unknown.svg",
+        creator: "SHAMAN2016"
+    },
 ];
 
 // This is PenguinMod's extensions. Added here for IDs addition
