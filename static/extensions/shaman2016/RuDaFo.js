@@ -44,7 +44,7 @@ RuDaFo = {
               text: "RuDaFo Object from Json Object [json]",
               arguments: {
                 json: {
-                  defaultValue: {"key":"value", "key2":"value"},
+                  defaultValue: '{"key":"value", "key2":"value"}',
                   type: Scratch.ArgumentType.STRING,
                 },
               },
@@ -54,7 +54,7 @@ RuDaFo = {
               text: "RuDaFo Array from Json Array [json]",
               arguments: {
                 json: {
-                  defaultValue: ["value", "value2"],
+                  defaultValue: '["value", "value2"]',
                   type: Scratch.ArgumentType.STRING,
                 },
               },
