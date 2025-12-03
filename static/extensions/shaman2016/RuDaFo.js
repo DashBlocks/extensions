@@ -117,9 +117,9 @@ block4(args) {
   return RuDaFo.ToJson('array', args.json)
 }
 block5(args) {
-  ret = RuDaFo.ToJson('object', args.rdf)
-  ret = ret[args.key] = args.value
-  return ret
+  ret = RuDaFo.ToJson('object', args.rdf);
+  ret[args.key] = args.value;
+  return ret;
 }
     }
     Scratch.extensions.register(new RuDaFoExt());
