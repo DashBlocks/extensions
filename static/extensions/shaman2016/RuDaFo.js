@@ -104,19 +104,19 @@ RuDaFo = {
     }
   },
 }
-block1(args) {
+async block1(args) {
   return RuDaFo.FromJson('object', args.json)
 }
-block2(args) {
+async block2(args) {
   return RuDaFo.FromJson('array', args.json)
 }
-block3(args) {
+async block3(args) {
   return RuDaFo.ToJson('object', args.json)
 }
-block4(args) {
+async block4(args) {
   return RuDaFo.ToJson('array', args.json)
 }
-block5(args) {
+async block5(args) {
   ret = RuDaFo.ToJson('object', args.rdf);
   ret[args.key] = args.value;
   return ret;
