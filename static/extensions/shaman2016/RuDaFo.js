@@ -31,7 +31,7 @@ RuDaFo = {
   },
 }
 
-    class modals {
+    class RuDaFo {
       getInfo() {
         return {
           id: "RuDaFoByShaman2016",
@@ -121,5 +121,5 @@ block5(args) {
   return ret[args.key] = args.value
 }
     }
-    Scratch.extensions.register(new modals());
+    Scratch.extensions.register(new RuDaFo());
   })(Scratch);
