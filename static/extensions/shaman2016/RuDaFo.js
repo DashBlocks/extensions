@@ -43,7 +43,7 @@ RuDaFo = {
               blockType: Scratch.BlockType.REPORTER,
               text: "RuDaFo Object from Json Object [json]",
               arguments: {
-                json1: {
+                json: {
                   defaultValue: {"key":"value", "key2":"value"},
                   type: Scratch.ArgumentType.STRING,
                 },
@@ -53,29 +53,51 @@ RuDaFo = {
               blockType: Scratch.BlockType.REPORTER,
               text: "RuDaFo Array from Json Array [json]",
               arguments: {
-                json1: {
+                json: {
                   defaultValue: ["value", "value2"],
                   type: Scratch.ArgumentType.STRING,
                 },
               },
             }, {
               opcode: "block3",
-              blockType: Scratch.BlockType.REPORTER,
+              blockType: Scratch.BlockType.OBJECT,
               text: "Json Object from RuDaFo Object [json]",
               arguments: {
-                json1: {
+                json: {
                   defaultValue: "key:value;key2:value2",
-                  type: Scratch.ArgumentType.OBJECT,
+                  type: Scratch.ArgumentType.STRING,
                 },
               },
             }, {
               opcode: "block4",
-              blockType: Scratch.BlockType.REPORTER,
+              blockType: Scratch.BlockType.ARRAY,
               text: "Json Array from RuDaFo Array [json]",
               arguments: {
-                json1: {
+                json: {
                   defaultValue: "value&value2",
-                  type: Scratch.ArgumentType.ARRAY,
+                  type: Scratch.ArgumentType.STRING,
+                },
+              },
+            },
+            {
+              blockType: Scratch.BlockType.LABEL,
+              text: "Interaction with RuDaFo"
+            }, {
+              opcode: "block5",
+              blockType: Scratch.BlockType.REPORTER,
+              text: "Set Key [key] in RuDaFo Object [rdf] value [value]",
+              arguments: {
+                rdf: {
+                  defaultValue: "key:value;key2:value2",
+                  type: Scratch.ArgumentType.STRING,
+                },
+                key: {
+                  defaultValue: "key",
+                  type: Scratch.ArgumentType.STRING,
+                },
+                value: {
+                  defaultValue: "value1",
+                  type: Scratch.ArgumentType.STRING,
                 },
               },
             },
@@ -93,6 +115,10 @@ block3(args) {
 }
 block4(args) {
   return RuDaFo.ToJson('array', args.json)
+}
+block5(args) {
+  ret = RuDaFo.ToJson('object', args.rdf)
+  return ret[args.key] = args.value
 }
     }
     Scratch.extensions.register(new modals());
