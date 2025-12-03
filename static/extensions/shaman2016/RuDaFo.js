@@ -4,7 +4,6 @@
 // By: shaman2016 <https://scratch.mit.edu/users/shaman2016/>
 
 (function (Scratch) {
-  "use strict";
 
   if (!Scratch.extensions.unsandboxed) {
     throw new Error("This Extension must run unsandboxed");
@@ -83,7 +82,7 @@
           ],
         };
       }
-RuDaFo = {
+var RuDaFo = {
   "ToJson": function(f, r) {
     if (f === 'object') {
       RuDaFo.data.i = r.split(';'); RuDaFo.data.i4 = {}; for(RuDaFo.data.i2 = 0; RuDaFo.data.i2 < RuDaFo.data.i.length; RuDaFo.data.i2++) { RuDaFo.data.i3 = RuDaFo.data.i[RuDaFo.data.i2]; RuDaFo.data.i5 = RuDaFo.data.i3.split(':'); RuDaFo.data.i4[RuDaFo.data.i5[0]] = RuDaFo.data.i5[1]; }; return RuDaFo.data.i4;
@@ -105,19 +104,19 @@ RuDaFo = {
   },
 }
 async block1(args) {
-  return RuDaFo.FromJson('object', args.json)
+  return window.RuDaFo.FromJson('object', args.json)
 }
 async block2(args) {
-  return RuDaFo.FromJson('array', args.json)
+  return window.RuDaFo.FromJson('array', args.json)
 }
 async block3(args) {
-  return RuDaFo.ToJson('object', args.json)
+  return window.RuDaFo.ToJson('object', args.json)
 }
 async block4(args) {
-  return RuDaFo.ToJson('array', args.json)
+  return window.RuDaFo.ToJson('array', args.json)
 }
 async block5(args) {
-  ret = RuDaFo.ToJson('object', args.rdf);
+  ret = window.RuDaFo.ToJson('object', args.rdf);
   ret[args.key] = args.value;
   return ret;
 }
