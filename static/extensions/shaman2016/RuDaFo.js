@@ -31,7 +31,7 @@ RuDaFo = {
   },
 }
 
-    class RuDaFo {
+    class RuDaFoExt {
       getInfo() {
         return {
           id: "RuDaFoByShaman2016",
@@ -122,5 +122,5 @@ block5(args) {
   return ret
 }
     }
-    Scratch.extensions.register(new RuDaFo());
+    Scratch.extensions.register(new RuDaFoExt());
   })(Scratch);
