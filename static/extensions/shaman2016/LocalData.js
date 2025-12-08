@@ -137,12 +137,12 @@
       let Cookies = document.cookie.split("; ")
       let keys = {}
       for(let i = 0; i < Cookies.length; i++) {
-        keys[Cookies[i].split("=")[0]] = Cookies[i].split("=")[1]
+        keys[decodeURIComponen(Cookies[i].split("=")[0])] = decodeURIComponent(Cookies[i].split("=")[1])
       }
-      return decodeURIComponent(keys)
+      return keys
     }
     async GetAllCookie2(args) {
-      return decodeURIComponent(document.cookie.split("; "))
+      let cookie = document.cookie.split("; "); let ret = []; for(let i = 0; i < cookie.length; i++) { ret.push(`${decodeURIComponent(cookie[i][0])}=${decodeURIComponent(cookie[i][1])}`) }; return ret
     }
     async ClearLocal(args) {
       localStorage.clear()
