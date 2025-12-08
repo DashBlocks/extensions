@@ -161,7 +161,7 @@
             },
           }, {
             opcode: "n8787LocalStorageGet",
-            blockType: Scratch.BlockType.COMMAND,
+            blockType: Scratch.BlockType.REPORTER,
             text: "Get key [name] database [db] room [room]",
             arguments: {
               name: {
