@@ -105,15 +105,6 @@ const extensions = [
         creator: "SHAMAN2016",
     },
     {
-        name: "Modification Http",
-        id: "ModHttpShaman2016",
-        description: "Extension for http requests",
-        code: "shaman2016/ModHTTP.js",
-        banner: "unknown.svg",
-        creator: "SHAMAN2016",
-        notes: "Beta-version. Testing extension. There may be errors in the extension.",
-    },
-    {
         name: "Local Data Extension",
         id: "LocalDataByShaman2016",
         description: "An extension for interacting with cookies and with local storage.",
