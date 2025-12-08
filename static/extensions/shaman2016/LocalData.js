@@ -129,6 +129,12 @@
     async GetAllCookie2(args) {
       return document.cookie.split("; ")
     }
+    async ClearLocal(args) {
+      sessionStorage.clear()
+    }
+    async ClearEleLocal(args) {
+      localStorage.removeItem(args.element);
+    }
   }
   Scratch.extensions.register(new LocalData());
 })(Scratch);
