@@ -142,7 +142,7 @@
       return decodeURIComponent(keys)
     }
     async GetAllCookie2(args) {
-      return document.cookie.split("; ")
+      return decodeURIComponent(document.cookie.split("; "))
     }
     async ClearLocal(args) {
       localStorage.clear()
