@@ -92,6 +92,21 @@
             blockType: Scratch.BlockType.ARRAY,
             text: "Get All Cookies list",
             arguments: {},
+          }, }, {
+            opcode: "ClearLocal",
+            blockType: Scratch.BlockType.COMMAND,
+            text: "Clear localStorage",
+            arguments: {},
+          }, }, {
+            opcode: "ClearEleLocal",
+            blockType: Scratch.BlockType.COMMAND,
+            text: "Delete key [element] in localStorage",
+            arguments: {
+              element: {
+                defaultValue: "LocalRecord",
+                type: Scratch.ArgumentType.STRING,
+              }
+            },
           },
         ],
       };
