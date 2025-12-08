@@ -115,7 +115,7 @@
       const Cookies = document.cookie.split("; ")
       for(let i = 0; i < Cookies.length; i++) {
         if (Cookies[i].split("=")[0] === args.cookie) {
-          const key = Cookies[i].split("=")[1]
+          let key = Cookies[i].split("=")[1]
         }
       }
       return key
