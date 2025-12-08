@@ -112,10 +112,10 @@
       };
     }
     async GetCookie(args) {
-      let Cookies = document.cookie.split("; ")
+      const Cookies = document.cookie.split("; ")
       for(let i = 0; i < Cookies.length; i++) {
         if (Cookies[i].split("=")[0] === args.cookie) {
-          key = Cookies[i].split("=")[1]
+          const key = Cookies[i].split("=")[1]
         }
       }
       return key
@@ -137,7 +137,7 @@
       let Cookies = document.cookie.split("; ")
       let keys = {}
       for(let i = 0; i < Cookies.length; i++) {
-        key[Cookies[i].split("=")[0]] = Cookies[i].split("=")[1]
+        keys[Cookies[i].split("=")[0]] = Cookies[i].split("=")[1]
       }
       return decodeURIComponent(keys)
     }
