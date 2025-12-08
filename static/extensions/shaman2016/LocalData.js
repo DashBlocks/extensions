@@ -183,12 +183,16 @@
     }
     async GetCookie(args) {
       const Cookies = document.cookie.split("; ")
+      let naydeno = false
       for(let i = 0; i < Cookies.length; i++) {
         if (Cookies[i].split("=")[0] === args.cookie) {
+          naydeno = true
           return Cookies[i].split("=")[1]
         }
       }
-      return ""
+      if (!naydeno) {
+        return ""
+      }
     }
     async GetLocalData(args) {
       return localStorage.getItem(args.key)
