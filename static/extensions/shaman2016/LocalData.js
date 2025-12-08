@@ -115,10 +115,10 @@
       const Cookies = document.cookie.split("; ")
       for(let i = 0; i < Cookies.length; i++) {
         if (Cookies[i].split("=")[0] === args.cookie) {
-          let key = Cookies[i].split("=")[1]
+          return Cookies[i].split("=")[1]
         }
       }
-      return key
+      return ""
     }
     async GetLocalData(args) {
       return localStorage.getItem(args.key)
