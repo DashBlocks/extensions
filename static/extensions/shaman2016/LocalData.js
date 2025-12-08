@@ -113,7 +113,7 @@
     }
     async GetCookie(args) {
       let Cookies = document.cookie.split("; ")
-      for(i = 0; i < Cookies.length; i++) {
+      for(let i = 0; i < Cookies.length; i++) {
         if (Cookies[i].split("=")[0] === args.cookie) {
           key = Cookies[i].split("=")[1]
         }
@@ -136,7 +136,7 @@
     async GetAllCookie(args) {
       let Cookies = document.cookie.split("; ")
       let keys = {}
-      for(i = 0; i < Cookies.length; i++) {
+      for(let i = 0; i < Cookies.length; i++) {
         key[Cookies[i].split("=")[0]] = Cookies[i].split("=")[1]
       }
       return decodeURIComponent(keys)
