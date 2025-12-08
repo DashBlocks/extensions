@@ -19,6 +19,9 @@
         color1: "#a3c0e1",
         blocks: [
           {
+            blockType: Scratch.BlockType.LABEL,
+            text: "Cookies and LocalStorage"
+          }, {
             opcode: "GetCookie",
             blockType: Scratch.BlockType.REPORTER,
             text: "Get Cookie [cookie]",
@@ -107,7 +110,74 @@
                 type: Scratch.ArgumentType.STRING,
               }
             },
-          },
+          }, {
+            blockType: Scratch.BlockType.LABEL,
+            text: "8787LocalStorage"
+          }, {
+            opcode: "n8787LocalStorageSet",
+            blockType: Scratch.BlockType.COMMAND,
+            text: "Set key [name] value [value] database [db] room [room]",
+            arguments: {
+              name: {
+                defaultValue: "LocalRecord",
+                type: Scratch.ArgumentType.STRING,
+              },
+              value: {
+                defaultValue: 899,
+                type: Scratch.ArgumentType.STRING,
+              },
+              db: {
+                defaultValue: "MyDB",
+                type: Scratch.ArgumentType.STRING,
+              },
+              room: {
+                defaultValue: "Records",
+                type: Scratch.ArgumentType.STRING,
+              }
+            },
+          }, {
+            opcode: "n8787LocalStorageNewDB",
+            blockType: Scratch.BlockType.COMMAND,
+            text: "New DataBase [db]",
+            arguments: {
+              db: {
+                defaultValue: "MyDB",
+                type: Scratch.ArgumentType.STRING,
+              },
+            },
+          }, {
+            opcode: "n8787LocalStorageNewRoom",
+            blockType: Scratch.BlockType.COMMAND,
+            text: "New Room [room] in DB [db]",
+            arguments: {
+              db: {
+                defaultValue: "MyDB",
+                type: Scratch.ArgumentType.STRING,
+              },
+              room: {
+                defaultValue: "Records",
+                type: Scratch.ArgumentType.STRING,
+              }
+            },
+          }, {
+            opcode: "n8787LocalStorageGet",
+            blockType: Scratch.BlockType.COMMAND,
+            text: "Get key [name] database [db] room [room]",
+            arguments: {
+              name: {
+                defaultValue: "LocalRecord",
+                type: Scratch.ArgumentType.STRING,
+              },
+              db: {
+                defaultValue: "MyDB",
+                type: Scratch.ArgumentType.STRING,
+              },
+              room: {
+                defaultValue: "Records",
+                type: Scratch.ArgumentType.STRING,
+              }
+            },
+          }
         ],
       };
     }
@@ -149,6 +219,25 @@
     }
     async ClearEleLocal(args) {
       localStorage.removeItem(args.element);
+    }
+    async n8787LocalStorageSet(args) {
+      let i = localStorage.getItem("n8787LocalStorage")
+      i[args.db][args.room][args.name] = args.value
+      localStorage.setItem("n8787LocalStorage", i)
+    }
+    async n8787LocalStorageNewDB(args) {
+      let i = localStorage.getItem("n8787LocalStorage")
+      i[args.db] = {}
+      localStorage.setItem("n8787LocalStorage", i)
+    }
+    async n8787LocalStorageNewRoom(args) {
+      let i = localStorage.getItem("n8787LocalStorage")
+      i[args.db][args.room] = {}
+      localStorage.setItem("n8787LocalStorage", i)
+    }
+    async n8787LocalStorageGet(args) {
+      let i = localStorage.getItem("n8787LocalStorage")
+      return i[args.db][args.room][args.name]
     }
   }
   Scratch.extensions.register(new LocalData());
