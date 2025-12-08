@@ -137,7 +137,7 @@
       let Cookies = document.cookie.split("; ")
       let keys = {}
       for(let i = 0; i < Cookies.length; i++) {
-        keys[decodeURIComponen(Cookies[i].split("=")[0])] = decodeURIComponent(Cookies[i].split("=")[1])
+        keys[decodeURIComponent(Cookies[i].split("=")[0])] = decodeURIComponent(Cookies[i].split("=")[1])
       }
       return keys
     }
