@@ -92,12 +92,12 @@
             blockType: Scratch.BlockType.ARRAY,
             text: "Get All Cookies list",
             arguments: {},
-          }, }, {
+          }, {
             opcode: "ClearLocal",
             blockType: Scratch.BlockType.COMMAND,
             text: "Clear localStorage",
             arguments: {},
-          }, }, {
+          }, {
             opcode: "ClearEleLocal",
             blockType: Scratch.BlockType.COMMAND,
             text: "Delete key [element] in localStorage",
@@ -124,10 +124,10 @@
       return localStorage.getItem(args.key)
     }
     async SetCookie(args) {
-      if (secure) {
-        document.cookie = `${args.name}=${args.value}; max-age=${args.age}; path=${path}; domain=${domain}; secure`
+      if (args.secure) {
+        document.cookie = `${args.name}=${args.value}; max-age=${args.age}; path=${args.path}; domain=${args.domain}; secure`
       } else {
-        document.cookie = `${args.name}=${args.value}; max-age=${args.age}; path=${path}; domain=${domain}`
+        document.cookie = `${args.name}=${args.value}; max-age=${args.age}; path=${args.path}; domain=${args.domain}`
       }
     }
     async SetLocalData(args) {
@@ -145,7 +145,7 @@
       return document.cookie.split("; ")
     }
     async ClearLocal(args) {
-      sessionStorage.clear()
+      localStorage.clear()
     }
     async ClearEleLocal(args) {
       localStorage.removeItem(args.element);
