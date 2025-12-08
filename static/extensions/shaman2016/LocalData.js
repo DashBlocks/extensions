@@ -112,7 +112,7 @@
       };
     }
     async GetCookie(args) {
-      Cookies = document.cookie.split("; ")
+      let Cookies = document.cookie.split("; ")
       for(i = 0; i < Cookies.length; i++) {
         if (Cookies[i].split("=")[0] === args.cookie) {
           key = Cookies[i].split("=")[1]
@@ -134,8 +134,8 @@
       localStorage.setItem(args.key, args.value)
     }
     async GetAllCookie(args) {
-      Cookies = document.cookie.split("; ")
-      keys = {}
+      let Cookies = document.cookie.split("; ")
+      let keys = {}
       for(i = 0; i < Cookies.length; i++) {
         key[Cookies[i].split("=")[0]] = Cookies[i].split("=")[1]
       }
