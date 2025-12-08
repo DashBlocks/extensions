@@ -125,9 +125,9 @@
     }
     async SetCookie(args) {
       if (args.secure) {
-        document.cookie = `${args.name}=${args.value}; max-age=${args.age}; path=${args.path}; domain=${args.domain}; secure`
+        document.cookie = `${encodeURIComponent(args.name)}=${encodeURIComponent(args.value)}; max-age=${args.age}; path=${encodeURIComponent(args.path)}; domain=${args.domain}; secure`
       } else {
-        document.cookie = `${args.name}=${args.value}; max-age=${args.age}; path=${args.path}; domain=${args.domain}`
+        document.cookie = `${encodeURIComponent(args.name)}=${encodeURIComponent(args.value)}; max-age=${args.age}; path=${encodeURIComponent(args.path)}; domain=${args.domain}`
       }
     }
     async SetLocalData(args) {
@@ -139,7 +139,7 @@
       for(i = 0; i < Cookies.length; i++) {
         key[Cookies[i].split("=")[0]] = Cookies[i].split("=")[1]
       }
-      return keys
+      return decodeURIComponent(keys)
     }
     async GetAllCookie2(args) {
       return document.cookie.split("; ")
