@@ -9,7 +9,7 @@ const extensions = [
         name: "Playgama Bridge SDK",
         id: "playgama",
         description: "Blocks that initialize and interact with the Playgama Bridge SDK. Official.",
-        code: "https://github.com/Playgama/bridge-scratch/releases/download/v1.25.0-preview/PlaygamaBridge.js",
+        code: "https://github.com/playgama/bridge-scratch/releases/latest/download/PlaygamaBridge.js",
         // banner: "Playgama/PlaygamaBridge.svg",
         creator: ['Playgama', 'sergei-playgama', 'DBDev-IT'],
         isGitHub: true,
