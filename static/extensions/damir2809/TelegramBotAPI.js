@@ -626,9 +626,7 @@
                 fetch(url)
                     .then((response) => {
                         if (!response.ok) {
-                            throw new Error(
-                                `Ошибка HTTP! Статус: ${response.status}`,
-                            );
+                            console.error(response.status)
                         }
                         return response.json();
                     })
@@ -667,6 +665,35 @@
             if (!this.token) return;
             const url = `https://api.telegram.org/bot${this.token}/sendMessage`;
             if (args.PARSE_MODE === "no") {
+                if (args.BUTTONS) {
+                    await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            chat_id: args.CHATID,
+                            text: args.TEXT,
+                            reply_markup: {
+                                inline_keyboard: [args.BUTTONS]
+                            }
+                        }),
+                    }).catch(console.error);
+                } else {
+                    await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            chat_id: args.CHATID,
+                            text: args.TEXT
+                        }),
+                    }).catch(console.error);
+                }
+                return;
+            }
+            if (args.BUTTONS) {
                 await fetch(url, {
                     method: "POST",
                     headers: {
@@ -675,33 +702,60 @@
                     body: JSON.stringify({
                         chat_id: args.CHATID,
                         text: args.TEXT,
-                        reply_markup: args.BUTTONS ?? {
-                            inline_keyboard: [args.BUTTONS],
-                        },
+                        parse_mode: args.PARSE_MODE,
+                        reply_markup: {
+                            inline_keyboard: [args.BUTTONS]
+                        }
                     }),
                 }).catch(console.error);
-                return;
-            }
-            await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    chat_id: args.CHATID,
-                    text: args.TEXT,
-                    parse_mode: args.PARSE_MODE,
-                    reply_markup: args.BUTTONS ?? {
-                        inline_keyboard: [args.BUTTONS],
+            } else {
+                await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
                     },
-                }),
-            }).catch(console.error);
+                    body: JSON.stringify({
+                        chat_id: args.CHATID,
+                        text: args.TEXT,
+                        parse_mode: args.PARSE_MODE
+                    }),
+                }).catch(console.error);
+            }
         }
 
         async replyToMessage(args) {
             if (!this.token) return;
             const url = `https://api.telegram.org/bot${this.token}/sendMessage`;
             if (args.PARSE_MODE === "no") {
+                if (args.BUTTONS) {
+                    await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            chat_id: args.CHATID,
+                            text: args.TEXT,
+                            reply_markup: {
+                                inline_keyboard: [args.BUTTONS]
+                            }
+                        }),
+                    }).catch(console.error);
+                } else {
+                    await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            chat_id: args.CHATID,
+                            text: args.TEXT
+                        }),
+                    }).catch(console.error);
+                }
+                return;
+            }
+            if (args.BUTTONS) {
                 await fetch(url, {
                     method: "POST",
                     headers: {
@@ -710,28 +764,27 @@
                     body: JSON.stringify({
                         chat_id: args.CHATID,
                         text: args.TEXT,
-                        reply_markup: args.BUTTONS ?? {
-                            inline_keyboard: [args.BUTTONS],
-                        },
+                        parse_mode: args.PARSE_MODE,
+                        reply_to_message_id: args.MESSAGEID,
+                        reply_markup: {
+                            inline_keyboard: [args.BUTTONS]
+                        }
                     }),
                 }).catch(console.error);
-                return;
-            }
-            await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    chat_id: args.CHATID,
-                    text: args.TEXT,
-                    parse_mode: args.PARSE_MODE,
-                    reply_to_message_id: args.MESSAGEID,
-                    reply_markup: args.BUTTONS ?? {
-                        inline_keyboard: [args.BUTTONS],
+            } else {
+                await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
                     },
-                }),
-            }).catch(console.error);
+                    body: JSON.stringify({
+                        chat_id: args.CHATID,
+                        text: args.TEXT,
+                        parse_mode: args.PARSE_MODE,
+                        reply_to_message_id: args.MESSAGEID
+                    }),
+                }).catch(console.error);
+            }
         }
 
         async sendPhoto(args) {
@@ -985,7 +1038,7 @@
                     text: args.TEXT,
                     callback_data: args.DATA,
                 });
-            } else if (args.TYPE === "url") {
+            } else if (args.TYPE === "link") {
                 this.inlineButtons.push({ text: args.TEXT, url: args.DATA });
             }
         }
