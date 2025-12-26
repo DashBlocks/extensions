@@ -206,7 +206,7 @@ Each extension is incased in `{}` brackets. Look below on how to copy it.
 ```js
 {
     name: "Evaluating Expressions", // The name of the extension.
-    id: "usernameEvalExprsns" // The ID of the extension. Must be same as inside the extension code.
+    id: "usernameEvalExprsns", // The ID of the extension. Must be same as inside the extension code.
     description: "Blocks to return the result of an expression.", // The description for the extension.
     code: "Username/extension.js", // The folder and file name for the code of the extension.
     banner: "Username/Extension.png", // The folder and file name for the banner of the extension.
