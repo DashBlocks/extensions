@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"lint": "eslint .",
-		"build": "vite build",
+		"build": "cp -r static dist/static && vite build",
 		"start": "vite dev"
 	},
 	"dependencies": {
