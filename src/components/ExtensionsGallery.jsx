@@ -3,15 +3,17 @@ import {extensions} from "../lib/extensions";
 import "../styles/extensions.css";
 
 function getBannerUrl (banner) {
-    if (!banner) return "/static/images/unknown.svg";
+    const base = import.meta.env.BASE_URL || '/';
+    if (!banner) return `${base}static/images/unknown.svg`;
     if (banner.startsWith("http://") || banner.startsWith("https://")) return banner;
-    return `/static/images/${banner}`;
+    return `${base}static/images/${banner}`;
 }
 
 function getCodeUrl (code) {
+    const base = import.meta.env.BASE_URL || '/';
     if (!code) return "#";
     if (code.startsWith("http://") || code.startsWith("https://")) return code;
-    return `https://dashblocks.github.io/extensions/static/extensions/${code}`;
+    return `${base}static/extensions/${code}`;
 }
 
 export default function ExtensionsGallery () {
