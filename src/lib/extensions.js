@@ -47,7 +47,6 @@ const extensions = [
             { name: "AnonimKing24", link: "_scratch_" },
             { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
         ],
-        notes: "Translate to English soon.",
     },
     {
         name: "Discord Webhook API",
