@@ -63,13 +63,11 @@ Create the pull request.
 
 Continue through the menus until it lets you create a pull request.
 
-You can post your extension banner / thumbnail and or description in the pull request.
+You can post your extension banner/thumbnail and or description in the pull request.
 
 Once your pull request is merged, it'll be on the site or upcoming onto the site. You may get responses about things you should change or fix though.
 
-*Note: Vercel may comment on your pull request. This is the hosting service we use.*
-
-*If it has a link to visit a preview, you can click on it and see your changes. See the Optional Steps for more info on how to edit the site to show your extension.*
+*See the Optional Steps for more info on how to edit the site to show your extension.*
 
 
 # Optional Steps
@@ -242,7 +240,7 @@ Each extension is incased in `{}` brackets. Look below on how to copy it.
         "link" can be:
             * "_scratch_" - Adds a link to Scratch profile whose username is specified in "name".
             * "_github_" - Adds a link to GitHub profile whose username is specified in "name".
-            * Link to social profile. (**ALLOWED** Scratch or GitHub profile)
+            * Link to social profile. (ALLOWED Scratch or GitHub profile)
     */
     // ...
 },
