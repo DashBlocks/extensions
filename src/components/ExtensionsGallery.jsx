@@ -48,7 +48,7 @@ export default function ExtensionsGallery () {
             return (
                 (e.name || "").toLowerCase().includes(q) ||
                 (e.description || "").toLowerCase().includes(q) ||
-                (Array.isArray()
+                (Array.isArray(e.creator)
                     ? e.creator.some((creator) => getCreatorName(creator || "").toLowerCase().includes(q))
                     : getCreatorName(e.creator || "").toString().toLowerCase().includes(q))
             );
