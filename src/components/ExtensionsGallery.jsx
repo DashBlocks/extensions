@@ -3,17 +3,15 @@ import {extensions} from "../lib/extensions";
 import "../styles/extensions.css";
 
 function getBannerUrl (banner) {
-    const base = import.meta.env.BASE_URL || '/';
-    if (!banner) return `${base}static/images/unknown.svg`;
+    if (!banner) return `https://dashblocks.github.io/extensions/static/images/unknown.svg`;
     if (banner.startsWith("http://") || banner.startsWith("https://")) return banner;
-    return `${base}static/images/${banner}`;
+    return `https://dashblocks.github.io/extensions/static/images/${banner}`;
 }
 
 function getCodeUrl (code) {
-    const base = import.meta.env.BASE_URL || '/';
     if (!code) return "#";
     if (code.startsWith("http://") || code.startsWith("https://")) return code;
-    return `${base}static/extensions/${code}`;
+    return `https://dashblocks.github.io/extensions/static/extensions/${code}`;
 }
 
 export default function ExtensionsGallery () {
@@ -74,6 +72,14 @@ export default function ExtensionsGallery () {
                                         }
                                     </p>
                                     <div className="ext-actions">
+                                        <button
+                                            className="ext-btn"
+                                            onClick={() => {
+                                                window.open("https://dashblocks.github.io/editor.html?extension=" + getCodeUrl(ext.code), "_blank");
+                                            }}
+                                        >
+                                            Open Extension
+                                        </button>
                                         <button
                                             className="ext-btn"
                                             onClick={() => {
