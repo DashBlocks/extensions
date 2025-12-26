@@ -25,6 +25,23 @@ and [our extension gallery](https://dashblocks.github.io/extensions) to confirm.
 - Your extension **CANNOT** reference, contain or use any content not suitable for ages under 16. (including extension icon and extension code)
 - Your extension **CANNOT** contain discriminatory content or content that is against a certain group or minority.
 
+## Recommended Guidelines (optional):
+- Your blocks should start with lowercase letter.
+- Your blocks' texts should contain only letters. (No emojis, symbols, etc.)
+- Your code should be clean. (You can use Prettier for it)
+- Your code should start like this:
+```js
+// Name: Extension
+// ID: meMyExtension
+// Description: Cool extension.
+// By: Me <https://scratch.mit.edu/users/me/>
+// License: MIT
+
+// ...
+```
+- If your extension needs to run unsandboxed, you should check it via `Scratch.extensions.unsandboxed`.
+- If your extension uses things that only work in Dash, you should check for platform before using them via `Scratch.extensions.isDash`.
+
 ### Step 2.
 Create info for your extension, like a description and a banner/thumbnail.
 The banner/thumbnail is not required, but it will be a `static/images/unknown.svg` if not provided.
