@@ -14,6 +14,24 @@ function getCodeUrl (code) {
     return `https://dashblocks.github.io/extensions/static/extensions/${code}`;
 }
 
+function getCreatorNode (creator) {
+    if (typeof creator == "string") return creator;
+    return (
+        <a
+            href={creator.link === "_scratch_"
+                ? `https://scratch.mit.edu/users/${creator.name}`
+                : creator.link === "_github_"
+                    ? `https://github.com/${creator.name}`
+                    : creator.link}
+            target="_blank"
+            rel="noreferrer"
+            key={creator.name}
+        >
+            {creator.name}
+        </a>
+    );
+}
+
 export default function ExtensionsGallery () {
     const [query, setQuery] = useState("");
 
@@ -61,12 +79,19 @@ export default function ExtensionsGallery () {
                                             ? (
                                                 <>
                                                     <b>Creators: </b>
-                                                    {ext.creator.join(", ")}
+                                                    {ext.creator.map((creator, i) => (
+                                                        <React.Fragment key={i}>
+                                                            {getCreatorNode(creator)}
+                                                            {i !== ext.creator.length - 1 && (
+                                                                ', '
+                                                            )}
+                                                        </React.Fragment>
+                                                    ))}
                                                 </>
                                             ) : (
                                                 <>
                                                     <b>Creator: </b>
-                                                    {ext.creator}
+                                                    {getCreatorNode(ext.creator)}
                                                 </>
                                             )
                                         }
