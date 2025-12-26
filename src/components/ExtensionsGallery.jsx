@@ -37,7 +37,6 @@ function getCreatorName (creator) {
     return creator.name;
 }
 
-
 export default function ExtensionsGallery () {
     const [query, setQuery] = useState("");
 
@@ -48,6 +47,7 @@ export default function ExtensionsGallery () {
             return (
                 (e.name || "").toLowerCase().includes(q) ||
                 (e.description || "").toLowerCase().includes(q) ||
+                (e.notes || "").toLowerCase().includes(q) ||
                 (Array.isArray(e.creator)
                     ? e.creator.some((creator) => getCreatorName(creator || "").toLowerCase().includes(q))
                     : getCreatorName(e.creator || "").toString().toLowerCase().includes(q))
@@ -104,6 +104,10 @@ export default function ExtensionsGallery () {
                                             )
                                         }
                                     </p>
+                                    {ext.notes && <p className="ext-meta">
+                                        <b>Notes: </b>
+                                        {ext.notes}
+                                    </p>}
                                     <div className="ext-actions">
                                         <button
                                             className="ext-btn"
