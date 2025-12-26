@@ -7,16 +7,13 @@
 >
 > This is to prevent projects being broken. If we remove your code, anyone who used your extension will have to remake their **ENTIRE** project without editing their file manually.
 
-> [!IMPORTANT]
-> **WE DON'T CURRENTLY ACCEPT YOUR EXTENSIONS**, as we plan to rewrite some parts of this instruction.
-
 ### Step 1.
 Create your extension. You can find a lot of details [here](https://docs.turbowarp.org/development/extensions/introduction).
 
 #### Important Guidelines:
 - Your extension should not already exist on the gallery. Please check the
 [Pull Requests](https://github.com/DashBlocks/extensions/pulls)
-and our extension gallery (within editor page of Dash) to confirm.
+and [our extension gallery](https://dashblocks.github.io/extensions) to confirm.
 - Your extension should be created for a specific purpose. An extension with random blocks someone might need will likely not get accepted if the blocks are not in a certain theme, like math or rendering.
 - The primary purpose of your extension **CANNOT** be a monetization.
 - Your extension **CANNOT** use `eval()` or `new Function()`.
@@ -74,7 +71,7 @@ Once your pull request is merged, it'll be on the site or upcoming onto the site
 
 *If it has a link to visit a preview, you can click on it and see your changes. See the Optional Steps for more info on how to edit the site to show your extension.*
 
-<!--
+
 # Optional Steps
 
 ### Step 6.
@@ -96,6 +93,7 @@ If you are using the website to add the file:
 
 This should create the folder with the uploaded image inside.
 
+<!--
 ### Step 7.
 Create instructions on using your extension.
 
@@ -197,9 +195,10 @@ Example:
 Do not type a `/` or any characters that cannot be used in a URL here. Uppercase letters may also not work for the page link.
 
 Also try to keep the name recognizable to your extension as this name will also be used on the `/docs` page.
+-->
 
-### Step 8.
-Add your extension onto the actual website.
+### Step 7.
+Add your extension onto the extensions list.
 
 Enter the `src/lib/extensions.js` file in the repository.
 
@@ -212,17 +211,54 @@ Each extension is incased in `{}` brackets. Look below on how to copy it.
     description: "Blocks to return the result of an expression.", // The description for the extension.
     code: "Username/extension.js", // The folder and file name for the code of the extension.
     banner: "Username/Extension.png", // The folder and file name for the banner of the extension.
-    creator: "Username", // Your username. Adds a link to your profile.
+    creator: "Username", // Username of extension creator. For more information, see "Add creator(s)"
     
     // Only applies if you created a documentation page.
     documentation: "page-name", // This is the page name for the documentation you created.
 
     // These next ones are optional. You can choose not to include them.
-    creatorAlias: "Joe", // Optional. This will not change the creator link, but change the name that links to it.
     notes: "Additional help by someguy", // Optional. Allows you to note anyone else who helped you or any small info.
-    unstable: false, // Optional. Will add a warning message that your extension is unstable.
-    unstableReason: "May break sometimes, Use at your own risk.", // Optional. Will change the reason that your extension is unstable.
     isGitHub: false, // Optional. false means this is your Scratch username, true means this is your GitHub username.
 },
 ```
--->
+
+#### Add creator(s):
+- One creator with username without link:
+```js
+{
+    // ...
+    creator: "Username", // Username of extension creator.
+    // ...
+},
+```
+
+- One creator with username with link:
+```js
+{
+    // ...
+    creator: { name: "Username", link: "_scratch_" },
+    /*
+        "name" - Username of extension creator.
+        "link" can be:
+            * "_scratch_" - Adds a link to Scratch profile whose username is specified in "name".
+            * "_github_" - Adds a link to GitHub profile whose username is specified in "name".
+            * Link to social profile. (**ALLOWED** Scratch or GitHub profile)
+    */
+    // ...
+},
+```
+
+- Two and more creators:
+```js
+{
+    // ...
+    creator: [
+        "CreatorNo1",
+        { name: "CreatorNo2", link: "_scratch_" },
+        { name: "CreatorNo3", link: "_github_" },
+        { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
+        // ...
+    ],
+    // ...
+},
+```
