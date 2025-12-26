@@ -31,9 +31,9 @@ body {
     position: relative;
     left: 50%;
     right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    width: 100vw;
+    margin-left: -50%;
+    margin-right: -50%;
+    width: 100%;
 }
 
 .ext-search {
