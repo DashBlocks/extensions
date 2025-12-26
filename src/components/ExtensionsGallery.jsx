@@ -32,6 +32,12 @@ function getCreatorNode (creator) {
     );
 }
 
+function getCreatorName (creator) {
+    if (typeof creator == "string") return creator;
+    return creator.name;
+}
+
+
 export default function ExtensionsGallery () {
     const [query, setQuery] = useState("");
 
@@ -42,7 +48,9 @@ export default function ExtensionsGallery () {
             return (
                 (e.name || "").toLowerCase().includes(q) ||
                 (e.description || "").toLowerCase().includes(q) ||
-                (e.creator || "").toString().toLowerCase().includes(q)
+                (Array.isArray()
+                    ? e.creator.some((creator) => getCreatorName(creator || "").toLowerCase().includes(q))
+                    : getCreatorName(e.creator || "").toString().toLowerCase().includes(q))
             );
         });
     }, [extensions, query]);
