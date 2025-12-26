@@ -1,53 +1,72 @@
 /*
     Note to contributors & developers that can read JSON:
-        the extra commas are added at the end of each thing
-        to help copy & pasting work better
-        please dont remove them :)
+        The extra commas are added at the end of each thing
+        to help copy & pasting work better.
+        Please, dont remove them :)
 */
 const extensions = [
     {
         name: "Playgama Bridge SDK",
         id: "playgama",
-        description: "Blocks that initialize and interact with the Playgama Bridge SDK. Official.",
+        description:
+            "Blocks that initialize and interact with the Playgama Bridge SDK. Official.",
         code: "https://github.com/playgama/bridge-scratch/releases/latest/download/PlaygamaBridge.js",
         // banner: "Playgama/PlaygamaBridge.svg",
-        creator: ['Playgama', 'sergei-playgama', 'DBDev-IT'],
-        isGitHub: true,
+        creator: [
+            { name: "Playgama", link: "_github_" },
+            { name: "sergei-playgama", link: "_github_" },
+            { name: "DBDev-IT", link: "_github_" },
+        ],
     },
     {
         name: "YaGames SDK",
         id: "yagames",
-        description: "Blocks that initialize and interact with the Yandex Games SDK. Unofficial.",
+        description:
+            "Blocks that initialize and interact with the Yandex Games SDK. Unofficial.",
         code: "timaaos/YaGames.js",
         banner: "timaaos/YaGames.svg",
-        creator: ['timaaos', 'scratch-craft-2', 'DDen4ik-12', 'DBDev-IT'],
-        isGitHub: true,
+        creator: [
+            { name: "timaaos", link: "_github_" },
+            { name: "scratch_craft_2", link: "_scratch_" },
+            { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
+            { name: "DBDev-IT", link: "_github_" },
+        ],
     },
     {
         name: "Telegram Bot API",
         id: "TelegramBotAPI",
-        description: "Blocks that interact with the Telegram API for bots. Unofficial.",
+        description:
+            "Blocks that interact with the Telegram API for bots. Unofficial.",
         code: "damir2809/TelegramBotAPI.js",
         banner: "damir2809/TelegramBotAPI.svg",
-        creator: ["damir2809", "scratch_craft_2", "ttt999", "By-ROlil-CO", "AnonimKing24", "Den4ik-12"],
+        creator: [
+            { name: "DBDev-IT", link: "_github_" },
+            { name: "scratch_craft_2", link: "_scratch_" },
+            { name: "ttt999", link: "_scratch_" },
+            { name: "By-ROlil-CO", link: "_scratch_" },
+            { name: "AnonimKing24", link: "_scratch_" },
+            { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
+        ],
         notes: "Translate to English soon.",
     },
     {
         name: "Discord Webhook API",
         id: "DBDevDiscordWebhookAPI",
-        description: "Blocks that interact with the Discord Webhook API. Unofficial.",
+        description:
+            "Blocks that interact with the Discord Webhook API. Unofficial.",
         code: "damir2809/DiscordWebhookAPI.js",
         // banner: "damir2809/DiscordWebhookAPI.svg",
-        creator: "damir2809",
+        creator: { name: "DBDev-IT", link: "_github_" },
         notes: "Beta-version.",
     },
     {
         name: "Pathfinding",
         id: "Den4ik12Pathfinding",
-        description: "Find paths from one position to another, avoiding obstacles.",
+        description:
+            "Find paths from one position to another, avoiding obstacles.",
         code: "Den4ik-12/Pathfinding.js",
         banner: "Den4ik-12/Pathfinding.svg",
-        creator: "Den4ik-12",
+        creator: { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
     },
     {
         name: "Wheel Scroll",
@@ -55,15 +74,16 @@ const extensions = [
         description: "Blocks for detecting mouse wheel scrolling.",
         code: "Den4ik-12/WheelScroll.js",
         banner: "Den4ik-12/WheelScroll.svg",
-        creator: "Den4ik-12",
+        creator: { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
     },
     {
         name: "Maps",
         id: "Den4ik12Maps",
-        description: "Blocks for working with Map, which is more powerful than Object.",
+        description:
+            "Blocks for working with Map, which is more powerful than Object.",
         code: "Den4ik-12/Maps.js",
         banner: "Den4ik-12/Maps.svg",
-        creator: "Den4ik-12",
+        creator: { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
     },
     {
         name: "Modals",
@@ -71,14 +91,14 @@ const extensions = [
         description: "Control classic modal windows in browsers!",
         code: "scratch_craft_2/Modals.js",
         banner: "scratch_craft_2/Modals.png",
-        creator: "scratch_craft_2",
+        creator: { name: "scratch_craft_2", link: "_scratch_" },
     },
     {
         name: "MediaRecorder",
         id: "MediaRecord",
         description: "Record your projects directly in Dash!",
         code: "scratch_craft_2/MediaRecorder.js",
-        creator: "scratch_craft_2",
+        creator: { name: "scratch_craft_2", link: "_scratch_" },
     },
     {
         name: "Notification",
@@ -86,7 +106,7 @@ const extensions = [
         description: "Send notifications with icons.",
         code: "shilenin/Notification.js",
         banner: "shilenin/Notification.svg",
-        creator: "shilenin",
+        creator: { name: "shilenin", link: "_scratch_" },
     },
     {
         name: "Code Cleaner",
@@ -94,7 +114,7 @@ const extensions = [
         description: "Clean and optimize your code!",
         code: "shilenin/CodeCleaner.js",
         banner: "https://raw.githubusercontent.com/Mirazstudio-offical/Dash_code_cleaner_extension/refs/heads/main/logo.svg",
-        creator: "shilenin",
+        creator: { name: "shilenin", link: "_scratch_" },
     },
     /*
     {
