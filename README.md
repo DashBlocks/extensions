@@ -25,7 +25,7 @@ and [our extension gallery](https://dashblocks.github.io/extensions) to confirm.
 - Your extension **CANNOT** reference, contain or use any content not suitable for ages under 16. (including extension icon and extension code)
 - Your extension **CANNOT** contain discriminatory content or content that is against a certain group or minority.
 
-## Recommended Guidelines (optional):
+#### Recommended Guidelines (optional):
 - Your blocks should start with lowercase letter.
 - Your blocks' texts should contain only letters. (No emojis, symbols, etc.)
 - Your code should be clean. (You can use Prettier for it)
