@@ -118,11 +118,13 @@ const extensions = [
     {
         name: "JavaScript Runner",
         id: "JavaScriptRunner",
-        description: 
-          "Run the JavaScript code!",
+        description: "Run the JavaScript code!",
         code: "shaman2016/JavaScriptRunner.js",
         // banner: "",
-        creator: { name: "SHAMAN2016", link: "_scratch_" },,
+        creator: [
+            { name: "SHAMAN2016", link: "_scratch_" },
+            { name: "DBDev-IT", link: "_github_" },
+        ],
     },
 ];
 
