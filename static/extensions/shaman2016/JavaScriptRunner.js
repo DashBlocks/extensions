@@ -1,6 +1,9 @@
 // Name: JavaScript Runner
 // ID: shaman2016JavaScriptRunner
-// Author: SHAMAN2016 <https://scratch.mit.edu/users/SHAMAN2016/>
+/* By:
+SHAMAN2016 <https://scratch.mit.edu/users/SHAMAN2016/>
+damir2809 <https://scratch.mit.edu/users/damir2809/>
+*/
 // License: MIT
 
 (function (Scratch) {
@@ -14,9 +17,14 @@
             name: "JavaScript Runner",
             authors: [
                 {
-                  username: "SHAMAN2016",
+                  name: "SHAMAN2016",
                   scratch: "https://scratch.mit.edu/users/SHAMAN2016",
                   github: "https://github.com/shaman2016scratch"
+                },
+                {
+                  name: "DBDev IT",
+                  scratch: "https://scratch.mit.edu/users/damir2809",
+                  github: "https://github.com/DBDev-IT"
                 }
             ],
             version: "3.0",
