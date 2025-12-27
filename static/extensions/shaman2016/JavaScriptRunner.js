@@ -1,128 +1,153 @@
 // Name: JavaScript Runner
 // ID: shaman2016JavaScriptRunner
 // Author: SHAMAN2016 <https://scratch.mit.edu/users/SHAMAN2016/>
+// License: MIT
 
 (function (Scratch) {
     "use strict";
 
-    if (!Scratch.extensions.unsandboxed) {
-        return alert("This extension needs to be unsandboxed to run!");
-    }
+    if (!Scratch.extensions.unsandboxed) return alert("This extension needs to be unsandboxed to run!");
 
     const Cast = Scratch.Cast;
-    let sandboxed = true;
-
-    const RunnerDopFunc = `
-        per = {}
-        const RunnerVersion = '2.1'
-        const RunnerData = {
-            "name": "JavaScript Runner",
-            "By": [
+    const _runnerFunctions = `
+        data = {
+            name: "JavaScript Runner",
+            authors: [
                 {
-                  "nickname": "SHAMAN2016",
-                  "Scratch": "https://scratch.mit.edu/users/SHAMAN2016",
-                  "Github": "https://github.com/shaman2016scratch"
+                  username: "SHAMAN2016",
+                  scratch: "https://scratch.mit.edu/users/SHAMAN2016",
+                  github: "https://github.com/shaman2016scratch"
                 }
             ],
-            "version": "2.1",
-            "id": "shaman2016JavaScriptRunner"
-        }
-        const RunnerFunc = {}
-        function output(out) {
-            return out;
-        }
-        function error(err) {
-            return \`Error: \${err}\`
-        }
-        function warn(war) {
-            return \`Warning: \${war}\`
-        }
-    `
+            version: "3.0",
+            id: "shaman2016JavaScriptRunner"
+        };
+        function output (toOutput) {
+            window.RUNNER_OUTPUT = toOutput;
+            return toOutput;
+        };
+        function warn (toWarn) {
+            window.RUNNER_OUTPUT = \`Warning: \${toWarn}\`;
+            return \`Warning: \${toWarn}\`;
+        };
+        function error (toError) {
+            window.RUNNER_OUTPUT = \`Error: \${toError}\`;
+            return \`Error: \${toError}\`;
+        };
+    `;
 
     class JavaScriptExtension {
-        getInfo() {
+        getInfo () {
             return {
-                "id": "shaman2016JavaScriptRunner",
-                "name": "JavaScript Runner",
-                "docs": "https://shaman2016scratch.github.io/shaman2016.github.io/extensions/extension6/docs/"
-                "color1": "#0fbd8c",
-                "blocks": [
+                id: "shaman2016JavaScriptRunner",
+                name: "JavaScript Runner",
+                docs: "https://shaman2016scratch.github.io/shaman2016.github.io/extensions/extension6/docs/",
+                color1: "#0fbd8c",
+                blocks: [
                     {
-                        "func": "handleChangeSandboxed",
-                        "text": sandboxed ? "Run unsandboxed" : "Run sandboxed",
-                        "blockType": Scratch.BlockType.BUTTON
-                    },
-                    {
-                        "opcode": "command",
-                        "text": "command [CODE]",
-                        "blockType": Scratch.BlockType.COMMAND,
-                        "arguments": {
-                            "CODE": {
-                                "type": Scratch.ArgumentType.STRING,
-                                "defaultValue": "alert(\"Hello World\")"
+                        opcode: "command",
+                        text: "command [CODE]",
+                        blockType: Scratch.BlockType.COMMAND,
+                        arguments: {
+                            CODE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "alert(\"Hello, world!\");"
                             }
                         }
                     },
                     {
-                        "opcode": "reporter",
-                        "text": "reporter [CODE]",
-                        "blockType": Scratch.BlockType.REPORTER,
-                        "arguments": {
-                            "CODE": {
-                                "type": Scratch.ArgumentType.STRING,
-                                "defaultValue": "output(\"Hello World\")"
+                        opcode: "reporter",
+                        text: "reporter [CODE]",
+                        blockType: Scratch.BlockType.REPORTER,
+                        arguments: {
+                            CODE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "output(\"Hello, world!\");"
                             }
                         }
                     },
                     {
-                        "opcode": "boolean",
-                        "text": "boolean [CODE]",
-                        "blockType": Scratch.BlockType.BOOLEAN,
-                        "arguments": {
-                            "CODE": {
-                                "type": Scratch.ArgumentType.STRING,
-                                "defaultValue": "output(1 < 2)"
+                        opcode: "boolean",
+                        text: "boolean [CODE]",
+                        blockType: Scratch.BlockType.BOOLEAN,
+                        arguments: {
+                            CODE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "output(1 < 2);"
+                            }
+                        }
+                    },
+                    {
+                        opcode: "array",
+                        text: "array [CODE]",
+                        blockType: Scratch.BlockType.ARRAY,
+                        arguments: {
+                            CODE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "output([\"apple\", \"banana\"]);"
+                            }
+                        }
+                    },
+                    {
+                        opcode: "object",
+                        text: "object [CODE]",
+                        blockType: Scratch.BlockType.OBJECT,
+                        arguments: {
+                            CODE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "output({a: \"apple\", b: \"banana\"});"
                             }
                         }
                     }
                 ]
             }
         }
+        async _runSandboxed (code) {
+            window.RUNNER_OUTPUT = null;
 
-        handleChangeSandboxed () {
-            sandboxed = !sandboxed;
-            Scratch.vm.extensionManager.refreshBlocks();
-        }
-        SandboxJsRun (code) {
-            new Promise((resolve, reject) => {
+            await new Promise((resolve, reject) => {
                 const script = document.createElement('script');
-                if (!sandboxed) {
-                    script.onerror = () => {
-                        reject(new Error(`Error in unsandboxed script. Check console for more info`));
-                    };
-                    script.src = `data:application/javascript,${encodeURIComponent(RunnerDopFunc)};${encodeURIComponent(code)}`;
-                    document.body.appendChild(script);
-                    return;
-                }
-                script.onload = () => resolve();
+                script.onload = () => {
+                    script.remove()
+                    resolve();
+                };
                 script.onerror = () => {
+                    script.remove()
                     reject(new Error(`Error in sandboxed script. Check the console for more info`));
                 };
-                script.src = `data:application/javascript,${encodeURIComponent(RunnerDopFunc)};${encodeURIComponent(code)}`;
+                script.src = `data:application/javascript,${encodeURIComponent(_runnerFunctions)};${encodeURIComponent(code)}`;
                 document.body.appendChild(script);
-            })
+            });
+            return window.RUNNER_OUTPUT;
         }
 
-        command (args) {
-            this.SandboxJsRun(args.CODE);
+        async command (args) {
+            const code = Cast.toString(args.CODE);
+            await this._runSandboxed(code);
         }
-        reporter (args) {
-            const string = Cast.toString(this.SandboxJsRun(args.CODE));
-            return string;
+
+        async reporter (args) {
+            const code = Cast.toString(args.CODE);
+            const output = Cast.toString(await this._runSandboxed(code));
+            return output;
         }
-        boolean (args) {
-            const boolean = Cast.toBoolean(this.SandboxJsRun(args.CODE));
+
+        async boolean (args) {
+            const code = Cast.toString(args.CODE);
+            const boolean = Cast.toBoolean(await this._runSandboxed(code));
             return boolean;
+        }
+
+        async array (args) {
+            const code = Cast.toString(args.CODE);
+            const array = Cast.toList(await this._runSandboxed(code));
+            return array;
+        }
+
+        async object (args) {
+            const code = Cast.toString(args.CODE);
+            const object = Cast.toObject(await this._runSandboxed(code));
+            return object;
         }
     }
 
