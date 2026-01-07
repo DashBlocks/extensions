@@ -110,7 +110,7 @@ export default function ExtensionsGallery () {
                                     </p>}
                                     <div className="ext-actions">
                                         <button
-                                            className="ext-btn"
+                                            className="ext-btn ext-btn-accented"
                                             onClick={() => {
                                                 window.open("https://dashblocks.github.io/editor.html?extension=" + getCodeUrl(ext.code), "_blank");
                                             }}
@@ -119,6 +119,14 @@ export default function ExtensionsGallery () {
                                         </button>
                                         <button
                                             className="ext-btn"
+                                            onClick={() => {
+                                                window.open("https://dashblocks.github.io/scratch-gui/editor.html?enabletests&extension=" + getCodeUrl(ext.code), "_blank");
+                                            }}
+                                        >
+                                            ...in Dev
+                                        </button>
+                                        <button
+                                            className="ext-btn ext-btn-accented"
                                             onClick={() => {
                                                 navigator.clipboard.writeText(getCodeUrl(ext.code));
                                                 alert("Extension link copied to clipboard!");
