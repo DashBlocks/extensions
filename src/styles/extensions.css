@@ -114,6 +114,7 @@ body {
 .ext-actions {
     margin-top: auto;
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
