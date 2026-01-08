@@ -59,6 +59,15 @@ const extensions = [
         notes: "Beta-version.",
     },
     {
+        name: "Iframe+",
+        id: "iframePlus",
+        description: "No info",
+        code: "noname/iframe+.js",
+        banner: "noname/iframe+.png",
+        creator: { name: "scratch_craft_2", link: "_scratch_" },
+        notes: "Настоящий создатель неизвестен, расширение взято из сайта скретчера dimka10",
+    },
+    {
         name: "Pathfinding",
         id: "Den4ik12Pathfinding",
         description:
