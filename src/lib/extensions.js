@@ -145,7 +145,8 @@ const otherExtensions = [
         description: "Have many iframes at once",
         code: "https://extensions.mistium.com/featured/Iframe+.js",
         banner: "https://raw.githubusercontent.com/Mistium/extensions.mistium/main/images/Iframe+.png",
-        creator: { name: "Misitum", link: "_github_" },
+        isGitHub: true,
+        creator: "Mistium",
     },
     {
         name: "Shovel Debugger",
