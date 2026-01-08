@@ -59,15 +59,6 @@ const extensions = [
         notes: "Beta-version.",
     },
     {
-        name: "Iframe+",
-        id: "iframePlus",
-        description: "No info",
-        code: "noname/iframe+.js",
-        banner: "noname/iframe+.png",
-        creator: { name: "scratch_craft_2", link: "_scratch_" },
-        notes: "Настоящий создатель неизвестен, расширение взято из сайта скретчера dimka10",
-    },
-    {
         name: "Pathfinding",
         id: "Den4ik12Pathfinding",
         description:
@@ -137,8 +128,9 @@ const extensions = [
     },
 ];
 
-// This is PenguinMod's extensions. Added here for IDs addition
-const pmExtensions = [
+// In below array, there is some extensions that were taken from MistWarp and PenguinMod
+// (PenguinMod's extensions were added here for IDs addition)
+const otherExtensions = [
     {
         name: "Pen+",
         id: "penP",
@@ -146,6 +138,14 @@ const pmExtensions = [
         code: "ObviousAlexC/PenPlus.js",
         banner: "ObviousAlexC/PenPlus.svg",
         creator: "pinksheep2917",
+    },
+    {
+        name: "Iframe+",
+        id: "iframePlus",
+        description: "Have many iframes at once",
+        code: "https://extensions.mistium.com/featured/Iframe+.js",
+        banner: "https://raw.githubusercontent.com/Mistium/extensions.mistium/main/images/Iframe+.png",
+        creator: { name: "Misitum", link: "_github_" },
     },
     {
         name: "Shovel Debugger",
@@ -731,4 +731,4 @@ const pmExtensions = [
     },
 ];
 
-export {extensions, pmExtensions}
+export {extensions, otherExtensions}
