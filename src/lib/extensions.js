@@ -93,6 +93,13 @@ const extensions = [
         creator: { name: "scratch_craft_2", link: "_scratch_" },
     },
     {
+        name: "MediaRecorder",
+        id: "MediaRecord",
+        description: "Record your projects directly in Dash!",
+        code: "scratch_craft_2/MediaRecorder.js",
+        creator: { name: "scratch_craft_2", link: "_scratch_" },
+    },
+    {
         name: "Arduino ULTIMATE",
         id: "arduinoUltimate",
         description: "Allows you to control Arduino directly from the browser. Supports digital/analog I/O, PWM, Servo, I2C, basic sensors and devices.",
@@ -100,13 +107,6 @@ const extensions = [
         // banner: "scratch_craft_2/ArduinoULTIMATE.png",
         creator: { name: "scratch_craft_2", link: "_scratch_" },
         notes: "REQUIRED: The board must be flashed with StandardFirmata and the browser must support Web Serial (Chrome/Edge).",
-    },
-    {
-        name: "MediaRecorder",
-        id: "MediaRecord",
-        description: "Record your projects directly in Dash!",
-        code: "scratch_craft_2/MediaRecorder.js",
-        creator: { name: "scratch_craft_2", link: "_scratch_" },
     },
     {
         name: "Notification",
@@ -125,14 +125,6 @@ const extensions = [
         creator: { name: "shilenin", link: "_scratch_" },
     },
     {
-        name: "Auto Save",
-        id: "autosave161final",
-        description: "Several features for games",
-        code: "QBacks/AutoSave.js",
-        banner: "QBacks/autosave.svg",
-        creator: { name: "QBacks", link: "_scratch_" },
-    },
-    {
         name: "JavaScript Runner",
         id: "JavaScriptRunner",
         description: "Run the JavaScript code!",
@@ -142,6 +134,14 @@ const extensions = [
             { name: "SHAMAN2016", link: "_scratch_" },
             { name: "DBDev-IT", link: "_github_" },
         ],
+    },
+    {
+        name: "Auto Save",
+        id: "autosave161final",
+        description: "Several features for games",
+        code: "QBacks/AutoSave.js",
+        banner: "QBacks/autosave.svg",
+        creator: { name: "QBacks", link: "_scratch_" },
     },
 ];
 
