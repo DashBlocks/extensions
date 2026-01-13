@@ -140,10 +140,10 @@ const extensions = [
     },
     {
         name: "Auto Save",
-        id: "autosave161final",
+        id: "qbacksAutosSave",
         description: "Several features for games",
         code: "QBacks/AutoSave.js",
-        banner: "QBacks/autosave.svg",
+        banner: "QBacks/AutoSave.svg",
         creator: { name: "QBacks", link: "_scratch_" },
     },
 ];
