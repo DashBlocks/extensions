@@ -1,4 +1,4 @@
-(function(Scratch) {
+(function(Scratch) { 
   'use strict';
   if (!Scratch.extensions.unsandboxed) {
     throw new Error('Для работы расширения необходимо включить режим Unsandboxed Mode в настройках Dashblocks!');
