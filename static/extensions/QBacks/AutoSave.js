@@ -1,7 +1,7 @@
 (function(Scratch) { 
  'use strict';
   if (!Scratch.extensions.unsandboxed) {
-    throw new Error('Для работы расширения необходимо включить режим Unsandboxed Mode в настройках Dashblocks!');
+    throw new Error('Extension MUST run unsandboxed!');
   }
   const vm = Scratch.vm;
   let currentGameId = 'MyGame';
@@ -62,17 +62,17 @@
   class AutoSaveTitanium {
     getInfo() {
       return {
-        id: 'autosave161final',
-        name: 'AutoSave 1.6.1',
+        id: 'qbacksAutoSave',
+        name: 'AutoSave',
         color1: '#37474F', 
         color2: '#263238', 
         color3: '#FFD600', 
         blocks: [
-          { blockType: Scratch.BlockType.LABEL, text: 'Настройки Системы' },
+          { blockType: Scratch.BlockType.LABEL, text: 'System Controls' },
           {
             opcode: 'config',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Настроить игру: ID [ID] | Ключ [KEY]',
+            text: 'Configure game: ID [ID] | Key [KEY]',
             arguments: {
               ID: { type: Scratch.ArgumentType.STRING, defaultValue: 'RPG_v1' },
               KEY: { type: Scratch.ArgumentType.STRING, defaultValue: 'Secret' }
@@ -81,30 +81,30 @@
           {
             opcode: 'setSlot',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Выбрать Слот: [NUM]',
+            text: 'Set Slot: [NUM]',
             arguments: { NUM: { type: Scratch.ArgumentType.STRING, defaultValue: '1' } }
           },
           {
             opcode: 'getCurrentSlot',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'Текущий слот',
+            text: 'Current Slot',
             disableMonitor: true
           },
           {
             opcode: 'copySlot',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Копировать Слот [FROM] в Слот [TO]',
+            text: 'Copy Slot [FROM] to Slot [TO]',
             arguments: {
               FROM: { type: Scratch.ArgumentType.STRING, defaultValue: '1' },
               TO: { type: Scratch.ArgumentType.STRING, defaultValue: '2' }
             }
           },
           '---',
-          { blockType: Scratch.BlockType.LABEL, text: 'Данные Слота' },
+          { blockType: Scratch.BlockType.LABEL, text: 'Slot Data' },
           {
             opcode: 'saveVar',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Сохранить переменную [VAL] как [NAME]',
+            text: 'Save variable [VAL] as [NAME]',
             arguments: {
               VAL: { type: Scratch.ArgumentType.STRING, defaultValue: '100' },
               NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'score' }
@@ -113,7 +113,7 @@
           {
             opcode: 'loadVar',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'Загрузить переменную [NAME] (или [DEF])',
+            text: 'Load variable [NAME] (or [DEF])',
             arguments: {
               NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'score' },
               DEF: { type: Scratch.ArgumentType.STRING, defaultValue: '0' }
@@ -122,7 +122,7 @@
           {
             opcode: 'saveList',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Сохранить список [LIST] как [NAME]',
+            text: 'Save list [LIST] as [NAME]',
             arguments: {
               LIST: { type: Scratch.ArgumentType.STRING, menu: 'listsMenu' },
               NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'inv' }
@@ -131,7 +131,7 @@
           {
             opcode: 'loadList',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Загрузить в список [LIST] из [NAME]',
+            text: 'Load list [LIST] from [NAME]',
             arguments: {
               LIST: { type: Scratch.ArgumentType.STRING, menu: 'listsMenu' },
               NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'inv' }
@@ -142,7 +142,7 @@
           {
             opcode: 'jsonSet',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'В объект [OBJ] записать ключ [KEY] = [VAL]',
+            text: 'In object [OBJ] write key [KEY] = [VAL]',
             arguments: {
               OBJ: { type: Scratch.ArgumentType.STRING, defaultValue: 'Stats' },
               KEY: { type: Scratch.ArgumentType.STRING, defaultValue: 'hp' },
@@ -152,7 +152,7 @@
           {
             opcode: 'jsonGet',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'Из объекта [OBJ] получить ключ [KEY]',
+            text: 'From object [OBJ] get key [KEY]',
             arguments: {
               OBJ: { type: Scratch.ArgumentType.STRING, defaultValue: 'Stats' },
               KEY: { type: Scratch.ArgumentType.STRING, defaultValue: 'hp' }
@@ -161,13 +161,13 @@
           {
             opcode: 'jsonSave',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Сохранить ОБЪЕКТ [OBJ] на диск',
+            text: 'Save object [OBJ] to disk',
             arguments: { OBJ: { type: Scratch.ArgumentType.STRING, defaultValue: 'Stats' } }
           },
           {
             opcode: 'jsonLoad',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Загрузить ОБЪЕКТ [OBJ] с диска',
+            text: 'Load object [OBJ] from disk',
             arguments: { OBJ: { type: Scratch.ArgumentType.STRING, defaultValue: 'Stats' } }
           },
           '---',
@@ -175,7 +175,7 @@
           {
             opcode: 'saveGlobal',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'ГЛОБАЛЬНО: Сохранить [VAL] как [NAME]',
+            text: 'GLOBAL: Save [VAL] as [NAME]',
             arguments: {
               VAL: { type: Scratch.ArgumentType.STRING, defaultValue: 'true' },
               NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'GameBeaten' }
@@ -184,7 +184,7 @@
           {
             opcode: 'loadGlobal',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'ГЛОБАЛЬНО: Загрузить [NAME] (или [DEF])',
+            text: 'GLOBAL: Load [NAME] (or [DEF])',
             arguments: {
               NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'GameBeaten' },
               DEF: { type: Scratch.ArgumentType.STRING, defaultValue: 'false' }
@@ -193,17 +193,17 @@
           {
             opcode: 'registerAch',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Регистрация ачивки: ID[ID] Имя[NAME] Описание[DESC]',
+            text: 'Register achievement: ID [ID] Name [NAME] Description [DESC]',
             arguments: {
               ID: { type: Scratch.ArgumentType.STRING, defaultValue: 'WIN' },
-              NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'Победа' },
-              DESC: { type: Scratch.ArgumentType.STRING, defaultValue: 'Пройди игру' }
+              NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'Victory' },
+              DESC: { type: Scratch.ArgumentType.STRING, defaultValue: 'Complete the game' }
             }
           },
           {
             opcode: 'registerAchProgress',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Настройка прогресса: ID[ID] Цель[TARGET] Стат[STAT]',
+            text: 'Progress settings: ID [ID] Target [TARGET] Stat [STAT]',
             arguments: {
               ID: { type: Scratch.ArgumentType.STRING, defaultValue: 'KILLER' },
               TARGET: { type: Scratch.ArgumentType.NUMBER, defaultValue: 100 },
@@ -213,7 +213,7 @@
           {
             opcode: 'addStat',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Добавить [VAL] к статистике [STAT]',
+            text: 'Add [VAL] to stat [STAT]',
             arguments: {
               VAL: { type: Scratch.ArgumentType.NUMBER, defaultValue: 1 },
               STAT: { type: Scratch.ArgumentType.STRING, defaultValue: 'kills' }
@@ -222,19 +222,19 @@
           {
             opcode: 'whenUnlocked',
             blockType: Scratch.BlockType.HAT,
-            text: 'Когда получено достижение',
+            text: 'When achievement unlocked',
             isEdgeActivated: false
           },
           {
             opcode: 'getLastAchInfo',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'Инфо последней ачивки: [TYPE]',
+            text: 'Info of last achievement: [TYPE]',
             arguments: { TYPE: { type: Scratch.ArgumentType.STRING, menu: 'achInfoMenu' } }
           },
           {
             opcode: 'getAchData',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'Данные ачивки [ID]: [TYPE]',
+            text: 'Data of achievement [ID]: [TYPE]',
             arguments: {
               ID: { type: Scratch.ArgumentType.STRING, defaultValue: 'WIN' },
               TYPE: { type: Scratch.ArgumentType.STRING, menu: 'achFullMenu' }
@@ -245,54 +245,54 @@
           {
             opcode: 'saveTimestamp',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Записать ВРЕМЯ сохранения'
+            text: 'Write save timestamp'
           },
           {
             opcode: 'getLastSaveTime',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'Время последнего сохранения',
+            text: 'Time of last save',
             disableMonitor: true
           },
           {
             opcode: 'slotExists',
             blockType: Scratch.BlockType.BOOLEAN,
-            text: 'Слот [NUM] занят?',
+            text: 'Slot [NUM] occupied?',
             arguments: { NUM: { type: Scratch.ArgumentType.STRING, defaultValue: '1' } }
           },
           {
             opcode: 'generateSaveCode',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'Получить сжатый код сохранения',
+            text: 'Get compressed save code',
             disableMonitor: true
           },
           {
             opcode: 'loadFromSaveCode',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Загрузить из кода: [CODE]',
+            text: 'Load from code: [CODE]',
             arguments: { CODE: { type: Scratch.ArgumentType.STRING, defaultValue: '' } }
           },
           {
             opcode: 'downloadKey',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Скачать Слот как файл',
+            text: 'Download Slot as file',
             arguments: { NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'backup' } }
           },
           {
             opcode: 'uploadKey',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Загрузить файл в Слот',
+            text: 'Upload file to Slot',
             arguments: { NAME: { type: Scratch.ArgumentType.STRING, defaultValue: 'backup' } }
           },
           {
              opcode: 'wipeSlot',
              blockType: Scratch.BlockType.COMMAND,
-             text: 'Удалить данные слота (Wipe)'
+             text: 'Delete slot data (Wipe)'
           }
         ],
         menus: {
           listsMenu: { acceptReporters: true, items: 'getLists' },
-          achInfoMenu: { items: ['ID', 'Имя', 'Описание'] },
-          achFullMenu: { items: ['Имя', 'Описание', 'Открыто? (true/false)', 'Прогресс', 'Цель'] }
+          achInfoMenu: { items: ['ID', 'Name', 'Description'] },
+          achFullMenu: { items: ['Name', 'Description', 'Unlocked? (true/false)', 'Progress', 'Target'] }
         }
       };
     }
@@ -461,25 +461,25 @@
         status.unlocked = true;
         localStorage.setItem(this._makeKeyAch(id), this._encrypt(JSON.stringify(status)));
         lastUnlockedID = id;
-        vm.runtime.startHats('autosave161clean_whenUnlocked');
+        vm.runtime.startHats('qbacksAutoSave_whenUnlocked');
     }
     whenUnlocked() { return false; }
     getLastAchInfo(args) {
         if (!lastUnlockedID || !achievementsDB[lastUnlockedID]) return 'Unknown';
         if (args.TYPE === 'ID') return lastUnlockedID;
-        if (args.TYPE === 'Имя') return achievementsDB[lastUnlockedID].name;
-        if (args.TYPE === 'Описание') return achievementsDB[lastUnlockedID].desc;
+        if (args.TYPE === 'Name') return achievementsDB[lastUnlockedID].name;
+        if (args.TYPE === 'Description') return achievementsDB[lastUnlockedID].desc;
         return '';
     }
     getAchData(args) {
         const id = args.ID;
         const info = achievementsDB[id] || { name: id, desc: '??', target: 0 };
         const status = this._getAchStatus(id);
-        if (args.TYPE === 'Имя') return info.name;
-        if (args.TYPE === 'Описание') return info.desc;
-        if (args.TYPE === 'Открыто? (true/false)') return status.unlocked;
-        if (args.TYPE === 'Цель') return info.target;
-        if (args.TYPE === 'Прогресс') {
+        if (args.TYPE === 'Name') return info.name;
+        if (args.TYPE === 'Description') return info.desc;
+        if (args.TYPE === 'Unlocked? (true/false)') return status.unlocked;
+        if (args.TYPE === 'Target') return info.target;
+        if (args.TYPE === 'Progress') {
             if (!info.stat) return status.unlocked ? 1 : 0;
             return this.loadGlobal({NAME: info.stat, DEF: 0});
         }
@@ -544,7 +544,7 @@
         const reader = new FileReader();
         reader.onload = re => {
           localStorage.setItem(this._makeKeyNew(args.NAME), re.target.result);
-          alert('Файл загружен!');
+          alert('File uploaded!');
         };
         reader.readAsText(file);
       };
@@ -556,9 +556,9 @@
     }
     getLastSaveTime() {
         const raw = localStorage.getItem(this._makeKeyNew('_TIMESTAMP'));
-        if (!raw) return 'Нет данных';
+        if (!raw) return 'No data';
         const dec = this._decrypt(raw);
-        return dec || 'Ошибка';
+        return dec || 'Error';
     }
     slotExists(args) {
         const savedSlot = currentSlot;
@@ -600,7 +600,7 @@
           if (v.type === 'list') { if (!lists.includes(v.name)) lists.push(v.name); }
         }
       }
-      return lists.length > 0 ? lists : ['Создай список!'];
+      return lists.length > 0 ? lists : ['Create a list!'];
     }
   }
   Scratch.extensions.register(new AutoSaveTitanium());
