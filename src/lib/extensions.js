@@ -124,6 +124,14 @@ const extensions = [
         banner: "https://raw.githubusercontent.com/Mirazstudio-offical/Dash_code_cleaner_extension/refs/heads/main/logo.svg",
         creator: { name: "shilenin", link: "_scratch_" },
     },
+        {
+        name: "Auto Save",
+        id: "autosave161final",
+        description: "Several features for games",
+        code: "QBacks/AutoSave.js",
+        banner: "QBacks/autosave.svg",
+        creator: { name: "QBacks", link: "_scratch_" },
+    },
     {
         name: "JavaScript Runner",
         id: "JavaScriptRunner",
