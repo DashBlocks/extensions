@@ -47,6 +47,7 @@ const extensions = [
             { name: "AnonimKing24", link: "_scratch_" },
             { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
         ],
+        internetConnectionRequired: true,
     },
     {
         name: "Discord Webhook API",
@@ -57,6 +58,7 @@ const extensions = [
         // banner: "damir2809/DiscordWebhookAPI.svg",
         creator: { name: "DBDev-IT", link: "_github_" },
         notes: "Beta-version.",
+        internetConnectionRequired: true,
     },
     {
         name: "Pathfinding",
@@ -123,6 +125,7 @@ const extensions = [
         code: "shilenin/CodeCleaner.js",
         banner: "https://raw.githubusercontent.com/Mirazstudio-offical/Dash_code_cleaner_extension/refs/heads/main/logo.svg",
         creator: { name: "shilenin", link: "_scratch_" },
+        scratchCompatible: true,
     },
     {
         name: "JavaScript Runner",
