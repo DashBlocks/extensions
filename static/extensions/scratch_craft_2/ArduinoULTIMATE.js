@@ -17,12 +17,12 @@ class ArduinoUltimate {
       id: "arduinoUltimate",
       name: "Arduino ULTIMATE",
       blocks: [
-        { opcode: "connect", blockType: Scratch.BlockType.COMMAND, text: "подключить Arduino" },
+        { opcode: "connect", blockType: Scratch.BlockType.COMMAND, text: "connect Arduino" },
 
         {
           opcode: "pinMode",
           blockType: Scratch.BlockType.COMMAND,
-          text: "пин [PIN] режим [MODE]",
+          text: "pin [PIN] mode [MODE]",
           arguments: {
             PIN: { type: Scratch.ArgumentType.NUMBER, defaultValue: 13 },
             MODE: { type: Scratch.ArgumentType.STRING, menu: "mode" }
@@ -32,7 +32,7 @@ class ArduinoUltimate {
         {
           opcode: "digitalWrite",
           blockType: Scratch.BlockType.COMMAND,
-          text: "цифровой пин [PIN] = [VAL]",
+          text: "digital pin [PIN] = [VAL]",
           arguments: {
             PIN: { type: Scratch.ArgumentType.NUMBER, defaultValue: 13 },
             VAL: { type: Scratch.ArgumentType.NUMBER, defaultValue: 1 }
@@ -42,7 +42,7 @@ class ArduinoUltimate {
         {
           opcode: "digitalRead",
           blockType: Scratch.BlockType.REPORTER,
-          text: "цифровой пин [PIN]",
+          text: "digital pin [PIN]",
           arguments: {
             PIN: { type: Scratch.ArgumentType.NUMBER, defaultValue: 2 }
           }
@@ -51,7 +51,7 @@ class ArduinoUltimate {
         {
           opcode: "analogRead",
           blockType: Scratch.BlockType.REPORTER,
-          text: "аналоговый пин [PIN]",
+          text: "analog pin [PIN]",
           arguments: {
             PIN: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 }
           }
@@ -60,7 +60,7 @@ class ArduinoUltimate {
         {
           opcode: "analogWrite",
           blockType: Scratch.BlockType.COMMAND,
-          text: "PWM пин [PIN] значение [VAL]",
+          text: "PWM pin [PIN] value [VAL]",
           arguments: {
             PIN: { type: Scratch.ArgumentType.NUMBER, defaultValue: 3 },
             VAL: { type: Scratch.ArgumentType.NUMBER, defaultValue: 128 }
@@ -70,7 +70,7 @@ class ArduinoUltimate {
         {
           opcode: "servoWrite",
           blockType: Scratch.BlockType.COMMAND,
-          text: "servo пин [PIN] угол [ANGLE]",
+          text: "servo pin [PIN] angle [ANGLE]",
           arguments: {
             PIN: { type: Scratch.ArgumentType.NUMBER, defaultValue: 9 },
             ANGLE: { type: Scratch.ArgumentType.NUMBER, defaultValue: 90 }
@@ -80,7 +80,7 @@ class ArduinoUltimate {
         {
           opcode: "i2cWrite",
           blockType: Scratch.BlockType.COMMAND,
-          text: "I2C адрес [ADDR] регистр [REG] значение [VAL]",
+          text: "I2C address [ADDR] register [REG] value [VAL]",
           arguments: {
             ADDR: { type: Scratch.ArgumentType.NUMBER, defaultValue: 39 },
             REG: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 },
@@ -91,14 +91,13 @@ class ArduinoUltimate {
         {
           opcode: "i2cRead",
           blockType: Scratch.BlockType.REPORTER,
-          text: "I2C адрес [ADDR] регистр [REG]",
+          text: "I2C address [ADDR] register [REG]",
           arguments: {
             ADDR: { type: Scratch.ArgumentType.NUMBER, defaultValue: 39 },
             REG: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 }
           }
         }
       ],
-
       menus: {
         mode: {
           items: ["INPUT", "OUTPUT", "INPUT_PULLUP"]
@@ -110,7 +109,7 @@ class ArduinoUltimate {
   /* ===== Connection ===== */
   async connect() {
     if (!("serial" in navigator)) {
-      alert("Web Serial не поддерживается этим браузером");
+      alert("Web Serial is not supported by this browser");
       return;
     }
 
@@ -195,7 +194,7 @@ if (!this.digitalPorts[port]) this.digitalPorts[port] = 0;
   }
 
   i2cRead({ ADDR, REG }) {
-    return this.i2cData[${ADDR}:${REG}] || 0;
+    return this.i2cData[`${ADDR}:${REG}`] || 0;
   }
 
   /* ===== Serial parsing ===== */
