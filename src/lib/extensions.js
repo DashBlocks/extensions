@@ -92,14 +92,14 @@ const extensions = [
         banner: "scratch_craft_2/Modals.png",
         creator: { name: "scratch_craft_2", link: "_scratch_" },
     },
-        {
-        name: "Arduino ultimate",
+    {
+        name: "Arduino ULTIMATE",
         id: "arduinoUltimate",
-        description: "Позволяет управлять arduino прямо из браузера. Поддерживает digital/analog /I/O, PWM, Servo, I2C, Базовые датчики и устройства. ОБЯЗАТЕЛЬНО: Плата должна быть прошита StandardFirmata и браузер с web serial (Chrome/Edge).",
+        description: "Allows you to control Arduino directly from the browser. Supports digital/analog I/O, PWM, Servo, I2C, basic sensors and devices.",
         code: "scratch_craft_2/ArduinoULTIMATE.js",
         banner: "scratch_craft_2/ArduinoULTIMATE.png",
         creator: { name: "scratch_craft_2", link: "_scratch_" },
-        notes: "Beta-version.",
+        notes: "REQUIRED: The board must be flashed with StandardFirmata and the browser must support Web Serial (Chrome/Edge).",
     },
     {
         name: "MediaRecorder",
