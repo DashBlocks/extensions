@@ -234,6 +234,8 @@ Each extension is incased in `{}` brackets. Look below on how to copy it.
 
     // These next ones are optional. You can choose not to include them.
     notes: "Additional help by someguy", // Optional. Allows you to note anyone else who helped you or any small info.
+    scratchCompatible: false, // Optional. Indicates whether the extension is compatible with Scratch. Scratch-compatible extensions usually don't add new blocks.
+    internetConnectionRequired: false, // Optional. Specifies whether the extension needs an internet connection to work.
 },
 ```
 
