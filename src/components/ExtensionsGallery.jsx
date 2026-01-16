@@ -1,6 +1,7 @@
 import React, {useState, useMemo} from "react";
 import {extensions} from "../lib/extensions";
 import "../styles/extensions.css";
+import internetConnectionIcon from "./internet-connection.svg"
 
 function getBannerUrl (banner) {
     if (!banner) return `https://dashblocks.github.io/extensions/static/images/unknown.svg`;
@@ -82,6 +83,13 @@ export default function ExtensionsGallery () {
                                 <div className="ext-body">
                                     <h2 className="ext-title">{ext.name}</h2>
                                     <p className="ext-description">{ext.description}</p>
+                                    {ext.internetConnectionRequired && <p className="ext-meta">
+                                        <b>Requires: </b>
+                                        <img
+                                            src={internetConnectionIcon}
+                                            className="ext-internet-connection-icon"
+                                        />
+                                    </p>}
                                     <p className="ext-meta">
                                         {Array.isArray(ext.creator)
                                             ? (

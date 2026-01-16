@@ -111,6 +111,12 @@ body {
     font-size: 0.85rem;
 }
 
+.ext-internet-connection-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
 .ext-actions {
     margin-top: auto;
     display: flex;
