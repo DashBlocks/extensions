@@ -40,10 +40,14 @@ function getCreatorName (creator) {
 
 export default function ExtensionsGallery () {
     const [query, setQuery] = useState("");
+    const [sort, setSort] = useState("og");
 
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase();
-        return extensions.filter((e) => {
+        let result = extensions;
+        if (sort === "abc") result = result.toSorted();
+        if (sort === "zyx") result = result.toSorted().reduceRight((acc, e) => [...acc, e], []);
+        result = result.filter((e) => {
             if (!q) return true;
             return (
                 (e.name || "").toLowerCase().includes(q) ||
@@ -54,7 +58,8 @@ export default function ExtensionsGallery () {
                     : getCreatorName(e.creator || "").toString().toLowerCase().includes(q))
             );
         });
-    }, [extensions, query]);
+        return result;
+    }, [extensions, query, sort]);
 
     return (
         <>
@@ -67,6 +72,14 @@ export default function ExtensionsGallery () {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
+                    <select
+                        class="ext-sort"
+                        onChange={(e) => setSort(e.target.value)}
+                    >
+                        <option value="og">Sort: Default</option>
+                        <option value="abc">Sort: ABC</option>
+                        <option value="zyx">Sort: ZYX</option>
+                    </select>
                 </div>
             </header>
 
