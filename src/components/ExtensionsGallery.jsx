@@ -45,8 +45,12 @@ export default function ExtensionsGallery () {
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase();
         let result = extensions;
-        if (sort === "abc") result = result.toSorted();
-        if (sort === "zyx") result = result.toSorted().reduceRight((acc, e) => [...acc, e], []);
+        if (sort === "abc") result = result.toSorted(
+            (e1, e2) => (e1.name || "") === (e2.name || "") ? 0 : (e1.name || "") > (e2.name || "") ? 1 : -1
+        );
+        if (sort === "zyx") result = result.toSorted(
+            (e1, e2) => (e1.name || "") === (e2.name || "") ? 0 : (e1.name || "") > (e2.name || "") ? -1 : 1
+        );
         result = result.filter((e) => {
             if (!q) return true;
             return (
