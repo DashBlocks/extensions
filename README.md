@@ -20,7 +20,7 @@ and [our extension gallery](https://dashblocks.github.io/extensions) to confirm.
 - If your extension uses external content such as JS libraries or CSS stylesheets, you must include them inside the extension code itself. You **CANNOT** fetch/import content from URLs that is a core part of your extension as it'll make the extension unusable offline, or in offline packaged projects. This does not apply to:
     - content that obviously requires internet, like an extension that allows projects to use a public API.
     - content of SDK-extensions, like "Yandex Games SDK (Unofficial)" extension.
-- Your extension **CANNOT** be made entirely with AI and **CANNOT** be made **ENTIRELY OR PARTLY** with assistive tools such as TurboBuilder, ExtForge. You must understand the raw code your extension is running.
+- Your extension **CANNOT** be made entirely with AI and **CANNOT** be made **ENTIRELY OR PARTLY** with assistive tools such as TurboBuilder, ExtForge. There's a lot of ways to tell if code was written with AI, so there's no reason to lie. You must understand the raw code your extension is running.
 - Your extension **CANNOT** rely on the use of any generative AI. This is mainly for extensions that respond to messages from AI like ChatGPT.
 - Your extension **CANNOT** reference, contain or use any content not suitable for ages under 16. (including extension icon and extension code)
 - Your extension **CANNOT** contain discriminatory content or content that is against a certain group or minority.
@@ -50,6 +50,7 @@ The banner/thumbnail is not required, but it will be a `static/images/unknown.sv
 - Your banner/thumbnail **MUST BE** MIT licensed. (basically just make it yourself and the image should be usable anywhere)
 - Your banner/thumbnail **MUST BE** 600x300 pixels.
 - Your banner/thumbnail **CANNOT** reference or contain any content not suitable for ages under 16.
+- Your banner/thumbnail **CANNOT** be AI-generated image under any condition. We would rather not have an image than use AI slop.
 - If your banner/thumbnail is in SVG format, it **CANNOT** contain `<text>` elements.
 - Ideally, your banner/thumbnail shound not contain any text, that needs to be translated, such as the name of extension.
 
@@ -83,6 +84,8 @@ Continue through the menus until it lets you create a pull request.
 You can post your extension banner/thumbnail and or description in the pull request.
 
 Once your pull request is merged, it'll be on the site or upcoming onto the site. You may get responses about things you should change or fix though.
+
+Note that **reviewers are volunteers**. They are deciding whether or when to review your change. We don't guarantee that your change will be accepted.
 
 *See the Optional Steps for more info on how to edit the site to show your extension.*
 
