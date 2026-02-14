@@ -17,18 +17,19 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
             name: "JavaScript Runner",
             authors: [
                 {
-                  name: "SHAMAN2016",
-                  scratch: "https://scratch.mit.edu/users/SHAMAN2016",
-                  github: "https://github.com/shaman2016scratch"
+                    name: "SHAMAN2016",
+                    scratch: "https://scratch.mit.edu/users/SHAMAN2016",
+                    github: "https://github.com/shaman2016scratch"
                 },
                 {
-                  name: "DBDev IT",
-                  scratch: "https://scratch.mit.edu/users/damir2809",
-                  github: "https://github.com/DBDev-IT"
+                    name: "DBDev IT",
+                    scratch: "https://scratch.mit.edu/users/damir2809",
+                    github: "https://github.com/DBDev-IT"
                 }
             ],
             version: "3.0",
-            id: "shaman2016JavaScriptRunner"
+            id: "shaman2016JavaScriptRunner",
+            docs: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/"
         };
         function output (toOutput) {
             window.RUNNER_OUTPUT = toOutput;
@@ -49,7 +50,7 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
             return {
                 id: "shaman2016JavaScriptRunner",
                 name: "JavaScript Runner",
-                docs: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/",
+                docsURL: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/",
                 color1: "#0fbd8c",
                 blocks: [
                     {
