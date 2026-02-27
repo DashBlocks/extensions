@@ -27,7 +27,7 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
                     github: "https://github.com/DBDev-IT"
                 }
             ],
-            version: "3.0",
+            version: "3.1",
             id: "shaman2016JavaScriptRunner",
             docs: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/"
         };
