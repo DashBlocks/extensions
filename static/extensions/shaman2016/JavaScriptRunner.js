@@ -17,18 +17,19 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
             name: "JavaScript Runner",
             authors: [
                 {
-                  name: "SHAMAN2016",
-                  scratch: "https://scratch.mit.edu/users/SHAMAN2016",
-                  github: "https://github.com/shaman2016scratch"
+                    name: "SHAMAN2016",
+                    scratch: "https://scratch.mit.edu/users/SHAMAN2016",
+                    github: "https://github.com/shaman2016scratch"
                 },
                 {
-                  name: "DBDev IT",
-                  scratch: "https://scratch.mit.edu/users/damir2809",
-                  github: "https://github.com/DBDev-IT"
+                    name: "DBDev IT",
+                    scratch: "https://scratch.mit.edu/users/damir2809",
+                    github: "https://github.com/DBDev-IT"
                 }
             ],
-            version: "3.0",
-            id: "shaman2016JavaScriptRunner"
+            version: "3.1",
+            id: "shaman2016JavaScriptRunner",
+            docs: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/"
         };
         function output (toOutput) {
             window.RUNNER_OUTPUT = toOutput;
@@ -49,68 +50,88 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
             return {
                 id: "shaman2016JavaScriptRunner",
                 name: "JavaScript Runner",
-                docs: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/",
+                docsURL: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/",
                 color1: "#0fbd8c",
                 blocks: [
                     {
                         opcode: "command",
-                        text: "command [CODE]",
+                        text: "command [CODE], is async [isAsync]",
                         blockType: Scratch.BlockType.COMMAND,
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: "alert(\"Hello, world!\");"
+                            },
+                            isAsync: {
+                                type: Scratch.ArgumentType.BOOLEAN,
+                                defaultValuefalse
                             }
-                        }
+}
                     },
                     {
                         opcode: "reporter",
-                        text: "reporter [CODE]",
+                        text: "reporter [CODE], is async [isAsync]",
                         blockType: Scratch.BlockType.REPORTER,
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: "output(\"Hello, world!\");"
+                            },
+                            isAsync: {
+                                type: Scratch.ArgumentType.BOOLEAN,
+                                defaultValue: false
                             }
                         }
                     },
                     {
                         opcode: "boolean",
-                        text: "boolean [CODE]",
+                        text: "boolean [CODE], is async [isAsync]",
                         blockType: Scratch.BlockType.BOOLEAN,
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: "output(1 < 2);"
+                            },
+                            isAsync: {
+                                type: Scratch.ArgumentType.BOOLEAN,
+                                defaultValue: false
                             }
                         }
                     },
                     {
                         opcode: "array",
-                        text: "array [CODE]",
+                        text: "array [CODE], is async [isAsync]",
                         blockType: Scratch.BlockType.ARRAY,
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: "output([\"apple\", \"banana\"]);"
+                            },
+                            isAsync: {
+                                type: Scratch.ArgumentType.BOOLEAN,
+                                defaultValue: false
                             }
                         }
                     },
                     {
                         opcode: "object",
-                        text: "object [CODE]",
+                        text: "object [CODE], is async [isAsync]",
                         blockType: Scratch.BlockType.OBJECT,
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: "output({a: \"apple\", b: \"banana\"});"
+                            },
+                            isAsync: {
+                                type: Scratch.ArgumentType.BOOLEAN,
+                                defaultValue: false
                             }
                         }
                     }
                 ]
             }
         }
-        async _runSandboxed (code) {
+        async _runSandboxed (code, isAsync) {
             window.RUNNER_OUTPUT = null;
 
             await new Promise((resolve, reject) => {
@@ -123,7 +144,11 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
                     script.remove()
                     reject(new Error(`Error in sandboxed script. Check the console for more info`));
                 };
-                script.src = `data:application/javascript,${encodeURIComponent(_runnerFunctions)};${encodeURIComponent(code)}`;
+                if (isAsync) {
+                    script.src = `data:application/javascript,async function jsRun() { ${encodeURIComponent(_runnerFunctions)};${encodeURIComponent(code)} }; jsRun()`;
+                } else {
+                    script.src = `data:application/javascript,${encodeURIComponent(_runnerFunctions)};${encodeURIComponent(code)}`;
+                };
                 document.body.appendChild(script);
             });
             return window.RUNNER_OUTPUT;
@@ -131,30 +156,30 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
 
         async command (args) {
             const code = Cast.toString(args.CODE);
-            await this._runSandboxed(code);
+            await this._runSandboxed(code, args.isAsync);
         }
 
         async reporter (args) {
             const code = Cast.toString(args.CODE);
-            const output = Cast.toString(await this._runSandboxed(code));
+            const output = Cast.toString(await this._runSandboxed(code, args.isAsync));
             return output;
         }
 
         async boolean (args) {
             const code = Cast.toString(args.CODE);
-            const boolean = Cast.toBoolean(await this._runSandboxed(code));
+            const boolean = Cast.toBoolean(await this._runSandboxed(code, args.isAsync));
             return boolean;
         }
 
         async array (args) {
             const code = Cast.toString(args.CODE);
-            const array = Cast.toList(await this._runSandboxed(code));
+            const array = Cast.toList(await this._runSandboxed(code, args.isAsync));
             return array;
         }
 
         async object (args) {
             const code = Cast.toString(args.CODE);
-            const object = Cast.toObject(await this._runSandboxed(code));
+            const object = Cast.toObject(await this._runSandboxed(code, args.isAsync));
             return object;
         }
     }
