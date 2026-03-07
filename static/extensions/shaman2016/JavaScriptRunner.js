@@ -82,7 +82,7 @@
         }
 
         async _execute (code) {
-            return await vm.SanboxRunner.execute(code)
+            return await vm.SandboxRunner.execute(code)
                 .then(result => {
                     if (result.success) {
                         return result.value;
