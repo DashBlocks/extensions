@@ -82,17 +82,17 @@
         }
 
         async _execute (code) {
-            return await vm.SandboxRunner.execute(code)
-                .then(result => {
-                    if (result.success) {
-                        return result.value;
-                    } else {
-                        return "Error: " + result.value;
-                    }
-                })
-                .catch(error => {
-                    return "Error: " + error.message;
-                });
+            const wrappedCode = `(async () => {${code}})()`;
+            try {
+                const result = await vm.SandboxRunner.execute(wrappedCode);
+                if (result.success) {
+                    return result.value;
+                } else {
+                    return "Error: " + result.value.message;
+                }
+            } catch (error) {
+                return "Error: " + result.value;
+            }
         }
 
         async command (args) {
