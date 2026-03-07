@@ -1,48 +1,18 @@
 // Name: JavaScript Runner
 // ID: shaman2016JavaScriptRunner
 /* By:
-SHAMAN2016 <https://scratch.mit.edu/users/SHAMAN2016/>
-damir2809 <https://scratch.mit.edu/users/damir2809/>
-*/
+ * SHAMAN2016 <https://scratch.mit.edu/users/SHAMAN2016/>
+ * damir2809 <https://scratch.mit.edu/users/damir2809/>
+ */
 // License: MIT
 
 (function (Scratch) {
     "use strict";
 
-    if (!Scratch.extensions.unsandboxed) return alert("This extension needs to be unsandboxed to run!");
+    if (!Scratch.extensions.unsandboxed) return alert("This extension MUST run unsandboxed!");
 
+    const vm = Scratch.vm;
     const Cast = Scratch.Cast;
-    const _runnerFunctions = `
-        data = {
-            name: "JavaScript Runner",
-            authors: [
-                {
-                    name: "SHAMAN2016",
-                    scratch: "https://scratch.mit.edu/users/SHAMAN2016",
-                    github: "https://github.com/shaman2016scratch"
-                },
-                {
-                    name: "DBDev IT",
-                    scratch: "https://scratch.mit.edu/users/damir2809",
-                    github: "https://github.com/DBDev-IT"
-                }
-            ],
-            version: "3.1.2",
-            id: "shaman2016JavaScriptRunner"
-        };
-        function output (toOutput) {
-            window.RUNNER_OUTPUT = toOutput;
-            return toOutput;
-        };
-        function warn (toWarn) {
-            window.RUNNER_OUTPUT = \`Warning: \${toWarn}\`;
-            return \`Warning: \${toWarn}\`;
-        };
-        function error (toError) {
-            window.RUNNER_OUTPUT = \`Error: \${toError}\`;
-            return \`Error: \${toError}\`;
-        };
-    `;
 
     class JavaScriptExtension {
         getInfo () {
@@ -70,7 +40,7 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
-                                defaultValue: "output(\"Hello, world!\");"
+                                defaultValue: "return \"Hello, world!\";"
                             }
                         }
                     },
@@ -81,7 +51,7 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
-                                defaultValue: "output(1 < 2);"
+                                defaultValue: "return 1 < 2;"
                             }
                         }
                     },
@@ -92,7 +62,7 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
-                                defaultValue: "output([\"apple\", \"banana\"]);"
+                                defaultValue: "return [\"apple\", \"banana\"];"
                             }
                         }
                     },
@@ -103,61 +73,56 @@ damir2809 <https://scratch.mit.edu/users/damir2809/>
                         arguments: {
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
-                                defaultValue: "output({a: \"apple\", b: \"banana\"});"
+                                defaultValue: "return {a: \"apple\", b: \"banana\"};"
                             }
                         }
                     }
                 ]
             }
         }
-        async _runSandboxed (code) {
-            window.RUNNER_OUTPUT = null;
 
-            await new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.onload = () => {
-                    script.remove()
-                    resolve();
-                };
-                script.onerror = () => {
-                    script.remove()
-                    reject(new Error(`Error in sandboxed script. Check the console for more info`));
-                };
-                script.src = `data:application/javascript,${encodeURIComponent(_runnerFunctions)};${encodeURIComponent(code)}`;
-                document.body.appendChild(script);
-            });
-            return window.RUNNER_OUTPUT;
+        async _execute (code) {
+            return await vm.SanboxRunner.execute(code)
+                .then(result => {
+                    if (result.success) {
+                        return result.value;
+                    } else {
+                        return "Error: " + result.value;
+                    }
+                })
+                .catch(error => {
+                    return "Error: " + error.message;
+                });
         }
 
         async command (args) {
             const code = Cast.toString(args.CODE);
-            await this._runSandboxed(code);
+            await this._execute(code);
         }
 
         async reporter (args) {
             const code = Cast.toString(args.CODE);
-            const output = Cast.toString(await this._runSandboxed(code));
+            const output = Cast.toString(await this._execute(code));
             return output;
         }
 
         async boolean (args) {
             const code = Cast.toString(args.CODE);
-            const boolean = Cast.toBoolean(await this._runSandboxed(code));
+            const boolean = Cast.toBoolean(await this._execute(code));
             return boolean;
         }
 
         async array (args) {
             const code = Cast.toString(args.CODE);
-            const array = Cast.toList(await this._runSandboxed(code));
+            const array = Cast.toList(await this._execute(code));
             return array;
         }
 
         async object (args) {
             const code = Cast.toString(args.CODE);
-            const object = Cast.toObject(await this._runSandboxed(code));
+            const object = Cast.toObject(await this._execute(code));
             return object;
         }
     }
-
     Scratch.extensions.register(new JavaScriptExtension);
 })(Scratch);

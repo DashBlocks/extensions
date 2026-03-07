@@ -129,7 +129,7 @@ const extensions = [
     },
     {
         name: "JavaScript Runner",
-        id: "JavaScriptRunner",
+        id: "shaman2016JavaScriptRunner",
         description: "Run the JavaScript code!",
         code: "shaman2016/JavaScriptRunner.js",
         banner: "shaman2016/JavaScriptRunner.svg",
