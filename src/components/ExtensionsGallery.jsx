@@ -3,6 +3,12 @@ import {extensions} from "../lib/extensions";
 import "../styles/extensions.css";
 import internetConnectionIcon from "./internet-connection.svg"
 
+const creditLinkShortcuts = {
+    "_scratch_": (credit) => `https://scratch.mit.edu/users/${credit.name}`,
+    "_github_": (credit) => `https://github.com/${credit.name}`
+};
+const creditLink = (credit) => credit.link;
+
 function getBannerUrl (banner) {
     if (!banner) return `https://dashblocks.github.io/extensions/static/images/unknown.svg`;
     if (banner.startsWith("http://") || banner.startsWith("https://")) return banner;
@@ -19,11 +25,7 @@ function getCreatorNode (creator) {
     if (typeof creator == "string") return creator;
     return (
         <a
-            href={creator.link === "_scratch_"
-                ? `https://scratch.mit.edu/users/${creator.name}`
-                : creator.link === "_github_"
-                    ? `https://github.com/${creator.name}`
-                    : creator.link}
+            href={(creditLinkShortcuts[creator.link] || creditLink)(creator)}
             target="_blank"
             rel="noreferrer"
             key={creator.name}
