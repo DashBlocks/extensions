@@ -262,7 +262,8 @@ Each extension is incased in `{}` brackets. Look below on how to copy it.
         "link" can be:
             * "_scratch_" - Adds a link to Scratch profile whose username is specified in "name".
             * "_github_" - Adds a link to GitHub profile whose username is specified in "name".
-            * Link to social profile. (ALLOWED Scratch or GitHub profile)
+            * "_dash_" - Adds a link to Dash profile whose username is specified in "name".
+            * Link to social profile. (For non-Dash developer contributors ALLOWED Scratch, GitHub or Dash profile)
     */
     // ...
 },
