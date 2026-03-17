@@ -134,7 +134,7 @@ const extensions = [
         code: "shaman2016/JavaScriptRunner.js",
         banner: "shaman2016/JavaScriptRunner.svg",
         creator: [
-            { name: "SHAMAN2016", link: "_scratch_" },
+            { name: "polzovatel_8787", link: "_dash_" },
             { name: "DBDev-IT", link: "_github_" },
         ],
     },
