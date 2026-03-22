@@ -162,8 +162,20 @@
     constructor() {
       runtime.registerSerializer(
         "Den4ik12Maps_map",
-        (value) => runtime.serializers.json_json.serialize(value.entries().toArray()),
-        (value) => new CDTMap(runtime.serializers.json_json.deserialize(value))
+        function*(obj) {
+          const result = [];
+          for (let [key, item] of obj) {
+            result.push([yield key, yield item]);
+          }
+          return result;
+        },
+        function*(serialized) => {
+          const result = new CDTMap();
+          for (let [key, item] of serialized) {
+            result.set(yield key, yield item);
+          }
+          return result;
+        }
       );
     }
     getInfo() {
@@ -329,14 +341,14 @@
     }
     _toMap(value) {
       if (value instanceof CDTMap) return value;
-      if (Array.isArray(value)) {
+      if (Cast.isNormalArray(value)) {
         try {
           return new CDTMap(value);
         } catch {
           return new CDTMap();
         }
       }
-      if (typeof value === "object" && value instanceof Object) {
+      if (Cast.isNormalObject(value)) {
         try {
           return new CDTMap(Object.entries(value));
         } catch {
