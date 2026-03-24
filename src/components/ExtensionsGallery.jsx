@@ -94,7 +94,12 @@ export default function ExtensionsGallery () {
                 <main>
                     <div className="ext-infobox">
                         <div className="ext-infobox-title">Some extensions will work only in Dash.</div>
-                        Extensions that rely on Arrays or Objects will likely not work in other mods than Dash.
+                        Extensions will likely not work in other mods than Dash if they:
+                        <ul>
+                            <li>Rely on Arrays or Objects,</li>
+                            <li>Use generator functions (function*) as serializers/deserializers of custom types,</li>
+                            <li>Use Patcher, SandboxRunner APIs.</li>
+                        </ul>
                     </div>
                     <div className="ext-grid">
                         {filtered.map((ext) => (
