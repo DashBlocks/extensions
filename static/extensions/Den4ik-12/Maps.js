@@ -169,7 +169,7 @@
           }
           return result;
         },
-        function*(serialized) => {
+        function*(serialized) {
           const result = new CDTMap();
           for (let [key, item] of serialized) {
             result.set(yield key, yield item);
