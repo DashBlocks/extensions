@@ -84,7 +84,7 @@
         async _execute (code) {
             const wrappedCode = `(async () => {${code}})()`;
             try {
-                const result = await vm.SandboxRunner.execute(wrappedCode);
+                const result = await Scratch.SandboxRunner.execute(wrappedCode);
                 if (result.success) {
                     return result.value;
                 } else {
