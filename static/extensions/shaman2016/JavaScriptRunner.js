@@ -11,7 +11,6 @@
 
     if (!Scratch.extensions.unsandboxed) return alert("This extension MUST run unsandboxed!");
 
-    const vm = Scratch.vm;
     const Cast = Scratch.Cast;
 
     class JavaScriptExtension {
