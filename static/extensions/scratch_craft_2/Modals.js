@@ -7,6 +7,10 @@
 (function (Scratch) {
   "use strict";
 
+  if (!Scratch.extensions.unsandboxed) {
+    throw new Error("This extension MUST run unsandboxed");
+  }
+
   const Cast = Scratch.Cast;
 
   class Modals {
