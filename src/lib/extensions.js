@@ -141,10 +141,11 @@ const extensions = [
     {
         name: "Dash Api",
         id: "polzovatel8787DashApi",
-        description: "",
+        description: "An extension for interacting with the Dash api.",
         code: "shaman2016/dashapi.js",
         // banner: "shaman2016/dashapi.svg",
         creator: { name: "polzovatel_8787", link: "_dash_" },
+        notes: "It ONLY works in Dash."
     },
     {
         name: "Auto Save",
