@@ -139,6 +139,14 @@ const extensions = [
         ],
     },
     {
+        name: "Dash Api",
+        id: "polzovatel8787DashApi",
+        description: "",
+        code: "shaman2016/dashapi.js",
+        // banner: "shaman2016/dashapi.svg",
+        creator: { name: "polzovatel_8787", link: "_dash_" },
+    },
+    {
         name: "Auto Save",
         id: "qbacksAutosSave",
         description: "Several features for games",
