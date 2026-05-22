@@ -139,13 +139,16 @@ const extensions = [
         ],
     },
     {
-        name: "Dash Api",
-        id: "polzovatel8787DashApi",
-        description: "An extension for interacting with the Dash api.",
-        code: "shaman2016/dashapi.js",
-        // banner: "shaman2016/dashapi.svg",
-        creator: { name: "polzovatel_8787", link: "_dash_" },
-        notes: "It ONLY works in Dash."
+        name: "Dash API",
+        id: "DashAPI",
+        description: "Blocks that interact with the Dash API. Official.",
+        code: "shaman2016/DashAPI.js",
+        // banner: "shaman2016/DashAPI.svg",
+        creator: [
+            { name: "polzovatel_8787", link: "_dash_" },
+            { name: "DBDev-IT", link: "_github_" },
+        ],
+        internetConnectionRequired: true,
     },
     {
         name: "Auto Save",
