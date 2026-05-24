@@ -19,7 +19,8 @@
                 id: "shaman2016JavaScriptRunner",
                 name: "JavaScript Runner",
                 docsURL: "https://shaman2016scratch.github.io/ext-docs/JavaScriptRunner/",
-                color1: "#0fbd8c",
+                iconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1280px-Unofficial_JavaScript_logo_2.svg.png",
+                color1: "#f3e000",
                 blocks: [
                     {
                         opcode: "command",
