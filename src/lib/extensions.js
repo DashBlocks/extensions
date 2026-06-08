@@ -2,7 +2,7 @@
     Note to contributors & developers that can read JSON:
         The extra commas are added at the end of each thing
         to help copy & pasting work better.
-        Please, dont remove them :)
+        Please, don't remove them :)
 */
 const extensions = [
     {
@@ -84,6 +84,15 @@ const extensions = [
             "Blocks for working with Map, which is more powerful than Object.",
         code: "Den4ik-12/Maps.js",
         banner: "Den4ik-12/Maps.svg",
+        creator: { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
+    },
+    {
+        name: "Targets",
+        id: "Den4ik12Targets",
+        description:
+            "Easily manage your sprites, clones, and their properties.",
+        code: "Den4ik-12/Targets.js",
+        banner: "Den4ik-12/Targets.svg",
         creator: { name: "Den4ik-12", link: "https://github.com/DDen4ik-12" },
     },
     {
@@ -189,7 +198,7 @@ const otherExtensions = [
     {
         name: "Boxed Physics",
         id: "P7BoxPhys",
-        description: "Implements the Box2D physics engine into PenguinMod, adding joints, springs, etc. This is different from TurboWarp's implementation.",
+        description: "Implements the Box2D physics engine, adding joints, springs, etc. This is different from TurboWarp's implementation.",
         code: "pooiod/Box2D.js",
         banner: "pooiod/B2Dimg.svg",
         creator: "pooiod7",
@@ -213,43 +222,6 @@ const otherExtensions = [
         isGitHub: false,
         unstable: true,
         unstableReason: "WebGPU is still experimental and not supported by all browsers and does not work when packaged to electron. Check compatibility at webgpu.io."
-    },
-    {
-        name: "Object",
-        id: "skyhigh173object",
-        description: "Handle large JSON files at an extreme speed.",
-        code: "skyhigh173/object.js",
-        banner: "skyhigh173/object.svg",
-        creator: "skyhigh173",
-        isGitHub: true,
-    },
-    {
-        name: "Scope Variable",
-        id: "0zCsv",
-        description: "Manage your variables in a block-like structure.",
-        code: "0znzw/ScopeVars.js",
-        banner: "0znzw/ScopeVars.png",
-        creator: "yuri-kiss",
-        isGitHub: true,
-        unstable: true,
-        unstableReason: "This extension uses unstable techniques that may not always work.",
-    },
-    {
-        name: "Extra Timers",
-        id: "steve0greatnesstimers",
-        description: "Allows for the creation and management of additional timer blocks.",
-        code: "steve0greatness/timers.js",
-        banner: "steve0greatness/timers.svg",
-        creator: "Steve0Greatness",
-        isGitHub: true, 
-    },
-    {
-        name: "Dictation",
-        id: "pooiod7Dictation",
-        description: "Convert your voice into text. (not supported in all browsers)",
-        code: "pooiod/Dictation.js",
-        banner: "pooiod/Dictation.svg",
-        creator: "pooiod7",
     },
     {
         name: "Stylus",
@@ -316,26 +288,6 @@ const otherExtensions = [
         isGitHub: true
     },
     {
-        name: "Background Remover",
-        id: "dumzdevBGRemover",
-        description: "Removes background from images.",
-        code: "dumzdev/removebg.js",
-        banner: "dumzdev/removebgbanner.svg",
-        creator: "dumzdev",
-    },
-    {
-        name: "PenguinAI",
-        id: "penguinGPT",
-        description: "Talk to AI! Use Models like DALL-E-3, GPT, LLama, Claude, and more!",
-        code: "MubiLop/penguingpt.js",
-        banner: "MubiLop/penguingpt.png",
-        creator: "cicerorph",
-        creatorAlias: "MubiLop",
-        isGitHub: true,
-        unstable: true,
-        unstableReason: "AI models can generate unintended or inappropriate output.\nSome AI models may also become temporarily inaccessible.\n\nUse at your own risk.",
-    },
-    {
         name: "Block AI",
         id: "pangpalgemini",
         description: "An AI powered chat bot to help you code in your projects.",
@@ -346,16 +298,6 @@ const otherExtensions = [
         isGitHub: true,
         unstable: true,
         unstableReason: "The AI model can generate inaccurate output and broken syntax!",
-    },
-    {
-        name: "PenguinHook",
-        id: "mubiloppenguinhook",
-        description: "Send Webhook requests, that can be Discord or any type of webhook.",
-        code: "MubiLop/penguinhook.js",
-        banner: "MubiLop/penguinhook.png",
-        creator: "cicerorph",
-        creatorAlias: "MubiLop",
-        isGitHub: true,
     },
     {
         name: "Number Utilities",
@@ -388,16 +330,6 @@ const otherExtensions = [
         isGitHub: true,
     },
     {
-        name: "Format Numbers",
-        id: "formatNumbers",
-        description: "Format large numbers into AD standard, fixed decimal, comma separated, or scientific notation.",
-        code: "DogeisCut/FormatNumbers.js",
-        banner: "DogeisCut/FormatNumbers.png",
-        creator: "DogeisCut",
-        isGitHub: true, 
-        notes: "Gallery banner by Dillon",
-    },
-    {
         name: "Date Format",
         id: "ddeDateFormatV2",
         description: "Manage, format and compare dates.",
@@ -415,33 +347,6 @@ const otherExtensions = [
         creator: "NotEmbin",
         isGitHub: true, 
         creatorAlias: "Embin",
-    },
-    {
-        name: "Yet Another String Extension",
-        id: "dogeiscutyetanotherstringextension",
-        description: "A small collection of utilty blocks intended to make managing strings much, much easier.",
-        code: "DogeisCut/YetAnotherStringExtension.js",
-        banner: "DogeisCut/YetAnotherStringExtension.svg",
-        creator: "DogeisCut",
-        isGitHub: true, 
-    },
-    {
-        name: "Sets",
-        id: "dogeiscutSet",
-        description: "Store non-repeating, unordered data super efficiently in sets.",
-        code: "DogeisCut/dogeiscutSet.js",
-        banner: "DogeisCut/dogeiscutSet.svg",
-        creator: "DogeisCut",
-        isGitHub: true, 
-    },
-    {
-        name: "Blobs",
-        id: "FaunksBlobs",
-        description: "An extension made for handling blobs which can be used to store files. Allows to easily make blobs for the Js extension",
-        code: "Faunks/Blobs.js",
-        banner: "Faunks/Blobs.avif",
-        creator: "Faunks",
-        isGitHub: true,
     },
     {
         name: "Random Utilities",
@@ -483,18 +388,9 @@ const otherExtensions = [
         isGitHub: false, 
     },
     {
-        name: "Pang API",
-        id: "sammerpenguinapi",
-        description: "Fetch information from the PenguinMod API.",
-        code: "SammerLOL/pangapi.js",
-        banner: "SammerLOL/pangapi.png",
-        creator: "oc9x97",
-        isGitHub: true,
-    },
-    {
         name: "TurboWeather",
         id: "turboweather",
-        description: "Show weather and location data for any place in our world. Data that could be used for doxxing is deleted from results.",
+        description: "Show weather and location data for any place in our world.",
         code: "RubyDevs/turboweather.js",
         banner: "RubyDevs/turboweather.webp",
         documentation: "TurboWeather",
@@ -535,15 +431,6 @@ const otherExtensions = [
         banner: "jwklong/projectpage.png",
         creator: "jwklong",
         isGitHub: true,
-    },
-    {
-        name: "All Menus",
-        id: "lmsAllMenus",
-        description: "Every dropdown menu for each block, in one extension.",
-        code: "Lily/AllMenus.js",
-        banner: "Lily/AllMenus.svg",
-        creator: "LilyMakesThings",
-        isGitHub: false,
     },
     {
         name: "More Fields",
@@ -672,15 +559,6 @@ const otherExtensions = [
         banner: "WAYLIVES/FreeServersIMG.svg",
         documentation: "FreeServers",
         creator: "WAYLIVES",
-        isGitHub: false,
-    },
-    {
-        name: "More Types",
-        id: "vgscompiledvalues",
-        description: "Adds more value types to PenguinMod, implementing Functions, Objects, Arrays, Sets, Maps, Symbols and Nothing.",
-        code: "VeryGoodScratcher42/More-Types.js",
-        banner: "VeryGoodScratcher42/More-Types.png",
-        creator: "VeryGoodScratcher42",
         isGitHub: false,
     },
     {
