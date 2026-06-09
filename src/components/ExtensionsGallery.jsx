@@ -149,7 +149,7 @@ export default function ExtensionsGallery () {
                                         <button
                                             className="ext-btn ext-btn-accented"
                                             onClick={() => {
-                                                window.open("https://dashblocks.github.io/editor.html?extension=" + getCodeUrl(ext.code), "_blank");
+                                                window.open("https://dashblocks.github.io/editor?extension=" + getCodeUrl(ext.code), "_blank");
                                             }}
                                         >
                                             Open Extension
@@ -157,7 +157,7 @@ export default function ExtensionsGallery () {
                                         <button
                                             className="ext-btn"
                                             onClick={() => {
-                                                window.open("https://dashblocks.github.io/scratch-gui/editor.html?enabletests&extension=" + getCodeUrl(ext.code), "_blank");
+                                                window.open("https://dashblocks.github.io/scratch-gui/editor?enabletests&extension=" + getCodeUrl(ext.code), "_blank");
                                             }}
                                         >
                                             ...in Dev
