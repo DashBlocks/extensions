@@ -1,7 +1,10 @@
 // Name: Dash Api
-// ID: polzovatel_8787_dashApi
+// ID: polzovatel8787dashApi
 // Description: An extension for interacting with the Dash api. It ONLY works in Dash.
-// By: polzovatel_8787 <https://dashblocks.github.io/scratch-gui/user#7>
+/* By:
+  polzovatel_8787 <https://dashblocks.org/scratch-gui/user#polzovatel_8787>
+  DBDev-IT <https://dashblocks.org/scratch-gui/user#DBDev-IT>
+*/
 // License: MPL-2.0
 
 (function (Scratch) {
@@ -15,6 +18,47 @@
   }
 
     class polzovatel_8787_dashApi {
+
+      constructor () {
+        this.isLogin = false
+        this.checkIsLogin = async () {
+          const req = await fetch("https://api.dashblocks.org/session", {
+            credentials: "include"
+          })
+          let ret = false
+          if (req.ok) {
+            ret = true
+          }
+          this.isLogin = ret
+        }
+        this.getMyInfo = async () {
+          const req = await fetch("https://api.dashblocks.org/session", {
+            credentials: "include"
+          })
+          let returN = {}
+          if (req.ok) {
+            returN = await req.json()
+          }
+          return returN
+        }
+        this.getUserInfo = async (username) {
+          const req = await fetch(`https://api.dashblocks.org/users/${username}`)
+          let returN = {}
+          if (req.ok) {
+            returN = await req.json()
+          }
+          return returN
+        }
+        this.getProjectInfo = async (id) {
+          const req = await fetch(`https://api.dashblocks.org/projects/${Number(id)}`)
+          let returN = {}
+          if (req.ok) {
+            returN = await req.json()
+          }
+          return returN
+        }
+      }
+
       getInfo() {
         return {
           id: "polzovatel8787dashApi",
@@ -24,15 +68,12 @@
           blocks: [
             {
               blockType: Scratch.BlockType.LABEL,
-              text: 'Login'
+              text: 'session and mi info'
             }, {
               opcode: "isLogin",
               blockType: Scratch.BlockType.BOOLEAN,
               text: "is login?",
               arguments: {}
-            }, {
-              blockType: Scratch.BlockType.LABEL,
-              text: 'Session and my info'
             }, {
               opcode: "getMyUsername",
               blockType: Scratch.BlockType.REPORTER,
@@ -55,10 +96,10 @@
               arguments: {}
             }, {
               blockType: Scratch.BlockType.LABEL,
-              text: "Get info"
+              text: "get info"
             }, {
               blockType: Scratch.BlockType.LABEL,
-              text: "1. Users"
+              text: "1. users"
             }, {
               opcode: "getIdUser",
               blockType: Scratch.BlockType.REPORTER,
@@ -120,16 +161,6 @@
                 }
               }
             }, {
-              opcode: "getScratchUser",
-              blockType: Scratch.BlockType.REPORTER,
-              text: "get scratch username of user [user]",
-              arguments: {
-                user: {
-                  defaultValue: "polzovatel_8787",
-                  type: Scratch.ArgumentType.STRING,
-                }
-              }
-            }, {
               opcode: "getAvatarUser",
               blockType: Scratch.BlockType.REPORTER,
               text: "get link of avatar of user [user]",
@@ -141,7 +172,7 @@
               }
             }, {
               blockType: Scratch.BlockType.LABEL,
-              text: "2. Projects"
+              text: "2. projects"
             }, {
               opcode: "getAuthorProject",
               blockType: Scratch.BlockType.REPORTER,
@@ -188,192 +219,88 @@
       }
 // Login
 async isLogin() {
-  const req = await fetch('https://dashblocks-server.vercel.app/session', {
-    credentials: 'include'
-  })
-  let ret = false
-  if (req) {
-    ret = true
-  }
-  return ret
+  await this.checkIsLogin()
+  return this.isLogin
 }
 // get my info
 async getMyUsername() {
-  async function isLogin() {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    let ret = false
-    if (req) {
-      ret = true
-    }
-    return ret
-  }
-  let ret = ''
-  if (isLogin()) {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    const res = await req.json()
-    ret = res.username
+  let ret = ""
+  if (this.isLogin) {
+    const result = await this.getMyInfo()
+    ret = result.username
   }
   return ret
 }
 async getMyId() {
-  async function isLogin() {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    let ret = false
-    if (req) {
-      ret = true
-    }
-    return ret
-  }
-  let ret = 0
-  if (isLogin()) {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    const res = await req.json()
-    ret = res.userId
+  let ret = ""
+  if (this.isLogin) {
+    const result = await this.getMyInfo()
+    ret = result.id
   }
   return ret
 }
 async getMyRole() {
-  async function isLogin() {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    let ret = false
-    if (req) {
-      ret = true
-    }
-    return ret
-  }
-  let ret = ''
-  if (isLogin()) {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    const res = await req.json()
-    ret = res.role || "dasher"
+  let ret = ""
+  if (this.isLogin) {
+    const result = await this.getMyInfo()
+    ret = result.role
   }
   return ret
 }
 async getMyAvatar() {
-  async function isLogin() {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    let ret = false
-    if (req) {
-      ret = true
-    }
-    return ret
-  }
-  let ret = ''
-  if (isLogin()) {
-    const req = await fetch('https://dashblocks-server.vercel.app/session', {
-      credentials: 'include'
-    })
-    const res = await req.json()
-    ret = `https://dashblocks-server.vercel.app/users/avatars/${res.profile.avatarId}`
+  let ret = ""
+  if (this.isLogin) {
+    const result = await this.getMyInfo()
+    ret = result.avatarId
   }
   return ret
 }
 // get user data
 async getIdUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.id
-}
-async getIdUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.id
+  const result = await this.getUserInfo(args.user)
+  return res.user?.id || null
 }
 async getUsernameUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.username
+  const result = await this.getUserInfo(args.user)
+  return res.user?.username || "Unknown"
 }
 async getColvoProjectsUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.projects.length
+  const result = await this.getUserInfo(args.user)
+  return res.user?.projects?.length || 0
 }
 async getProjectsUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.projects
+  const result = await this.getUserInfo(args.user)
+  return res.user?.projects || []
 }
 async getRoleUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.role
+  const result = await this.getUserInfo(args.user)
+  return res.user?.role || "Dasher"
 }
 async getDescriptionUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.profile.description
-}
-async getScratchUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.user.profile.scratchUsername || 'unknown'
+  const result = await this.getUserInfo(args.user)
+  return res.user?.profile?.description || ""
 }
 async getAvatarUser(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/users/${args.user}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return `https://dashblocks-server.vercel.app/users/avatars/${res.user.profile.avatarId}`
+  const result = await this.getUserInfo(args.user)
+  const avatarId = res.user?.profile?.avatarId || 0
+  return `https://api.dashblocks.org/users/avatars/${0}`
 }
 // get project data
-async getAuthorProject(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/projects/${args.project}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.project.author.username
+async getProjectAuthor(args) {
+  const result = await this.getProjectInfo(args.project)
+  return result.project?.author?.username || "Unknown"
 }
 async getNameProject(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/projects/${args.project}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.project.name
+  const result = await this.getProjectInfo(args.project)
+  return result.project?.name || ""
 }
 async getDescriptionProject(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/projects/${args.project}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.project.description
+  const result = await this.getProjectInfo(args.project)
+  return result.project?.description || ""
 }
 async getFiresProject(args) {
-  const req = await fetch(`https://dashblocks-server.vercel.app/projects/${args.project}`, {
-    credentials: 'include'
-  })
-  const res = await req.json()
-  return res.project.stats.fires
+  const result = await this.getProjectInfo(args.project)
+  return result.project?.stats?.fires || 0
 }
     }
     Scratch.extensions.register(new polzovatel_8787_dashApi());
