@@ -5,7 +5,7 @@
   polzovatel_8787 <https://dashblocks.org/scratch-gui/user#polzovatel_8787>
   DBDev-IT <https://dashblocks.org/scratch-gui/user#DBDev-IT>
 */
-// License: MPL-2.0
+// License: GNU GPL v3
 
 (function (Scratch) {
 
