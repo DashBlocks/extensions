@@ -174,9 +174,9 @@
               blockType: Scratch.BlockType.LABEL,
               text: "2. projects"
             }, {
-              opcode: "getAuthorProject",
+              opcode: "getProjectAuthor",
               blockType: Scratch.BlockType.REPORTER,
-              text: "get username of author project [project]",
+              text: "get username of author of project [project]",
               arguments: {
                 project: {
                   defaultValue: 100,
