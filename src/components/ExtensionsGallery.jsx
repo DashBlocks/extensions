@@ -6,20 +6,20 @@ import internetConnectionIcon from "./internet-connection.svg"
 const creditLinkShortcuts = {
     "_scratch_": (credit) => `https://scratch.mit.edu/users/${credit.name}`,
     "_github_": (credit) => `https://github.com/${credit.name}`,
-    "_dash_": (credit) => `https://dashblocks.github.io/user#${credit.name}`
+    "_dash_": (credit) => `https://dashblocks.org/user#${credit.name}`
 };
 const creditLink = (credit) => credit.link;
 
 function getBannerUrl (banner) {
-    if (!banner) return `https://dashblocks.github.io/extensions/static/images/unknown.svg`;
+    if (!banner) return `https://dashblocks.org/extensions/static/images/unknown.svg`;
     if (banner.startsWith("http://") || banner.startsWith("https://")) return banner;
-    return `https://dashblocks.github.io/extensions/static/images/${banner}`;
+    return `https://dashblocks.org/extensions/static/images/${banner}`;
 }
 
 function getCodeUrl (code) {
     if (!code) return "#";
     if (code.startsWith("http://") || code.startsWith("https://")) return code;
-    return `https://dashblocks.github.io/extensions/static/extensions/${code}`;
+    return `https://dashblocks.org/extensions/static/extensions/${code}`;
 }
 
 function getCreatorNode (creator) {
@@ -149,7 +149,7 @@ export default function ExtensionsGallery () {
                                         <button
                                             className="ext-btn ext-btn-accented"
                                             onClick={() => {
-                                                window.open("https://dashblocks.github.io/editor?extension=" + getCodeUrl(ext.code), "_blank");
+                                                window.open("https://dashblocks.org/editor?extension=" + getCodeUrl(ext.code), "_blank");
                                             }}
                                         >
                                             Open Extension
@@ -157,7 +157,7 @@ export default function ExtensionsGallery () {
                                         <button
                                             className="ext-btn"
                                             onClick={() => {
-                                                window.open("https://dashblocks.github.io/scratch-gui/editor?enabletests&extension=" + getCodeUrl(ext.code), "_blank");
+                                                window.open("https://dashblocks.org/scratch-gui/editor?enabletests&extension=" + getCodeUrl(ext.code), "_blank");
                                             }}
                                         >
                                             ...in Dev

@@ -13,7 +13,7 @@ Create your extension. You can find a lot of details [here](https://docs.turbowa
 #### Important Guidelines:
 - Your extension should not already exist on the gallery. Please check the
 [Pull Requests](https://github.com/DashBlocks/extensions/pulls)
-and [our extension gallery](https://dashblocks.github.io/extensions) to confirm.
+and [our extension gallery](https://dashblocks.org/extensions) to confirm.
 - Your extension should be created for a specific purpose. An extension with random blocks someone might need will likely not get accepted if the blocks are not in a certain theme, like math or rendering.
 - The primary purpose of your extension **CANNOT** be a monetization.
 - Your extension **CANNOT** use `eval()` or `new Function()`.
