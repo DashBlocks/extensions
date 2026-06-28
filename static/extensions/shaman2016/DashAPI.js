@@ -92,6 +92,11 @@
           color1: "#ff8f4d",
           blocks: [
             {
+              opcode: "getFeaturedProjects",
+              blockType: Scratch.BlockType.ARRAY,
+              text: "get featured projects",
+              arguments: {}
+            }, {
               blockType: Scratch.BlockType.LABEL,
               text: 'session and mi info'
             }, {
@@ -118,6 +123,11 @@
               opcode: "getMyAvatar",
               blockType: Scratch.BlockType.REPORTER,
               text: "avatar url",
+              arguments: {}
+            }, {
+              opcode: "getMyMessages",
+              blockType: Scratch.BlockType.ARRAY,
+              text: "messages",
               arguments: {}
             }, {
               blockType: Scratch.BlockType.LABEL,
@@ -288,6 +298,16 @@
                 }
               }
             }, {
+              opcode: "getUserRecommendedProjectId",
+              blockType: Scratch.BlockType.REPORTER,
+              text: "get id of recommended project of user [user]",
+              arguments: {
+                user: {
+                  defaultValue: "polzovatel_8787",
+                  type: Scratch.ArgumentType.STRING,
+                }
+              }
+            }, {
               blockType: Scratch.BlockType.LABEL,
               text: "2. projects"
             }, {
@@ -330,10 +350,24 @@
                   type: Scratch.ArgumentType.NUMBER,
                 }
               }
+            }, {
+              opcode: "getProjectTrumbnail",
+              blockType: Scratch.BlockType.REPORTER,
+              text: "get url of trumbnail of project [project]",
+              arguments: {
+                project: {
+                  defaultValue: 100,
+                  type: Scratch.ArgumentType.NUMBER,
+                }
+              }
             }
           ],
         };
       }
+async getFeaturedProjects() {
+  const returN = await (await fetch("https://dashblocks.org/featured-projects")).json()
+  return returN?.projects || []
+}
 // Login
 async isLoginBlock() {
   await this.checkIsLogin()
@@ -367,7 +401,15 @@ async getMyAvatar() {
   let ret = ""
   if (this.isLogin) {
     const result = await this.getMyInfo()
-    ret = `https://api.dashblocks.org/users/avatars/${result.user?.avatarId || null}`
+    ret = `https://api.dashblocks.org/users/avatars/${result.user?.id || null}`
+  }
+  return ret
+}
+async getMyMessages() {
+  let ret = ""
+  if (this.isLogin) {
+    const result = await (await fetch("https://api.dashblocks.org/session/messages")).json()
+    ret = result.messages
   }
   return ret
 }
@@ -398,8 +440,7 @@ async getDescriptionUser(args) {
 }
 async getAvatarUser(args) {
   const result = await this.getUserInfo(args.user)
-  const avatarId = result.user?.profile?.avatarId || 0
-  return `https://api.dashblocks.org/users/avatars/${avatarId}`
+  return `https://api.dashblocks.org/users/avatars/${result.user?.id}`
 }
 async getUserLinks(args) {
   const result = await this.getUserInfo(args.user)
@@ -425,6 +466,10 @@ async getFollowingUser(args) {
   const result = await this.getUserFollowing(args.user, args.offset, args.limit)
   return result.following || []
 }
+async getUserRecommendedProjectId(args) {
+  const result = await this.getUserInfo(args.user, args.offset, args.limit)
+  return result.profile?.recommendedProject?.id || null
+}
 // get project data
 async getProjectAuthor(args) {
   const result = await this.getProjectInfo(args.project)
@@ -441,6 +486,9 @@ async getDescriptionProject(args) {
 async getFiresProject(args) {
   const result = await this.getProjectInfo(args.project)
   return result.project?.stats?.fires || 0
+}
+getProjectTrumbnail(args) {
+  return `https://api.dashblocks.org/projects/trumbnail/${args.project}`
 }
     }
     Scratch.extensions.register(new polzovatel_8787_dashApi());
