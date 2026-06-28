@@ -6,20 +6,20 @@ import internetConnectionIcon from "./internet-connection.svg"
 const creditLinkShortcuts = {
     "_scratch_": (credit) => `https://scratch.mit.edu/users/${credit.name}`,
     "_github_": (credit) => `https://github.com/${credit.name}`,
-    "_dash_": (credit) => `https://dashblocks.org/user#${credit.name}`
+	"_dash_": (credit) => `https://dashblocks.org/user#${credit.name}`
 };
 const creditLink = (credit) => credit.link;
 
 function getBannerUrl (banner) {
-    if (!banner) return `https://dashblocks.org/extensions/static/images/unknown.svg`;
+    if (!banner) return `https://genesis-ide.github.io/extensions/static/images/unknown.svg`;
     if (banner.startsWith("http://") || banner.startsWith("https://")) return banner;
-    return `https://dashblocks.org/extensions/static/images/${banner}`;
+    return `https://genesis-ide.github.io/extensions/static/images/${banner}`;
 }
 
 function getCodeUrl (code) {
     if (!code) return "#";
     if (code.startsWith("http://") || code.startsWith("https://")) return code;
-    return `https://dashblocks.org/extensions/static/extensions/${code}`;
+    return `https://genesis-ide.github.io/extensions/static/extensions/${code}`;
 }
 
 function getCreatorNode (creator) {
@@ -71,7 +71,7 @@ export default function ExtensionsGallery () {
     return (
         <>
             <header className="ext-gallery-header">
-                <h1>Dash Extensions Gallery</h1>
+                <h1>Genesis IDE Extensions Gallery</h1>
                 <div className="ext-controls">
                     <input
                         className="ext-search"
@@ -93,8 +93,8 @@ export default function ExtensionsGallery () {
             <div className="ext-gallery-root">
                 <main>
                     <div className="ext-infobox">
-                        <div className="ext-infobox-title">Some extensions will work only in Dash.</div>
-                        Extensions will likely not work in other mods than Dash if they:
+                        <div className="ext-infobox-title">Some extensions will not work other Scratch Mods.</div>
+                        Extensions will likely not work in other Scratch mods if they:
                         <ul>
                             <li>Rely on Arrays or Objects,</li>
                             <li>Use generator functions (function*) as serializers/deserializers of custom types,</li>
@@ -149,18 +149,10 @@ export default function ExtensionsGallery () {
                                         <button
                                             className="ext-btn ext-btn-accented"
                                             onClick={() => {
-                                                window.open("https://dashblocks.org/editor?extension=" + getCodeUrl(ext.code), "_blank");
+                                                window.open("https://genesis-ide.github.io/editor?extension=" + getCodeUrl(ext.code), "_blank");
                                             }}
                                         >
                                             Open Extension
-                                        </button>
-                                        <button
-                                            className="ext-btn"
-                                            onClick={() => {
-                                                window.open("https://dashblocks.org/scratch-gui/editor?enabletests&extension=" + getCodeUrl(ext.code), "_blank");
-                                            }}
-                                        >
-                                            ...in Dev
                                         </button>
                                         <button
                                             className="ext-btn ext-btn-accented"

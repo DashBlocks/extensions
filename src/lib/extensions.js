@@ -4,7 +4,20 @@
         to help copy & pasting work better.
         Please, don't remove them :)
 */
+
 const extensions = [
+{
+        name: "Ding Dong Ditch",
+        description: "Some joke extension I did for fun. Originally from Magic Mod.",
+        code: "GaiaWindWave90/DingDongDitch.js",
+        banner: "GaiaWindWave90/DingDongDitch.svg",
+        creator: "GaiaWindWave90",
+        isGitHub: true,        
+    },
+];
+
+//Extensions that were taken from Dash Blocks
+const dbExtensions = [
     {
         name: "Playgama Bridge SDK",
         id: "playgama",
@@ -148,18 +161,6 @@ const extensions = [
         ],
     },
     {
-        name: "Dash API",
-        id: "DashAPI",
-        description: "Blocks that interact with the Dash API. Official.",
-        code: "shaman2016/DashAPI.js",
-        // banner: "shaman2016/DashAPI.svg",
-        creator: [
-            { name: "polzovatel_8787", link: "_dash_" },
-            { name: "DBDev-IT", link: "_github_" },
-        ],
-        internetConnectionRequired: true,
-    },
-    {
         name: "Auto Save",
         id: "qbacksAutosSave",
         description: "Several features for games",
@@ -169,9 +170,9 @@ const extensions = [
     },
 ];
 
-// In below array, there is some extensions that were taken from MistWarp and PenguinMod
+// Extensions that were taken from PenguinMod
 // (PenguinMod's extensions were added here for IDs addition)
-const otherExtensions = [
+const pmExtensions = [
     {
         name: "Pen+",
         id: "penP",
@@ -642,4 +643,392 @@ const otherExtensions = [
     },
 ];
 
-export {extensions, otherExtensions}
+// Extensions that were taken from DinosaurMod
+// (DinosaurMod's extensions were added here for IDs addition)
+const dmExtensions = [
+ {
+        name: 'Site Runtime',
+        extensionId: 'webextension.js',
+        iconURL: 'site-runtime.png',
+        description: 'A Combined version of multiple extensions: Packager Applications & AdaBrowser',
+        featured: true,
+        extDeveloper: 'MrIncredibleMaker',
+        internetConnectionRequired: true,
+        disabled: false
+    },
+    {
+        name: 'Keys+',
+        extensionId: 'keys-plus-extension.js',
+        description: 'Detect more keys when they are pressed or hit and make certain keys typable.',
+        extDeveloper: 'MrIncredibleMaker',
+        inspiredExt: 'Typable Tab Character Extension and More Keys Events (by julmik6478) Extension',
+        featured: true
+    },
+    {
+        name: 'GitHub API',
+        extensionId: 'github-api.js',
+        iconURL: 'githubapi.png',
+        description: 'Fetch IDs, Description, etc. from Repositories, Users and Organizations.',
+        internetConnectionRequired: true,
+        extDeveloper: 'MrIncredibleMaker',
+        featured: true
+    },
+    {
+        name: 'Python',
+        extensionId: 'python.js',
+        description: 'Run your own custom code written in Python using Pyodide!',
+        credits: ['Pyodide'],
+        extDeveloper: 'MrIncredibleMaker',
+        internetConnectionRequired: true,
+        featured: true
+    },
+    {
+        name: 'Lua',
+        extensionId: 'lua.js',
+        description: 'Run your own custom code written in Lua using Fengari!',
+        credits: ['Fengari'],
+        extDeveloper: 'MrIncredibleMaker',
+        internetConnectionRequired: true,
+        featured: true
+    },
+    {
+        name: 'Typable Tab Key',
+        extensionId: 'typable-tab-character.js',
+        description: 'This Extension was replaced by the Keys+ Extension. Gives the ability of typing the tab character.',
+        extDeveloper: 'MrIncredibleMaker',
+        featured: true
+    },
+    {
+        name: 'Useless blocks',
+        extensionId: 'Useless_Blocks.js',
+        iconURL: 'Useless_Blocks.png',
+        description: '',
+        extDevHREF: {
+            name: "Jambs / jlgri",
+            href: "https://www.youtube.com/channel/UCJzRC3HsauioZoc9vKC6W4g"
+        },
+        featured: true
+    },
+    {
+        name: 'Dogs',
+        extensionId: 'dogs.js',
+        description: 'Blocks related to dogs.',
+        featured: true,
+        inspiredExt: 'G1nX\'s Cats Extension',
+        extDeveloper: 'MrIncredibleMaker'
+    },
+    {
+        name: 'Functions and Tests',
+        extensionId: 'jasmine.js',
+        description: '',
+        featured: true,
+        disabled: true,
+        inspiredExt: 'Jasmine (JS Framework)',
+        extDeveloper: 'MrIncredibleMaker'
+    },
+];
+
+// Extensions that were taken from ElectraMod
+// (ElectraMod's extensions were added here for IDs addition)
+const emExtensions = [
+  {
+        name: "Debugger Console",
+        description: "Based on Turbowarp CN's Debugger by NOname",
+        code: "Aness6040/debuggerconsole.js",
+        banner: "Aness6040/debuggerconsole.svg",
+        creator: "Aness6040",
+        isGitHub: true,
+    },
+    {
+        name: "Lazy Multi-lines",
+        description: "A handy extension for JavaScript Extension or to create your own text file!",
+        code: "Aness6040/lazymultilines.js",
+        banner: "Aness6040/lazymultilines.svg",
+        creator: "Aness6040",
+        isGitHub: true,
+    },
+    {
+        name: "Jul Mik Utilities",
+        description: "An Extension of Blocks Utilities by Jul Mik (V1 and V2 when named Jul Mik Blocks with Turbobuilder) and helped by Aness6040 (Actual v3)",
+        code: "julmik6478/julmik_utilities.js",
+        banner: "julmik6478/julmik_utilities.svg",
+        creator: "julmik6478",
+        isGitHub: false,
+    },
+    /*
+    {
+        name: "GLSL Custom Shader",
+        description: "GLSL Shaders on Scratch by PROMISE",
+        code: "Aness6040/custom-shader.js",
+        banner: "PROMISE/custom_shader.png",
+    }, 
+    */
+    {
+        name: "E2EE",
+        description: "This is a Scratch 3 extension that enables E2EE (End-to-End Encryption). This E2EE extension utilizes the same underlying cryptography code that powers CloudLink Omega.",
+        code: "MikeDev101/e2ee.js",
+        banner: "MikeDev101/e2ee.svg",
+        creator: "MikeDev101",
+        isGitHub: true,
+    },
+    {
+        name: "WebRTC",
+        description: "A slimmed-down version of the CL5 protocol extension, designed to offer a basic implementation of the WebRTC standard for Scratch 3.",
+        code: "MikeDev101/webrtc.js",
+        banner: "MikeDev101/webrtc.png",
+        creator: "MikeDev101",
+        isGitHub: true,
+    },
+    {
+        name: "ElectraAPI",
+        description: "Based on Pang API for ElectraMod.",
+        code: "Aness6040/electraapi.js",
+        banner: "Aness6040/electraapi.svg",
+        creator: "Aness6040",
+        isGitHub: true,
+    },
+    {
+        name: "ElectraGPT",
+        description: "ElectraMod modification of PenguinGPT! Adds more prompts like Mishael or Slixbot!\nElectraGPT banner by Aness6040",
+        code: "MubiLop/electragpt.js",
+        banner: "MubiLop/electragpt.png",
+        creator: "MubiLop",
+        isGitHub: false,
+    },
+    {
+        name: "Markdown to HTML",
+        description: "Converts Markdown to HTML code.",
+        code: "Aness6040/md2html.js",
+        banner: "Aness6040/md2html.png",
+        creator: "Aness6040",
+        documentation: "md2html",
+        isGitHub: false,
+    },
+];
+
+// Extensions that were taken from Snail IDE.
+// There were actually two sets of Snail IDE extensions. Set 2 uses snail-ide.js.org as a url.
+// (Snail IDE's extensions were added here for IDs addition)
+const snIDEExtensions = [
+     {
+        name: "Rounding+",
+        description: "Expansion to the rounding blocks",
+        code: "CharCoalAfterLife/rounding.js",
+        banner: "CharCoalAfterLife/rounding.png",
+        documentation: "rounding-plus",
+        creator: "CharCoalAfterLife",
+        isGitHub: true,
+    },
+];
+
+const snIDETwoExtensions = [
+     {
+        name: "SnailShare API",
+        description: "Fetch details of projects and users from Snailshare.",
+        code: "api.js",
+        banner: "snailideapiext.png",
+        creator: "BA4X"
+    },
+     {
+        name: "Prompts",
+        description: "Good prompts for PenguinGPT.",
+        code: "Prompts.js",
+        banner: "Prompts.png",
+        creator: "LoganCreatez"
+    },
+     {
+        name: "Random Utils",
+        description: "Random utilites that you may or may not use.",
+        code: "random_utils.js",
+        banner: "random.png"
+    },
+     {
+        name: "Save Data",
+        description: "Extremely easy way to save data.",
+        code: "save.js",
+        creator: "Mr_rudy"
+    },
+     {
+        name: "Grayscale",
+        description: "Toggle a dramatic grayscale effect on your project.",
+        code: "grayscale.js",
+		banner: "grayscale.svg",
+        creator: "Mr_rudy"
+    },
+     {
+        name: "Randomly Blocks",
+        description: "Utilitys to have your project feel like a website",
+        code: "randomlyBlocks.js",
+        creator: "mariocraft987"
+    },
+];
+
+// Extensions that were taken from Ark IDE
+// (Ark IDE's extensions were added here for IDs addition)
+const arkExtensions = [
+        {
+        name: "ArkIDE additions",
+        description: "A simple extension that adds some cool new blocks for ArkIDE.",
+        code: "Ark/arkide-additons.js",
+        banner: "Ark/banner.png",
+        creator: "Arc360",
+        creatorAlias: "Ark",
+        notes: ""
+    },
+    {
+        name: "Json Number Array Operations",
+        description: "A nice extension that adds useful operation blocks for Json Number Arrays.",
+        code: "Ark/jsonnumberarray.js",
+        banner: "Ark/jsonant.png",
+        creator: "Arc360",
+        creatorAlias: "Ark",
+        notes: ""
+    },
+    {
+        name: "ArkIDE Console",
+        description: "Add a console to your project to log messages, errors, and warnings.",
+        code: "Ark/arkide-console.js",
+        banner: "Ark/console.png",
+        creator: "Arc360",
+        creatorAlias: "Ark",
+        notes: ""
+    },
+    {
+        name: "Timer Utils",
+        description: "An extension that helps you count down to certain dates without having to do a bunch of math and coding.",
+        code: "Ark/timerutils.js",
+        banner: "Ark/timerutils.svg",
+        creator: "Arc360",
+        creatorAlias: "Ark",
+        notes: ""
+    },
+    {
+        name: "Store My Stuff",
+        description: "Another varible storage extension but the server is running on the centeral ArkIDE server instead.",
+        code: "Ark/store-my-stuff.js",
+        banner: "Ark/storemystuff.png",
+        creator: "Arc360",
+        creatorAlias: "Ark",
+        unstableReason: "Server uptime may not be perfect"
+    },
+    {
+        name: "Comments",
+        description: "Adds comment blocks to your project.",
+        code: "Ark/comments.js",
+        banner: "Ark/comments.png",
+        creator: "Arc360",
+        creatorAlias: "Ark",
+    },
+    {
+        name: "Advanced Keyboard",
+        description: "Upgraded keyboard input: key combos (2–5 keys), long press detection, WASD direction, key counters, HAT events with edge trigger, and last key tracking..",
+        code: "Askyy/Advanced_keyboard.js",
+        banner: "Askyy/keyboard.jpg",
+        creator: "Askyy",
+        creatorAlias: "Askyy",
+    },
+    {
+        name: "Game Dev Utils",
+        description: "Essential game dev blocks: FPS counter, delta time, frame count, rectangle collision, LERP, distance & angle calculations, camera follow, snap-to-grid, named timers, and screen wrap.",
+        code: "Askyy/Devs_utilities_ex.js",
+        banner: "Askyy/game_dev_utils.jpg",
+        creator: "Askyy",
+        creatorAlias: "Askyy",
+    },
+    {
+        name: "Geography",
+        description: "Country data for 195+ nations: capital, population, region, subregion, currency, timezone, flag URL, languages. Plus live geolocation and IP address lookup.",
+        code: "Askyy/Geography_ex.js",
+        banner: "Askyy/geography.jpg",
+        creator: "Askyy",
+        creatorAlias: "Askyy",
+    },
+    {
+        name: "Internet & Device",
+        description: "Read device info directly from the browser: connection status, browser name/version, screen size, CPU cores, memory, orientation, language, battery level and charging state.",
+        code: "Askyy/Internet_Device_ex.js",
+        banner: "Askyy/internet_and_device.jpg",
+        creator: "Askyy",
+        creatorAlias: "Askyy",
+    },
+    {
+        name: "Weather",
+        description: "Real-time weather for 300+ world cities via Open-Meteo: temperature, feels like, humidity, wind speed & direction, weather description, rain/snow detection, and tomorrow's forecast.",
+        code: "Askyy/Weather_ex.js",
+        banner: "Askyy/weather.png",
+        creator: "Askyy",
+        creatorAlias: "Askyy",
+    },
+];
+
+
+// Extensions that were taken from GaiaMod (which is my other Scratch Mod lol)
+// (GaiaMod's extensions were added here for IDs addition)
+const gmExtensions = [
+    {
+        name: "Gaia Utilities",
+        description: "Wonderful utility blocks!",
+        code: "GaiaWindWave90/GaiaBlocks.js",
+        banner: "GaiaWindWave90/GaiaUtilities.png",
+        creator: "GaiaWindWave90 and other users",
+        isGitHub: true,        
+    },
+    {
+        name: 'GaiaGPT',
+        description: 'A GaiaMod modification of Pang AI with more prompts.',
+        code: "GaiaWindWave90/GaiaGPT.js",
+        banner: "GaiaWindWave90/GaiaGPT.png",
+        creator: "logise1123",
+        isGitHub: true,
+    },
+    {
+        name: "Runtime Tools",
+        description: "Blocks for modifying Scratch objects like Turbo Mode, stage size, clone limits, and more!",
+        code: "GaiaWindWave90/GaiaRuntime.js",
+        banner: "GaiaWindWave90/runtimeThumb.svg",
+        creator: "GaiaWindWave90",
+        isGitHub: true,        
+    },
+    {
+        name: 'Prompts',
+        description: 'Prompts made for Gaia AI. Inspired by the prompts extension found in Snail-IDE.',
+        code: "GaiaWindWave90/GTPPrompts.js",
+        banner: "GaiaWindWave90/prompts.png",
+        creator: "GaiaWindWave90",
+        isGitHub: true,
+    },
+    {
+        name: 'Spinach Facts',
+        description: 'An extension about spinach! Based on Gen1x\'s CATS, MrIncredibleMaker\'s DOGS and pooiod7\'s Raccoon Facts extensions.',
+        code: "GaiaWindWave90/SpinachFacts.js",
+        banner: "GaiaWindWave90/spinach.png",
+        creator: "GaiaWindWave90",
+        isGitHub: true,
+    },
+    {
+        name: "Penguin Attack!",
+        description: "Edited version of the Fire in the Hole extension.",
+        code: "GaiaWindWave90/PenguinAttack.js",
+        banner: "GaiaWindWave90/PenguinAttack.png",
+        creator: "GaiaWindWave90",
+        isGitHub: true,        
+    },
+    {
+        name: "Cocrea Fetch",
+        description: "Fetches API from Cocrea or Gandi IDE.",
+        code: "GaiaWindWave90/cocreaFetch.js",
+        banner: "GaiaWindWave90/cocreaFetch.png",
+        creator: "fath11",
+        isGitHub: true,        
+    },
+    {
+        name: "Webcam Recorder",
+        description: "Records videos straight out of webcam.",
+        code: "GaiaWindWave90/Webcamrecorder.js",
+        banner: "GaiaWindWave90/WebCamThumb.png",
+        creator: "-SIPC-",
+        isGitHub: true,        
+    },
+];
+
+export {extensions, dbExtensions, pmExtensions, dmExtensions, emExtensions, snIDEExtensions, snIDETwoExtensions, arkExtensions, gmExtensions}
