@@ -6,6 +6,7 @@ import internetConnectionIcon from "./internet-connection.svg"
 const creditLinkShortcuts = {
     "_scratch_": (credit) => `https://scratch.mit.edu/users/${credit.name}`,
     "_github_": (credit) => `https://github.com/${credit.name}`,
+	"_penguinmod_": (credit) => `https://penguinmod.com/profile?user=${credit.name}`,
 	"_dash_": (credit) => `https://dashblocks.org/user#${credit.name}`
 };
 const creditLink = (credit) => credit.link;
