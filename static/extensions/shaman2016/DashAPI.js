@@ -21,7 +21,7 @@
 
       constructor () {
         this.isLogin = false
-        this.checkIsLogin = async () {
+        this.checkIsLogin = async function () {
           const req = await fetch("https://api.dashblocks.org/session", {
             credentials: "include"
           })
@@ -30,8 +30,9 @@
             ret = true
           }
           this.isLogin = ret
+          return ret
         }
-        this.getMyInfo = async () {
+        this.getMyInfo = async function () {
           const req = await fetch("https://api.dashblocks.org/session", {
             credentials: "include"
           })
@@ -41,7 +42,7 @@
           }
           return returN
         }
-        this.getUserInfo = async (username) {
+        this.getUserInfo = async function (username) {
           const req = await fetch(`https://api.dashblocks.org/users/${username}`)
           let returN = {}
           if (req.ok) {
@@ -49,8 +50,32 @@
           }
           return returN
         }
-        this.getProjectInfo = async (id) {
+        this.getProjectInfo = async function (id) {
           const req = await fetch(`https://api.dashblocks.org/projects/${Number(id)}`)
+          let returN = {}
+          if (req.ok) {
+            returN = await req.json()
+          }
+          return returN
+        }
+        this.getUserProjects = async function (user, offset, limit) {
+          const req = await fetch(`https://api.dashblocks.org/users/${user}/projects?offset=${offset}&limit=${limit}`)
+          let returN = {}
+          if (req.ok) {
+            returN = await req.json()
+          }
+          return returN
+        }
+        this.getUserFollowers = async function (user, offset, limit) {
+          const req = await fetch(`https://api.dashblocks.org/users/${user}/followers?offset=${offset}&limit=${limit}`)
+          let returN = {}
+          if (req.ok) {
+            returN = await req.json()
+          }
+          return returN
+        }
+        this.getUserFollowing = async function (user, offset, limit) {
+          const req = await fetch(`https://api.dashblocks.org/users/${user}/following?offset=${offset}&limit=${limit}`)
           let returN = {}
           if (req.ok) {
             returN = await req.json()
@@ -70,7 +95,7 @@
               blockType: Scratch.BlockType.LABEL,
               text: 'session and mi info'
             }, {
-              opcode: "isLogin",
+              opcode: "isLoginBlock",
               blockType: Scratch.BlockType.BOOLEAN,
               text: "is login?",
               arguments: {}
@@ -121,23 +146,39 @@
                 }
               }
             }, {
-              opcode: "getColvoProjectsUser",
+              opcode: "getLengthProjectsUser",
               blockType: Scratch.BlockType.REPORTER,
-              text: "get the number of projects of user [user]",
+              text: "get the number of projects of user [user] with offset [offset] and limit [limit] (max 40)",
               arguments: {
                 user: {
                   defaultValue: "polzovatel_8787",
                   type: Scratch.ArgumentType.STRING,
+                },
+                offset: {
+                  defaultValue: 0,
+                  type: Scratch.ArgumentType.NUMBER,
+                },
+                limit: {
+                  defaultValue: 20,
+                  type: Scratch.ArgumentType.NUMBER,
                 }
               }
             }, {
               opcode: "getProjectsUser",
               blockType: Scratch.BlockType.ARRAY,
-              text: "get array of projects of user [user]",
+              text: "get array of projects of user [user] with offset [offset] and limit [limit] (max 40)",
               arguments: {
                 user: {
                   defaultValue: "polzovatel_8787",
                   type: Scratch.ArgumentType.STRING,
+                },
+                offset: {
+                  defaultValue: 0,
+                  type: Scratch.ArgumentType.NUMBER,
+                },
+                limit: {
+                  defaultValue: 20,
+                  type: Scratch.ArgumentType.NUMBER,
                 }
               }
             }, {
@@ -168,6 +209,82 @@
                 user: {
                   defaultValue: "polzovatel_8787",
                   type: Scratch.ArgumentType.STRING,
+                }
+              }
+            }, {
+              opcode: "getUserLinks",
+              blockType: Scratch.BlockType.ARRAY,
+              text: "get links of user [user]",
+              arguments: {
+                user: {
+                  defaultValue: "polzovatel_8787",
+                  type: Scratch.ArgumentType.STRING,
+                }
+              }
+            }, {
+              opcode: "getUserLinksLength",
+              blockType: Scratch.BlockType.REPORTER,
+              text: "get length of links of user [user]",
+              arguments: {
+                user: {
+                  defaultValue: "polzovatel_8787",
+                  type: Scratch.ArgumentType.STRING,
+                }
+              }
+            }, {
+              opcode: "getUserAchievements",
+              blockType: Scratch.BlockType.ARRAY,
+              text: "get achievements of user [user]",
+              arguments: {
+                user: {
+                  defaultValue: "polzovatel_8787",
+                  type: Scratch.ArgumentType.STRING,
+                }
+              }
+            }, {
+              opcode: "getUserAchievementsLength",
+              blockType: Scratch.BlockType.REPORTER,
+              text: "get length of achievements of user [user]",
+              arguments: {
+                user: {
+                  defaultValue: "polzovatel_8787",
+                  type: Scratch.ArgumentType.STRING,
+                }
+              }
+            }, {
+              opcode: "getFollowersUser",
+              blockType: Scratch.BlockType.ARRAY,
+              text: "get followers of user [user] with offset [offset] and limit [limit] (max 40)",
+              arguments: {
+                user: {
+                  defaultValue: "polzovatel_8787",
+                  type: Scratch.ArgumentType.STRING,
+                },
+                offset: {
+                  defaultValue: 0,
+                  type: Scratch.ArgumentType.NUMBER,
+                },
+                limit: {
+                  defaultValue: 20,
+                  type: Scratch.ArgumentType.NUMBER,
+                }
+              }
+            }, {
+              opcode: "getFollowingUser",
+              blockType: Scratch.BlockType.ARRAY,
+              text: "get following of user [user] with offset [offset] and limit [limit] (max 40)",
+              arguments: {
+                user: {
+                  defaultValue: "polzovatel_8787",
+                  type: Scratch.ArgumentType.STRING,
+                },
+                offset: {
+                  defaultValue: 0,
+                  type: Scratch.ArgumentType.NUMBER,
+                },
+                limit: {
+                  defaultValue: 20,
+                  type: Scratch.ArgumentType.NUMBER,
                 }
               }
             }, {
@@ -218,16 +335,15 @@
         };
       }
 // Login
-async isLogin() {
+async isLoginBlock() {
   await this.checkIsLogin()
   return this.isLogin
 }
-// get my info
 async getMyUsername() {
   let ret = ""
   if (this.isLogin) {
     const result = await this.getMyInfo()
-    ret = result.username
+    ret = result.user?.username || ""
   }
   return ret
 }
@@ -235,7 +351,7 @@ async getMyId() {
   let ret = ""
   if (this.isLogin) {
     const result = await this.getMyInfo()
-    ret = result.id
+    ret = result.user?.id || null
   }
   return ret
 }
@@ -243,7 +359,7 @@ async getMyRole() {
   let ret = ""
   if (this.isLogin) {
     const result = await this.getMyInfo()
-    ret = result.role
+    ret = result.user?.role || "dasher"
   }
   return ret
 }
@@ -251,39 +367,63 @@ async getMyAvatar() {
   let ret = ""
   if (this.isLogin) {
     const result = await this.getMyInfo()
-    ret = result.avatarId
+    ret = `https://api.dashblocks.org/users/avatars/${result.user?.avatarId || null}`
   }
   return ret
 }
 // get user data
 async getIdUser(args) {
   const result = await this.getUserInfo(args.user)
-  return res.user?.id || null
+  return result.user?.id || null
 }
 async getUsernameUser(args) {
   const result = await this.getUserInfo(args.user)
-  return res.user?.username || "Unknown"
+  return result.user?.username || "Unknown"
 }
-async getColvoProjectsUser(args) {
-  const result = await this.getUserInfo(args.user)
-  return res.user?.projects?.length || 0
+async getLengthProjectsUser(args) {
+  const result = await this.getUserProjects(args.user, args.offset, args.limit)
+  return result?.projects?.length || 0
 }
 async getProjectsUser(args) {
-  const result = await this.getUserInfo(args.user)
-  return res.user?.projects || []
+  const result = await this.getUserProjects(args.user, args.offset, args.limit)
+  return result?.projects || []
 }
 async getRoleUser(args) {
   const result = await this.getUserInfo(args.user)
-  return res.user?.role || "Dasher"
+  return result.user?.role || "dasher"
 }
 async getDescriptionUser(args) {
   const result = await this.getUserInfo(args.user)
-  return res.user?.profile?.description || ""
+  return result.user?.profile?.description || ""
 }
 async getAvatarUser(args) {
   const result = await this.getUserInfo(args.user)
-  const avatarId = res.user?.profile?.avatarId || 0
-  return `https://api.dashblocks.org/users/avatars/${0}`
+  const avatarId = result.user?.profile?.avatarId || 0
+  return `https://api.dashblocks.org/users/avatars/${avatarId}`
+}
+async getUserLinks(args) {
+  const result = await this.getUserInfo(args.user)
+  return result.user?.profile?.links || []
+}
+async getUserLinksLength(args) {
+  const result = await this.getUserInfo(args.user)
+  return result.user?.profile?.links?.length || 0
+}
+async getUserAchievements(args) {
+  const result = await this.getUserInfo(args.user)
+  return result.user?.profile?.achievements || []
+}
+async getUserAchievementsLength(args) {
+  const result = await this.getUserInfo(args.user)
+  return result.user?.profile?.achievements?.length || 0
+}
+async getFollowersUser(args) {
+  const result = await this.getUserFollowers(args.user, args.offset, args.limit)
+  return result.followers || []
+}
+async getFollowingUser(args) {
+  const result = await this.getUserFollowing(args.user, args.offset, args.limit)
+  return result.following || []
 }
 // get project data
 async getProjectAuthor(args) {
