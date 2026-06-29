@@ -1220,4 +1220,14 @@ const gmExtensions = [
     },
 ];
 
-export {extensions, dbExtensions, pmExtensions, dmExtensions, emExtensions, snIDEExtensions, snIDETwoExtensions, arkExtensions, gmExtensions}
+export {
+	extensions,
+	dbExtensions,
+	pmExtensions,
+	dmExtensions,
+	emExtensions,
+	snIDEExtensions,
+	snIDETwoExtensions,
+	arkExtensions,
+	gmExtensions
+	}
