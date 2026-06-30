@@ -98,7 +98,7 @@
               arguments: {}
             }, {
               blockType: Scratch.BlockType.LABEL,
-              text: 'session and mi info'
+              text: 'session and my info'
             }, {
               opcode: "isLoginBlock",
               blockType: Scratch.BlockType.BOOLEAN,
