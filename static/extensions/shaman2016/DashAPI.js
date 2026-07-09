@@ -17,6 +17,31 @@
     throw new Error("This Extension must run in Dash (because of CORS)")
   }
 
+   Scratch.translate.setup({
+    en: {
+      "getFeaturedProjects": "get featured projects",
+      "titles.session": "session and my info",
+      "session.isLogin": "is login?",
+      "session.username": "username",
+      "session.id": "user id",
+      "session.role": "role",
+      "session.avatar": "avatar url",
+      "session.messages": "messages",
+      "titles.info": "get info"
+    },
+    ru: {
+      "getFeaturedProjects": "получить избранные проекты",
+      "titles.session": "сессия и моя информация",
+      "session.isLogin": "вошел?",
+      "session.username": "имя пользователя",
+      "session.id": "id пользователя",
+      "session.role": "роль",
+      "session.avatar": "url аватарки",
+      "session.messages": "сообщения",
+      "titles.info": "получить информацию"
+    }
+   })
+
     class polzovatel_8787_dashApi {
 
       constructor () {
@@ -94,44 +119,44 @@
             {
               opcode: "getFeaturedProjects",
               blockType: Scratch.BlockType.ARRAY,
-              text: "get featured projects",
+              text: Scratch.translate({ id: "getFeaturedProjects", "default": "get featured projects"}),
               arguments: {}
             }, {
               blockType: Scratch.BlockType.LABEL,
-              text: 'session and my info'
+              text: Scratch.translate({ id: "titles.session", "default": "session and my info"})
             }, {
               opcode: "isLoginBlock",
               blockType: Scratch.BlockType.BOOLEAN,
-              text: "is login?",
+              text: Scratch.translate({ id: "session.isLogin", "default": "is login?"}),
               arguments: {}
             }, {
               opcode: "getMyUsername",
               blockType: Scratch.BlockType.REPORTER,
-              text: "username",
+              text: Scratch.translate({ id: "session.username", "default": "username"}),
               arguments: {}
             }, {
               opcode: "getMyId",
               blockType: Scratch.BlockType.REPORTER,
-              text: "user id",
+              text: Scratch.translate({ id: "session.id", "default": "user id"}),
               arguments: {}
             }, {
               opcode: "getMyRole",
               blockType: Scratch.BlockType.REPORTER,
-              text: "role",
+              text: Scratch.translate({ id: "session.role", "default": "role"}),
               arguments: {}
             }, {
               opcode: "getMyAvatar",
               blockType: Scratch.BlockType.REPORTER,
-              text: "avatar url",
+              text: Scratch.translate({ id: "session.avatar", "default": "avatar url"}),
               arguments: {}
             }, {
               opcode: "getMyMessages",
               blockType: Scratch.BlockType.ARRAY,
-              text: "messages",
+              text: Scratch.translate({ id: "session.messages", "default": "messages"}),
               arguments: {}
             }, {
               blockType: Scratch.BlockType.LABEL,
-              text: "get info"
+              text: Scratch.translate({ id: "titles.info", "default": "get info"})
             }, {
               blockType: Scratch.BlockType.LABEL,
               text: "1. users"
@@ -365,7 +390,7 @@
         };
       }
 async getFeaturedProjects() {
-  const returN = await (await fetch("https://dashblocks.org/featured-projects")).json()
+  const returN = await (await fetch("https://api.dashblocks.org/featured-projects")).json()
   return returN?.projects || []
 }
 // Login
