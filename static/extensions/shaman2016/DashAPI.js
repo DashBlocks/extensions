@@ -2,8 +2,8 @@
 // ID: polzovatel8787dashApi
 // Description: An extension for interacting with the Dash api. It ONLY works in Dash.
 /* By:
-  polzovatel_8787 <https://dashblocks.org/scratch-gui/user#polzovatel_8787>
-  DBDev-IT <https://dashblocks.org/scratch-gui/user#DBDev-IT>
+  polzovatel_8787 <https://dashblocks.org/user#polzovatel_8787>
+  DBDev-IT <https://dashblocks.org/user#DBDev-IT>
 */
 // License: GNU GPL v3
 
@@ -447,7 +447,7 @@ async getUsernameUser(args) {
 }
 async getLengthProjectsUser(args) {
   const result = await this.getUserInfo(args.user)
-  return result.user?.stats?.projects || 0
+  return result.user?.profile?.stats?.projects || 0
 }
 async getProjectsUser(args) {
   const result = await this.getUserProjects(args.user, args.offset, args.limit)
