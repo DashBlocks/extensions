@@ -27,7 +27,10 @@
       "session.role": "role",
       "session.avatar": "avatar url",
       "session.messages": "messages",
-      "titles.info": "get info"
+      "titles.info": "get info",
+      "titles.info.users": "1. users",
+      "info.users.id": "get id of [user]",
+      "info.users.username": "get username of id [user]"
     },
     ru: {
       "getFeaturedProjects": "получить избранные проекты",
@@ -38,7 +41,10 @@
       "session.role": "роль",
       "session.avatar": "url аватарки",
       "session.messages": "сообщения",
-      "titles.info": "получить информацию"
+      "titles.info": "получить информацию",
+      "titles.info.users": "1. пользователи",
+      "info.users.id": "получить id [user]",
+      "info.users.username": "получить имя пользователя по id [user]"
     }
    })
 
@@ -159,11 +165,11 @@
               text: Scratch.translate({ id: "titles.info", "default": "get info"})
             }, {
               blockType: Scratch.BlockType.LABEL,
-              text: "1. users"
+              text: Scratch.translate({ id: "titles.info.users", "default": "1. users"})
             }, {
               opcode: "getIdUser",
               blockType: Scratch.BlockType.REPORTER,
-              text: "get id of [user]",
+              text: Scratch.translate({ id: "info.users.id", "default": "get id of [user]"}),
               arguments: {
                 user: {
                   defaultValue: "polzovatel_8787",
@@ -173,7 +179,7 @@
             }, {
               opcode: "getUsernameUser",
               blockType: Scratch.BlockType.REPORTER,
-              text: "get username of id [user]",
+              text: Scratch.translate({ id: "info.users.username", "default": "get username of id [user]"}),
               arguments: {
                 user: {
                   defaultValue: 7,
@@ -183,19 +189,11 @@
             }, {
               opcode: "getLengthProjectsUser",
               blockType: Scratch.BlockType.REPORTER,
-              text: "get the number of projects of user [user] with offset [offset] and limit [limit] (max 40)",
+              text: "get the number of projects of user [user]",
               arguments: {
                 user: {
                   defaultValue: "polzovatel_8787",
                   type: Scratch.ArgumentType.STRING,
-                },
-                offset: {
-                  defaultValue: 0,
-                  type: Scratch.ArgumentType.NUMBER,
-                },
-                limit: {
-                  defaultValue: 20,
-                  type: Scratch.ArgumentType.NUMBER,
                 }
               }
             }, {
@@ -448,8 +446,8 @@ async getUsernameUser(args) {
   return result.user?.username || "Unknown"
 }
 async getLengthProjectsUser(args) {
-  const result = await this.getUserProjects(args.user, args.offset, args.limit)
-  return result?.projects?.length || 0
+  const result = await this.getUserInfo(args.user)
+  return result.user?.stats?.projects || 0
 }
 async getProjectsUser(args) {
   const result = await this.getUserProjects(args.user, args.offset, args.limit)
