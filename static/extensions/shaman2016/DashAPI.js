@@ -17,114 +17,30 @@
   }
 
   Scratch.translate.setup({
-    en: {
-      getFeaturedProjects: "get featured projects",
-      "titles.session": "session and my info",
-      "session.isLogin": "is login?",
-      "session.username": "username",
-      "session.id": "user id",
-      "session.role": "role",
-      "session.avatar": "avatar url",
-      "session.messages": "messages",
-      "titles.info": "get info",
-      "titles.info.users": "1. users",
-      "info.users.id": "get id of [user]",
-      "info.users.username": "get username of id [user]",
-    },
     ru: {
-      getFeaturedProjects: "получить избранные проекты",
-      "titles.session": "сессия и моя информация",
+      getFeaturedProjects: "избранные проекты",
+      "titles.session": "Cессия и моя информация",
       "session.isLogin": "вошел?",
       "session.username": "имя пользователя",
-      "session.id": "id пользователя",
+      "session.id": "ID пользователя",
       "session.role": "роль",
-      "session.avatar": "url аватарки",
+      "session.avatar": "URL аватарки",
       "session.messages": "сообщения",
-      "titles.info": "получить информацию",
-      "titles.info.users": "1. пользователи",
-      "info.users.id": "получить id [user]",
-      "info.users.username": "получить имя пользователя по id [user]",
+      "titles.info": "Получение информации",
+      "titles.info.users": "1. Пользователи",
+      "info.users.id": "ID пользователя [user]",
+      "info.users.username": "имя пользователя по ID [user]",
     },
   });
 
-  class polzovatel_8787_dashApi {
+  class DashAPI {
     constructor() {
       this.isLogin = false;
-      this.checkIsLogin = async function () {
-        const req = await fetch("https://api.dashblocks.org/session", {
-          credentials: "include",
-        });
-        let ret = false;
-        if (req.ok) {
-          ret = true;
-        }
-        this.isLogin = ret;
-        return ret;
-      };
-      this.getMyInfo = async function () {
-        const req = await fetch("https://api.dashblocks.org/session", {
-          credentials: "include",
-        });
-        let returN = {};
-        if (req.ok) {
-          returN = await req.json();
-        }
-        return returN;
-      };
-      this.getUserInfo = async function (username) {
-        const req = await fetch(`https://api.dashblocks.org/users/${username}`);
-        let returN = {};
-        if (req.ok) {
-          returN = await req.json();
-        }
-        return returN;
-      };
-      this.getProjectInfo = async function (id) {
-        const req = await fetch(
-          `https://api.dashblocks.org/projects/${Number(id)}`,
-        );
-        let returN = {};
-        if (req.ok) {
-          returN = await req.json();
-        }
-        return returN;
-      };
-      this.getUserProjects = async function (user, offset, limit) {
-        const req = await fetch(
-          `https://api.dashblocks.org/users/${user}/projects?offset=${offset}&limit=${limit}`,
-        );
-        let returN = {};
-        if (req.ok) {
-          returN = await req.json();
-        }
-        return returN;
-      };
-      this.getUserFollowers = async function (user, offset, limit) {
-        const req = await fetch(
-          `https://api.dashblocks.org/users/${user}/followers?offset=${offset}&limit=${limit}`,
-        );
-        let returN = {};
-        if (req.ok) {
-          returN = await req.json();
-        }
-        return returN;
-      };
-      this.getUserFollowing = async function (user, offset, limit) {
-        const req = await fetch(
-          `https://api.dashblocks.org/users/${user}/following?offset=${offset}&limit=${limit}`,
-        );
-        let returN = {};
-        if (req.ok) {
-          returN = await req.json();
-        }
-        return returN;
-      };
     }
-
     getInfo() {
       return {
         id: "polzovatel8787dashApi",
-        name: "Dash Api",
+        name: "Dash API",
         docsURL: "https://shaman2016scratch.github.io/ext-docs/dashapi/",
         color1: "#ff8f4d",
         blocks: [
@@ -133,15 +49,14 @@
             blockType: Scratch.BlockType.ARRAY,
             text: Scratch.translate({
               id: "getFeaturedProjects",
-              default: "get featured projects",
+              default: "featured projects",
             }),
-            arguments: {},
           },
           {
             blockType: Scratch.BlockType.LABEL,
             text: Scratch.translate({
               id: "titles.session",
-              default: "session and my info",
+              default: "Session and my info",
             }),
           },
           {
@@ -151,7 +66,6 @@
               id: "session.isLogin",
               default: "is login?",
             }),
-            arguments: {},
           },
           {
             opcode: "getMyUsername",
@@ -160,28 +74,24 @@
               id: "session.username",
               default: "username",
             }),
-            arguments: {},
           },
           {
             opcode: "getMyId",
             blockType: Scratch.BlockType.REPORTER,
-            text: Scratch.translate({ id: "session.id", default: "user id" }),
-            arguments: {},
+            text: Scratch.translate({ id: "session.id", default: "user ID" }),
           },
           {
             opcode: "getMyRole",
             blockType: Scratch.BlockType.REPORTER,
             text: Scratch.translate({ id: "session.role", default: "role" }),
-            arguments: {},
           },
           {
             opcode: "getMyAvatar",
             blockType: Scratch.BlockType.REPORTER,
             text: Scratch.translate({
               id: "session.avatar",
-              default: "avatar url",
+              default: "avatar URL",
             }),
-            arguments: {},
           },
           {
             opcode: "getMyMessages",
@@ -190,17 +100,16 @@
               id: "session.messages",
               default: "messages",
             }),
-            arguments: {},
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: Scratch.translate({ id: "titles.info", default: "get info" }),
+            text: Scratch.translate({ id: "titles.info", default: "Get info" }),
           },
           {
             blockType: Scratch.BlockType.LABEL,
             text: Scratch.translate({
               id: "titles.info.users",
-              default: "1. users",
+              default: "1. Users",
             }),
           },
           {
@@ -208,7 +117,7 @@
             blockType: Scratch.BlockType.REPORTER,
             text: Scratch.translate({
               id: "info.users.id",
-              default: "get id of [user]",
+              default: "ID of user [user]",
             }),
             arguments: {
               user: {
@@ -222,7 +131,7 @@
             blockType: Scratch.BlockType.REPORTER,
             text: Scratch.translate({
               id: "info.users.username",
-              default: "get username of id [user]",
+              default: "username by ID [user]",
             }),
             arguments: {
               user: {
@@ -234,7 +143,7 @@
           {
             opcode: "getLengthProjectsUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get the number of projects of user [user]",
+            text: "project count of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -245,7 +154,7 @@
           {
             opcode: "getProjectsUser",
             blockType: Scratch.BlockType.ARRAY,
-            text: "get array of projects of user [user] with offset [offset] and limit [limit] (max 40)",
+            text: "projects of user [user] with offset: [offset] limit: [limit]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -264,7 +173,7 @@
           {
             opcode: "getRoleUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get role of user [user]",
+            text: "role of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -275,7 +184,7 @@
           {
             opcode: "getDescriptionUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get description of user [user]",
+            text: "description of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -286,7 +195,7 @@
           {
             opcode: "getAvatarUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get link of avatar of user [user]",
+            text: "avatar URL of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -297,7 +206,7 @@
           {
             opcode: "getUserLinks",
             blockType: Scratch.BlockType.ARRAY,
-            text: "get links of user [user]",
+            text: "links of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -308,7 +217,7 @@
           {
             opcode: "getUserLinksLength",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get length of links of user [user]",
+            text: "link count of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -319,7 +228,7 @@
           {
             opcode: "getUserAchievements",
             blockType: Scratch.BlockType.ARRAY,
-            text: "get achievements of user [user]",
+            text: "achievements of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -330,7 +239,7 @@
           {
             opcode: "getUserAchievementsLength",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get length of achievements of user [user]",
+            text: "achievements count of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -341,7 +250,7 @@
           {
             opcode: "getFollowersUser",
             blockType: Scratch.BlockType.ARRAY,
-            text: "get followers of user [user] with offset [offset] and limit [limit] (max 40)",
+            text: "followers of user [user] with offset: [offset] limit: [limit]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -360,7 +269,7 @@
           {
             opcode: "getFollowingUser",
             blockType: Scratch.BlockType.ARRAY,
-            text: "get following of user [user] with offset [offset] and limit [limit] (max 40)",
+            text: "following of user [user] with offset: [offset] limit: [limit]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -379,7 +288,7 @@
           {
             opcode: "getUserRecommendedProjectId",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get id of recommended project of user [user]",
+            text: "recommended project ID of user [user]",
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -389,12 +298,12 @@
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: "2. projects",
+            text: "2. Projects",
           },
           {
             opcode: "getProjectAuthor",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get username of author of project [project]",
+            text: "author's username of project [project]",
             arguments: {
               project: {
                 defaultValue: 100,
@@ -405,7 +314,7 @@
           {
             opcode: "getNameProject",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get name of project [project]",
+            text: "name of project [project]",
             arguments: {
               project: {
                 defaultValue: 100,
@@ -416,7 +325,7 @@
           {
             opcode: "getDescriptionProject",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get description of project [project]",
+            text: "description of project [project]",
             arguments: {
               project: {
                 defaultValue: 100,
@@ -427,7 +336,7 @@
           {
             opcode: "getFiresProject",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get fires of project [project]",
+            text: "fires of project [project]",
             arguments: {
               project: {
                 defaultValue: 100,
@@ -438,7 +347,7 @@
           {
             opcode: "getProjectTrumbnail",
             blockType: Scratch.BlockType.REPORTER,
-            text: "get url of trumbnail of project [project]",
+            text: "thumbnail URL of project [project]",
             arguments: {
               project: {
                 defaultValue: 100,
@@ -449,13 +358,83 @@
         ],
       };
     }
+    // Utility methods
+    async checkIsLogin() {
+      const req = await fetch("https://api.dashblocks.org/session", {
+        credentials: "include",
+      });
+      let ret = false;
+      if (req.ok) {
+        ret = true;
+      }
+      this.isLogin = ret;
+      return ret;
+    }
+    async getMyInfo() {
+      const req = await fetch("https://api.dashblocks.org/session", {
+        credentials: "include",
+      });
+      let returN = {};
+      if (req.ok) {
+        returN = await req.json();
+      }
+      return returN;
+    }
+    async getUserInfo(username) {
+      const req = await fetch(`https://api.dashblocks.org/users/${username}`);
+      let returN = {};
+      if (req.ok) {
+        returN = await req.json();
+      }
+      return returN;
+    }
+    async getProjectInfo(id) {
+      const req = await fetch(
+        `https://api.dashblocks.org/projects/${Number(id)}`,
+      );
+      let returN = {};
+      if (req.ok) {
+        returN = await req.json();
+      }
+      return returN;
+    }
+    async getUserProjects(user, offset, limit) {
+      const req = await fetch(
+        `https://api.dashblocks.org/users/${user}/projects?offset=${offset}&limit=${limit}`,
+      );
+      let returN = {};
+      if (req.ok) {
+        returN = await req.json();
+      }
+      return returN;
+    }
+    async getUserFollowers(user, offset, limit) {
+      const req = await fetch(
+        `https://api.dashblocks.org/users/${user}/followers?offset=${offset}&limit=${limit}`,
+      );
+      let returN = {};
+      if (req.ok) {
+        returN = await req.json();
+      }
+      return returN;
+    }
+    async getUserFollowing(user, offset, limit) {
+      const req = await fetch(
+        `https://api.dashblocks.org/users/${user}/following?offset=${offset}&limit=${limit}`,
+      );
+      let returN = {};
+      if (req.ok) {
+        returN = await req.json();
+      }
+      return returN;
+    }
+    // Block methods
     async getFeaturedProjects() {
       const returN = await (
         await fetch("https://api.dashblocks.org/featured-projects")
       ).json();
       return returN?.projects || [];
     }
-    // Session and user info
     async isLoginBlock() {
       await this.checkIsLogin();
       return this.isLogin;
@@ -502,7 +481,6 @@
       }
       return ret;
     }
-    // Get data of users
     async getIdUser(args) {
       const result = await this.getUserInfo(args.user);
       return result.user?.id || null;
@@ -571,7 +549,6 @@
       const result = await this.getUserInfo(args.user, args.offset, args.limit);
       return result.profile?.recommendedProject?.id || null;
     }
-    // Get data of projects
     async getProjectAuthor(args) {
       const result = await this.getProjectInfo(args.project);
       return result.project?.author?.username || "Unknown";
@@ -592,5 +569,5 @@
       return `https://api.dashblocks.org/projects/trumbnail/${args.project}`;
     }
   }
-  Scratch.extensions.register(new polzovatel_8787_dashApi());
+  Scratch.extensions.register(new DashAPI());
 })(Scratch);
