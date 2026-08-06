@@ -278,7 +278,7 @@
             return Scratch.translate("stretch x");
           },
           get hide() {
-            return !vm.extensionManager._loadedExtensions.has("stretch");
+            return !vm.extensionManager.isExtensionLoaded("stretch");
           },
           getValue: function(target) {
             if (this.hide) return null;
@@ -308,7 +308,7 @@
             return Scratch.translate("stretch y");
           },
           get hide() {
-            return !vm.extensionManager._loadedExtensions.has("stretch");
+            return !vm.extensionManager.isExtensionLoaded("stretch");
           },
           getValue: function(target) {
             if (this.hide) return null;
@@ -338,7 +338,7 @@
             return Scratch.translate("stretch");
           },
           get hide() {
-            return !vm.extensionManager._loadedExtensions.has("stretch");
+            return !vm.extensionManager.isExtensionLoaded("stretch");
           },
           getValue: function(target) {
             if (this.hide) return null;
@@ -373,7 +373,7 @@
             return Scratch.translate("blending");
           },
           get hide() {
-            return !vm.extensionManager._loadedExtensions.has("xeltallivclipblend");
+            return !vm.extensionManager.isExtensionLoaded("xeltallivclipblend");
           },
           getValue: function(target) {
             if (this.hide) return null;
@@ -385,7 +385,7 @@
             return Scratch.translate("clipping box");
           },
           get hide() {
-            return !vm.extensionManager._loadedExtensions.has("xeltallivclipblend");
+            return !vm.extensionManager.isExtensionLoaded("xeltallivclipblend");
           },
           getValue: function(target) {
             if (this.hide || !target.clipbox) return null;
@@ -666,13 +666,15 @@
         },
         js: {
           runAsTarget: function (_, node, { Frame }) {
-            const spoofTarget = this.localVariables.next();
-            const runnerTargetLink = this.localVariables.next();
-            this.source += `const ${spoofTarget} = target;\n`;
-            this.source += `const ${runnerTargetLink} = ${this.descendInput(node.target)};\n`;
-            this.source += `if (runtime.ext_${EXT_ID}._isActualTargetLink(${runnerTargetLink})) {\n`;
-            this.source += `  const target = ${runnerTargetLink}.target;\n`;
+            const oldTarget = this.localVariables.next();
+            const substituteTargetLink = this.localVariables.next();
+            this.source += `const ${oldTarget} = target;\n`;
+            this.source += `const ${substituteTargetLink} = ${this.descendInput(node.target)};\n`;
+            this.source += `if (runtime.ext_${EXT_ID}._isActualTargetLink(${substituteTargetLink})) {\n`;
+            this.source += `  const target = ${substituteTargetLink}.target;\n`;
+            this.source += `  thread.compatibilitySubstituteTarget = ${substituteTargetLink}.target;\n`;
             this.descendStack(node.do, new Frame(false));
+            this.source += `  thread.compatibilitySubstituteTarget = thread.target === ${oldTarget} ? null : ${oldTarget};\n`;
             this.source += '}\n';
           },
         }
