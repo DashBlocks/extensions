@@ -16,6 +16,8 @@
   const vm = Scratch.vm;
   const runtime = vm.runtime;
   const Cast = Scratch.Cast;
+  const NormalArray = Scratch.NormalArray;
+  const NormalObject = Scratch.NormalObject;
 
   const EXT_ID = "Den4ik12Targets";
   const CDT_TARGET_LINK_ID = `${EXT_ID}_targetLink`;
@@ -200,7 +202,7 @@
             return Scratch.translate("clones");
           },
           getValue: (target) => {
-            const clones = [];
+            const clones = new NormalArray();
             target.sprite.clones.forEach((cloneTarget) => {
               if (!cloneTarget.isOriginal) clones.push(new TargetLink(cloneTarget));
             });
@@ -239,7 +241,7 @@
           get name() {
             return Scratch.translate("position");
           },
-          getValue: (target) => [target.x, target.y],
+          getValue: (target) => new NormalArray([target.x, target.y]),
           setValue: (target, value) => {
             let [x, y] = Cast.toList(value);
             x = Cast.toNumber(x);
@@ -349,7 +351,7 @@
             const stretchYSymbol = symbols.find((symbol) => symbol.description === "stretch.y");
             if (!stretchXSymbol || !stretchYSymbol) return null;
 
-            return [target[stretchXSymbol], target[stretchYSymbol]];
+            return new NormalArray([target[stretchXSymbol], target[stretchYSymbol]]);
           },
           setValue: function(target, value) {
             if (this.hide) return;
@@ -395,14 +397,14 @@
               x_max: x2,
               y_max: y2,
             } = target.clipbox
-            return {
+            return new NormalObject().assign({
               x1,
               y1,
               x2,
               y2,
               width: x2 - x1,
               height: y2 - y1,
-            };
+            });
           },
         },
         "visible": {
@@ -742,11 +744,11 @@
 
     // Block Functions
     allTargets() {
-      return runtime.targets.map((target) => new TargetLink(target));
+      return new NormalArray(runtime.targets.map((target) => new TargetLink(target)));
     }
 
     allSprites() {
-      const sprites = [];
+      const sprites = new NormalArray();
       runtime.targets.forEach((target) => {
         if (!target.isStage && target.isOriginal) sprites.push(new TargetLink(target));
       });
@@ -754,10 +756,10 @@
     }
 
     allSpritesAsObject() {
-      const sprites = {};
+      const sprites = new NormalObject();
       runtime.targets.forEach((target) => {
         if (!target.isStage && target.isOriginal)
-          sprites[target.getName()] = new TargetLink(target);
+          sprites.set(target.getName(), new TargetLink(target));
       });
       return sprites;
     }
@@ -857,10 +859,10 @@
     }
 
     targetsTouchingTarget(args) {
-      if (!this._isActualTargetLink(args.TARGET)) return [];
+      if (!this._isActualTargetLink(args.TARGET)) return new NormalArray();
       const target1 = args.TARGET.target;
 
-      const targets = [];
+      const targets = new NormalArray();
       runtime.targets.forEach((target2) => {
         if (
           target1 !== target2 &&
