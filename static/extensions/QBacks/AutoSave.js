@@ -4,6 +4,8 @@
     throw new Error('Extension MUST run unsandboxed!');
   }
   const vm = Scratch.vm;
+  const NormalArray = Scratch.NormalArray ? Scratch.NormalArray : Array;
+  const NormalObject = Scratch.NormalObject ? Scratch.NormalObject : Map;
   let currentGameId = 'MyGame';
   let currentSlot = '1';
   let encryptionKey = 'DefaultKey';
@@ -327,7 +329,7 @@
          const stage = vm.runtime.getTargetForStage();
          if (stage) list = stage.lookupVariableByNameAndType(listName, 'list');
       }
-      return list;
+      return new NormalArray(list);
     }
     config(args) { currentGameId = args.ID; encryptionKey = args.KEY; }
     setSlot(args) { currentSlot = args.NUM; }
@@ -451,9 +453,9 @@
     }
     _getAchStatus(id) {
         const raw = localStorage.getItem(this._makeKeyAch(id));
-        if (!raw) return { unlocked: false };
+        if (!raw) return new NormalObject().set('unlocked', false);
         const dec = this._decrypt(raw);
-        return dec ? JSON.parse(dec) : { unlocked: false };
+        return dec ? new NormalObject(Object.entries(JSON.parse(dec))) : new NormalObject().set('unlocked', false);
     }
     _unlockAch(id) {
         const status = this._getAchStatus(id);
@@ -600,7 +602,7 @@
           if (v.type === 'list') { if (!lists.includes(v.name)) lists.push(v.name); }
         }
       }
-      return lists.length > 0 ? lists : ['Create a list!'];
+      return lists.length > 0 ? new NormalArray(lists) : new NormalArray(['Create a list!']);
     }
   }
   Scratch.extensions.register(new AutoSaveTitanium());

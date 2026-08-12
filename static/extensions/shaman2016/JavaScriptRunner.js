@@ -9,7 +9,8 @@
 (function (Scratch) {
     "use strict";
 
-    if (!Scratch.extensions.unsandboxed) return alert("This extension MUST run unsandboxed!");
+    if (!Scratch.extensions.unsandboxed)
+        throw new Error("JavaScript Runner extension MUST run unsandboxed!");
 
     const Cast = Scratch.Cast;
 
@@ -24,7 +25,7 @@
                 blocks: [
                     {
                         opcode: "command",
-                        text: "command [CODE]",
+                        text: "execute [CODE]",
                         blockType: Scratch.BlockType.COMMAND,
                         arguments: {
                             CODE: {
@@ -35,7 +36,7 @@
                     },
                     {
                         opcode: "reporter",
-                        text: "reporter [CODE]",
+                        text: "execute [CODE]",
                         blockType: Scratch.BlockType.REPORTER,
                         arguments: {
                             CODE: {
@@ -46,7 +47,7 @@
                     },
                     {
                         opcode: "boolean",
-                        text: "boolean [CODE]",
+                        text: "execute [CODE]",
                         blockType: Scratch.BlockType.BOOLEAN,
                         arguments: {
                             CODE: {
@@ -57,7 +58,7 @@
                     },
                     {
                         opcode: "array",
-                        text: "array [CODE]",
+                        text: "execute [CODE]",
                         blockType: Scratch.BlockType.ARRAY,
                         arguments: {
                             CODE: {
@@ -68,7 +69,7 @@
                     },
                     {
                         opcode: "object",
-                        text: "object [CODE]",
+                        text: "execute [CODE]",
                         blockType: Scratch.BlockType.OBJECT,
                         arguments: {
                             CODE: {
@@ -91,7 +92,7 @@
                     return "Error: " + result.value.message;
                 }
             } catch (error) {
-                return "Error: " + result.value;
+                return "Error: " + error.message;
             }
         }
 

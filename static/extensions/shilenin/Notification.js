@@ -10,7 +10,7 @@ class NotificationExtension {
           text: 'send notification [TEXT] with icon [ICON_URL]',
           arguments: {
             TEXT: { type: Scratch.ArgumentType.STRING, defaultValue: 'Hi, this is notification!' },
-            ICON_URL: { type: Scratch.ArgumentType.STRING, defaultValue: 'https://dashblocks.github.io/favicon.ico' }
+            ICON_URL: { type: Scratch.ArgumentType.STRING, defaultValue: 'https://dashblocks.org/favicon.ico' }
           }
         }
       ]

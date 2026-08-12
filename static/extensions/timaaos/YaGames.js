@@ -6,7 +6,9 @@
         "Yandex Games SDK:\nThis extension must run unsandboxed!\nPlease enable the unsandboxed mode when loading the extension."
       );
     }
-  
+
+    const NormalObject = Scratch.NormalObject ? Scratch.NormalObject : Map;
+
     class YaGamesSDKExtension {
       constructor() {
         console.log(
@@ -294,7 +296,13 @@
         const name = Scratch.Cast.toString(args.NAME);
         const top = Scratch.Cast.toNumber(args.TOP);
         const around = Scratch.Cast.toNumber(args.AROUND);
-        return this.ysdk.leaderboards.getEntries(name, { quantityTop: top, includeUser: true, quantityAround: around});
+        return new NormalObject(Object.entries(
+          this.ysdk.leaderboards.getEntries(name, {
+            quantityTop: top,
+            includeUser: true,
+            quantityAround: around
+          })
+        ));
       }
 
       // Rewrite -->
@@ -534,7 +542,7 @@
         const key = Scratch.Cast.toString(args.KEY);
         if (!this.ysdk) return;
         return this.ysdk.getPlayer().then(player => {
-          return player.getData(key)
+          return new NormalObject(Object.entries(player.getData(key)));
         });
       }
       castToObject(value) {

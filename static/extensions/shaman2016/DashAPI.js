@@ -33,6 +33,8 @@
     },
   });
 
+  const NormalArray = Scratch.NormalArray;
+
   class DashAPI {
     constructor() {
       this.isLogin = false;
@@ -433,7 +435,7 @@
       const returN = await (
         await fetch("https://api.dashblocks.org/featured-projects")
       ).json();
-      return returN?.projects || [];
+      return new NormalArray(returN?.projects || []);
     }
     async isLoginBlock() {
       await this.checkIsLogin();
@@ -479,7 +481,7 @@
         ).json();
         ret = result.messages;
       }
-      return ret;
+      return new NormalArray(ret);
     }
     async getIdUser(args) {
       const result = await this.getUserInfo(args.user);
@@ -499,7 +501,7 @@
         args.offset,
         args.limit,
       );
-      return result?.projects || [];
+      return new NormalArray(result?.projects || []);
     }
     async getRoleUser(args) {
       const result = await this.getUserInfo(args.user);
@@ -515,7 +517,7 @@
     }
     async getUserLinks(args) {
       const result = await this.getUserInfo(args.user);
-      return result.user?.profile?.links || [];
+      return new NormalArray(result.user?.profile?.links || []);
     }
     async getUserLinksLength(args) {
       const result = await this.getUserInfo(args.user);
@@ -523,7 +525,7 @@
     }
     async getUserAchievements(args) {
       const result = await this.getUserInfo(args.user);
-      return result.user?.profile?.achievements || [];
+      return new NormalArray(result.user?.profile?.achievements || []);
     }
     async getUserAchievementsLength(args) {
       const result = await this.getUserInfo(args.user);
@@ -535,7 +537,7 @@
         args.offset,
         args.limit,
       );
-      return result.followers || [];
+      return new NormalArray(result.followers || []);
     }
     async getFollowingUser(args) {
       const result = await this.getUserFollowing(
@@ -543,7 +545,7 @@
         args.offset,
         args.limit,
       );
-      return result.following || [];
+      return new NormalArray(result.following || []);
     }
     async getUserRecommendedProjectId(args) {
       const result = await this.getUserInfo(args.user, args.offset, args.limit);
@@ -566,7 +568,7 @@
       return result.project?.stats?.fires || 0;
     }
     getProjectTrumbnail(args) {
-      return `https://api.dashblocks.org/projects/trumbnail/${args.project}`;
+      return `https://api.dashblocks.org/projects/thumbnails/${args.project}`;
     }
   }
   Scratch.extensions.register(new DashAPI());
