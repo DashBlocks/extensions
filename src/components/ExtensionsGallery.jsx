@@ -97,8 +97,8 @@ export default function ExtensionsGallery () {
                         Extensions will likely not work in other mods than Dash if they:
                         <ul>
                             <li>Rely on Arrays or Objects,</li>
-                            <li>Use generator functions (function*) as serializers/deserializers of custom types,</li>
-                            <li>Use Patcher, SandboxRunner APIs.</li>
+                            <li>Uses generator functions (function*) as serializers/deserializers of custom types,</li>
+                            <li>Uses new methods in Cast; Patcher API.</li>
                         </ul>
                     </div>
                     <div className="ext-grid">
