@@ -101,7 +101,9 @@
             try {
                 const response = await fetch(this.webhook + "?wait=true", options);
                 return response;
-            } catch (e) {throw new Error(e)}
+            } catch (e) {
+                throw new Error(e);
+            }
         }
 
         isConnected () {
@@ -110,10 +112,13 @@
 
         async getWebhookInfo () {
             try {
-                return await this._makeRequest().then(response =>
-                    new NormalObject(Object.entries(await response.json()))
-                );
-            } catch (_) {return new NormalObject()}
+                const response = await this._makeRequest();
+                if (!response) return new NormalObject();
+                const json = await response.json();
+                return new NormalObject(Object.entries(json));
+            } catch (_) {
+                return new NormalObject();
+            }
         }
 
         setUsername (args) {
