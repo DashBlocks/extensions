@@ -81,8 +81,9 @@
         }
 
         async init (args) {
-            if (this.connected && this.webhook === args.WEBHOOK_URL) return;
-            this.webhook = args.WEBHOOK_URL;
+            const webhookUrl = Cast.toString(args.WEBHOOK_URL);
+            if ((this.connected && this.webhook === webhookUrl) || !webhookUrl.startsWith("https://discord.com/api/webhooks/")) return;
+            this.webhook = webhookUrl;
             const response = await this._makeRequest();
             response.ok ? this.connected = true : this.connected = false;
         }
