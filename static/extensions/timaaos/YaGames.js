@@ -45,11 +45,13 @@
               opcode: "reporterlang",
               blockType: Scratch.BlockType.REPORTER,
               text: "game language",
+              disableMonitor: true
             },
             {
               opcode: "getservertime",
               blockType: Scratch.BlockType.REPORTER,
               text: "server time",
+              disableMonitor: true
             },
             "---",
            {
@@ -411,6 +413,8 @@
           console.log(YaGames);
           await YaGames.init().then((ysdk) => {
             this.ysdk = ysdk;
+            const _forceLangCheck = ysdk.environment.i18n.lang;
+            console.log(_forceLangCheck);
             ysdk.features.LoadingAPI.ready();
             ysdk
               .getPlayer({ scopes: false })
