@@ -30,6 +30,8 @@
       "titles.info.users": "1. Пользователи",
       "info.users.id": "ID пользователя [user]",
       "info.users.username": "имя пользователя по ID [user]",
+      "info.users.projectCount": "Количество проектов проектов пользователя [user]",
+      "info.users.projects": "Проекты пользователя [user] используя смещение: [offset] лимит: [limit]"
     },
   });
 
@@ -145,7 +147,10 @@
           {
             opcode: "getLengthProjectsUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "project count of user [user]",
+            text: Scratch.translate({
+              id: "info.users.projectCount",
+              default: "project count of user [user]",
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -156,7 +161,10 @@
           {
             opcode: "getProjectsUser",
             blockType: Scratch.BlockType.ARRAY,
-            text: "projects of user [user] with offset: [offset] limit: [limit]",
+            text: Scratch.translate({
+              id: "info.users.projects",
+              default: "projects of user [user] with offset: [offset] limit: [limit]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -357,6 +365,39 @@
               },
             },
           },
+          {
+            opcode: "getProjectForksBlock",
+            blockType: Scratch.BlockType.ARRAY,
+            text: "forks of project [project] with offset: [offset] limit: [limit]",
+            arguments: {
+              project: {
+                defaultValue: 100,
+                type: Scratch.ArgumentType.NUMBER,
+              },
+            },
+          },
+          {
+            opcode: "getProjectForkCount",
+            blockType: Scratch.BlockType.REPORTER,
+            text: "fork count of project [project]",
+            arguments: {
+              project: {
+                defaultValue: 100,
+                type: Scratch.ArgumentType.NUMBER,
+              },
+            },
+          },
+          {
+            opcode: "getProjectViews",
+            blockType: Scratch.BlockType.REPORTER,
+            text: "views of project [project]",
+            arguments: {
+              project: {
+                defaultValue: 100,
+                type: Scratch.ArgumentType.NUMBER,
+              },
+            },
+          },
         ],
       };
     }
@@ -423,6 +464,16 @@
     async getUserFollowing(user, offset, limit) {
       const req = await fetch(
         `https://api.dashblocks.org/users/${user}/following?offset=${offset}&limit=${limit}`,
+      );
+      let returN = {};
+      if (req.ok) {
+        returN = await req.json();
+      }
+      return returN;
+    }
+    async getProjectForks(project, offset, limit) {
+      const req = await fetch(
+        `https://api.dashblocks.org/projects/${project}/forks?offset=${offset}&limit=${limit}`,
       );
       let returN = {};
       if (req.ok) {
@@ -569,6 +620,18 @@
     }
     getProjectTrumbnail(args) {
       return `https://api.dashblocks.org/projects/thumbnails/${args.project}`;
+    }
+    async getProjectForksBlock(args) {
+      const result = await this.getProjectForks(args.project, args.offset, args.limit);
+      return new NormalArray(result.forks || []);
+    }
+    async getProjectForkCount(args) {
+      const result = await this.getProjectInfo(args.project);
+      return result.project.stats.forks || 0;
+    }
+    async getProjectViews(args) {
+      const result = await this.getProjectInfo(args.project);
+      return result.project.stats.views || 0;
     }
   }
   Scratch.extensions.register(new DashAPI());
