@@ -403,7 +403,7 @@
       const map = this._toMap(args.MAP);
       switch (args.ENUMERATION_TYPE) {
         case "entries":
-          return new NormalArray(map.entries().toArray());
+          return new NormalArray(map.entries().toArray().map((value) => new NormalArray(value)));
         case "keys":
           return new NormalArray(map.keys().toArray());
         case "values":
