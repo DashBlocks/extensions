@@ -31,7 +31,15 @@
       "info.users.id": "ID пользователя [user]",
       "info.users.username": "имя пользователя по ID [user]",
       "info.users.projectCount": "Количество проектов проектов пользователя [user]",
-      "info.users.projects": "Проекты пользователя [user] используя смещение: [offset] лимит: [limit]"
+      "info.users.projects": "Проекты пользователя [user] используя смещение: [offset] лимит: [limit]",
+      "info.users.role": "роль пользователя [user]",
+      "info.users.description": "описание пользователя [user]",
+      "info.users.avatar": "URL аватарки пользователя [user]",
+      "info.users.links": "ссылки пользователя [user]",
+      "info.users.links.count": "количество ссылок пользователя [user]",
+      "info.users.achievements": "достижения пользователя [user]",
+      "info.users.achievements.count": "количество достижений пользователя [user]",
+      "info.users.followers": "подписчики пользователя [user]"
     },
   });
 
@@ -183,7 +191,10 @@
           {
             opcode: "getRoleUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "role of user [user]",
+            text: Scratch.translate({
+              id: "info.users.role",
+              default: "role of user [user]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -194,7 +205,10 @@
           {
             opcode: "getDescriptionUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "description of user [user]",
+            text: Scratch.translate({
+              id: "info.users.description",
+              default: "description of user [user]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -205,7 +219,10 @@
           {
             opcode: "getAvatarUser",
             blockType: Scratch.BlockType.REPORTER,
-            text: "avatar URL of user [user]",
+            text: Scratch.translate({
+              id: "info.users.avatar",
+              default: "avatar URL of user [user]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -216,7 +233,10 @@
           {
             opcode: "getUserLinks",
             blockType: Scratch.BlockType.ARRAY,
-            text: "links of user [user]",
+            text: Scratch.translate({
+              id: "info.users.links",
+              default: "links of user [user]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -227,7 +247,10 @@
           {
             opcode: "getUserLinksLength",
             blockType: Scratch.BlockType.REPORTER,
-            text: "link count of user [user]",
+            text: Scratch.translate({
+              id: "info.users.links.count",
+              default: "link count of user [user]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -238,7 +261,10 @@
           {
             opcode: "getUserAchievements",
             blockType: Scratch.BlockType.ARRAY,
-            text: "achievements of user [user]",
+            text: Scratch.translate({
+              id: "info.users.achievements",
+              default: "achievements of user [user]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -249,7 +275,10 @@
           {
             opcode: "getUserAchievementsLength",
             blockType: Scratch.BlockType.REPORTER,
-            text: "achievements count of user [user]",
+            text: Scratch.translate({
+              id: "info.users.achievements.count",
+              default: "achievements count of user [user]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
@@ -260,7 +289,10 @@
           {
             opcode: "getFollowersUser",
             blockType: Scratch.BlockType.ARRAY,
-            text: "followers of user [user] with offset: [offset] limit: [limit]",
+            text: Scratch.translate({
+              id: "info.users.followers",
+              default: "followers of user [user] with offset: [offset] limit: [limit]"
+            }),
             arguments: {
               user: {
                 defaultValue: "polzovatel_8787",
