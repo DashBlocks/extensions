@@ -733,7 +733,7 @@
       }
       return 0;
     }
-    getProjectTrumbnail(args) {
+    async getProjectTrumbnail(args) {
       const project = Cast.toNumber(args.PROJECT);
       const result = await this._getProjectInfo(project);
       if (Object.entries(result).length > 0) {
