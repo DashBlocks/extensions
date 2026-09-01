@@ -443,7 +443,7 @@
         ],
       };
     }
-    async _makeRequest(endpoint, options) {
+    async _makeRequest(endpoint, options = {}) {
       try {
         const request = await fetch(this.API_ORIGIN + endpoint, {
           credentials: "include",
