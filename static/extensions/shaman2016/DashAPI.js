@@ -70,7 +70,7 @@
             blockType: Scratch.BlockType.LABEL,
             text: Scratch.translate({
               id: "titles.session",
-              default: "Session and my info",
+              default: "Session and My Info",
             }),
           },
           {
@@ -78,7 +78,7 @@
             blockType: Scratch.BlockType.BOOLEAN,
             text: Scratch.translate({
               id: "session.isLogin",
-              default: "is login?",
+              default: "logged in?",
             }),
           },
           {
@@ -97,14 +97,14 @@
           {
             opcode: "getMyRole",
             blockType: Scratch.BlockType.REPORTER,
-            text: Scratch.translate({ id: "session.role", default: "role" }),
+            text: Scratch.translate({ id: "session.role", default: "user role" }),
           },
           {
             opcode: "getMyAvatar",
             blockType: Scratch.BlockType.REPORTER,
             text: Scratch.translate({
               id: "session.avatar",
-              default: "avatar URL",
+              default: "user avatar URL",
             }),
           },
           {
@@ -112,12 +112,12 @@
             blockType: Scratch.BlockType.ARRAY,
             text: Scratch.translate({
               id: "session.messages",
-              default: "messages",
+              default: "user messages",
             }),
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: Scratch.translate({ id: "titles.info", default: "Get info" }),
+            text: Scratch.translate({ id: "titles.info", default: "Get Info" }),
           },
           {
             blockType: Scratch.BlockType.LABEL,
@@ -159,7 +159,7 @@
             blockType: Scratch.BlockType.REPORTER,
             text: Scratch.translate({
               id: "info.users.projectCount",
-              default: "project count of user [USER]",
+              default: "projects count of user [USER]",
             }),
             arguments: {
               USER: {
@@ -251,7 +251,7 @@
             blockType: Scratch.BlockType.REPORTER,
             text: Scratch.translate({
               id: "info.users.links.count",
-              default: "link count of user [USER]"
+              default: "links count of user [USER]"
             }),
             arguments: {
               USER: {
@@ -421,7 +421,7 @@
           {
             opcode: "getProjectForkCount",
             blockType: Scratch.BlockType.REPORTER,
-            text: "fork count of project [PROJECT]",
+            text: "forks count of project [PROJECT]",
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -432,7 +432,7 @@
           {
             opcode: "getProjectViews",
             blockType: Scratch.BlockType.REPORTER,
-            text: "views of project [PROJECT]",
+            text: "views count of project [PROJECT]",
             arguments: {
               PROJECT: {
                 defaultValue: 100,
