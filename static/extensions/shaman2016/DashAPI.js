@@ -443,10 +443,11 @@
         ],
       };
     }
-    async _makeRequest(endpoint, args) {
+    async _makeRequest(endpoint, options) {
       try {
         const request = await fetch(this.API_ORIGIN + endpoint, {
-          credentials: "include"
+          credentials: "include",
+          ...options
         });
         return await request.json();
       } catch (_) {
