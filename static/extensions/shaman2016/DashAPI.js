@@ -591,7 +591,7 @@
       const user = Cast.toString(args.USER);
       const result = await this._getUserInfo(user);
       if (Object.entries(result).length > 0) {
-        return result.profile.stats.projects.length;
+        return result.profile.stats.projects;
       }
       return 0;
     }
