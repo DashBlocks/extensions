@@ -13,6 +13,8 @@
         throw new Error("JavaScript Runner extension MUST run unsandboxed!");
 
     const Cast = Scratch.Cast;
+    const NormalArray = Scratch.NormalArray ? Scratch.NormalArray : Array;
+    const NormalObject = Scratch.NormalObject ? Scratch.NormalObject : Map;
 
     class JavaScriptExtension {
         getInfo () {
@@ -115,13 +117,15 @@
 
         async array (args) {
             const code = Cast.toString(args.CODE);
-            const array = Cast.toList(await this._execute(code));
+            const array = new NormalArray(await this._execute(code));
             return array;
         }
 
         async object (args) {
             const code = Cast.toString(args.CODE);
-            const object = Cast.toObject(await this._execute(code));
+            const object = new NormalObject(
+                Object.entries(await this._execute(code))
+            );
             return object;
         }
     }
