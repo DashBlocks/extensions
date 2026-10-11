@@ -19,6 +19,7 @@
   Scratch.translate.setup({
     ru: {
       getFeaturedProjects: "избранные проекты",
+      getFeaturedStudios: "избранные студии",
       "titles.session": "Cессия и моя информация",
       "session.isLogin": "вошел?",
       "session.username": "имя пользователя",
@@ -39,7 +40,10 @@
       "info.users.links.count": "количество ссылок пользователя [USER]",
       "info.users.achievements": "достижения пользователя [USER]",
       "info.users.achievements.count": "количество достижений пользователя [USER]",
-      "info.users.followers": "подписчики пользователя [USER]"
+      "info.users.followers": "подписчики пользователя [USER] используя смещение: [OFFSET] лимит: [LIMTI]",
+      "info.users.following": "подписки у [USER] используя смещение: [OFFSET] лимит: [LIMTI]",
+      "info.users.recommendedproject.id": "ID рекомендуемого проекта пользователя [USER]",
+      "titles.info.projects": "2. Проекты"
     },
   });
 
@@ -64,6 +68,14 @@
             text: Scratch.translate({
               id: "getFeaturedProjects",
               default: "featured projects",
+            }),
+          },
+          {
+            opcode: "getFeaturedStudios",
+            blockType: Scratch.BlockType.ARRAY,
+            text: Scratch.translate({
+              id: "getFeaturedStudios",
+              default: "featured studios",
             }),
           },
           {
@@ -313,7 +325,10 @@
           {
             opcode: "getFollowingUser",
             blockType: Scratch.BlockType.ARRAY,
-            text: "following of user [USER] with offset [OFFSET] and limit [LIMIT]",
+            text: Scratch.translate({
+              id: "info.users.following",
+              default: "following of user [USER] with offset [OFFSET] and limit [LIMIT]"
+            }),
             arguments: {
               USER: {
                 defaultValue: "polzovatel_8787",
@@ -332,7 +347,10 @@
           {
             opcode: "getUserRecommendedProjectId",
             blockType: Scratch.BlockType.REPORTER,
-            text: "recommended project ID of user [USER]",
+            text: Scratch.translate({
+              id: "info.users.recommendedproject.id",
+              default: "recommended project ID of user [USER]"
+            }),
             arguments: {
               USER: {
                 defaultValue: "polzovatel_8787",
@@ -342,7 +360,10 @@
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: "2. Projects",
+            text: Scratch.translate({
+              id: "titles.info.projects",
+              default: "2. Projects"
+            }),
           },
           {
             opcode: "getProjectAuthor",
@@ -521,6 +542,13 @@
       const data = await this._makeRequest("featured-projects");
       if (data.ok) {
         return new NormalArray(data.projects);
+      }
+      return new NormalArray();
+    }
+    async getFeaturedStudios() {
+      const data = await this._makeRequest("featured-studios");
+      if (data.ok) {
+        return new NormalArray(data.studios);
       }
       return new NormalArray();
     }
