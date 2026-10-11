@@ -546,7 +546,7 @@
       return new NormalArray();
     }
     async getFeaturedStudios() {
-      const data = await this._makeRequest("featured-studios");
+      const data = await this._makeRequest("featured/studios");
       if (data.ok) {
         return new NormalArray(data.studios);
       }
