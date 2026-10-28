@@ -43,7 +43,15 @@
       "info.users.followers": "подписчики пользователя [USER] используя смещение: [OFFSET] лимит: [LIMTI]",
       "info.users.following": "подписки у [USER] используя смещение: [OFFSET] лимит: [LIMTI]",
       "info.users.recommendedproject.id": "ID рекомендуемого проекта пользователя [USER]",
-      "titles.info.projects": "2. Проекты"
+      "titles.info.projects": "2. Проекты",
+      "info.projects.author.username": "имя пользователя автора проекта [PROJECT]",
+      "info.projects.name": "название проекта [PROJECT]",
+      "info.projects.description": "описание проекта [PROJECT]",
+      "info.projects.stats.fires": "огни проекта [PROJECT]",
+      "info.projects.trumbnail": "URL обложки проекта [PROJECT]",
+      "info.projects.forks": "форки проект [PROJECT] используя смещение: [OFFSET] лимит: [LIMTI]",
+      "info.projects.stats.forks": "количество форков проекта [PROJECT]",
+      "info.projects.stats.views": "количество просмотров проекта [PROJECT]"
     },
   });
 
@@ -368,7 +376,10 @@
           {
             opcode: "getProjectAuthor",
             blockType: Scratch.BlockType.REPORTER,
-            text: "author's username of project [PROJECT]",
+            text: Scratch.translate({
+              id: "info.projects.author.username",
+              default: "author's username of project [PROJECT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -379,7 +390,10 @@
           {
             opcode: "getNameProject",
             blockType: Scratch.BlockType.REPORTER,
-            text: "name of project [PROJECT]",
+            text: Scratch.translate({
+              id: "info.projects.name",
+              default: "name of project [PROJECT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -390,7 +404,10 @@
           {
             opcode: "getDescriptionProject",
             blockType: Scratch.BlockType.REPORTER,
-            text: "description of project [PROJECT]",
+            text: Scratch.translate({
+              id: "info.projects.description",
+              default: "description of project [PROJECT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -401,7 +418,10 @@
           {
             opcode: "getFiresProject",
             blockType: Scratch.BlockType.REPORTER,
-            text: "fires of project [PROJECT]",
+            text: Scratch.translate({
+              id: "info.projects.stats.fires",
+              default: "fires of project [PROJECT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -412,7 +432,10 @@
           {
             opcode: "getProjectTrumbnail",
             blockType: Scratch.BlockType.REPORTER,
-            text: "thumbnail URL of project [PROJECT]",
+            text: Scratch.translate({
+              id: "info.projects.trumbnail",
+              default: "thumbnail URL of project [PROJECT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -423,7 +446,10 @@
           {
             opcode: "getProjectForksBlock",
             blockType: Scratch.BlockType.ARRAY,
-            text: "forks of project [PROJECT] with offset [OFFSET] and limit [LIMIT]",
+            text: Scratch.translate({
+              id: "info.projects.forks",
+              default: "forks of project [PROJECT] with offset [OFFSET] and limit [LIMIT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -442,7 +468,10 @@
           {
             opcode: "getProjectForkCount",
             blockType: Scratch.BlockType.REPORTER,
-            text: "forks count of project [PROJECT]",
+            text: Scratch.translate({
+              id: "info.projects.stats.forks",
+              default: "forks count of project [PROJECT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
@@ -453,7 +482,10 @@
           {
             opcode: "getProjectViews",
             blockType: Scratch.BlockType.REPORTER,
-            text: "views count of project [PROJECT]",
+            text: Scratch.translate({
+              id: "info.projects.stats.views",
+              default: "views count of project [PROJECT]"
+            }),
             arguments: {
               PROJECT: {
                 defaultValue: 100,
