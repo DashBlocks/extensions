@@ -1,4 +1,4 @@
-﻿// Name: Targets
+// Name: Targets
 // ID: Den4ik12Targets
 // Description: Easily manage your sprites, clones, and their properties.
 // By: Den4ik-12 <https://scratch.mit.edu/users/Den4ik-12/>
@@ -34,6 +34,8 @@
     shape: Scratch.BlockShape.OCTAGONAL,
     check: CDT_TARGET_LINK_ID,
   };
+
+  const TARGET_LINK_PROP_SMBL = Symbol("Den4ik12Targets.property.targetLink");
 
   class TargetLink {
     customId = CDT_TARGET_LINK_ID;
@@ -204,7 +206,7 @@
           getValue: (target) => {
             const clones = new NormalArray();
             target.sprite.clones.forEach((cloneTarget) => {
-              if (!cloneTarget.isOriginal) clones.push(new TargetLink(cloneTarget));
+              if (!cloneTarget.isOriginal) clones.push(this._getTargetLink(cloneTarget));
             });
             return clones;
           },
@@ -214,7 +216,7 @@
             return Scratch.translate("origin");
           },
           getValue: (target) => {
-            return new TargetLink(target.sprite.clones.find((cloneTarget) => cloneTarget.isOriginal) || null);
+            return this._getTargetLink(target.sprite.clones.find((cloneTarget) => cloneTarget.isOriginal) || null);
           },
         },
         "x position": {
@@ -446,10 +448,10 @@
           return obj.target.id;
         },
         (serialized) => {
-          if (serialized === null) return new TargetLink(null);
+          if (serialized === null) return this._getTargetLink(null);
           const target = runtime.getTargetById(serialized);
-          if (!target) return new TargetLink(null);
-          return new TargetLink(target);
+          if (!target) return this._getTargetLink(null);
+          return this._getTargetLink(target);
         }
       );
     }
@@ -473,6 +475,11 @@
                 menu: "TARGETS",
               },
             },
+          },
+          {
+            opcode: "draggedTarget",
+            ...TARGET_BLOCK_TYPE,
+            text: Scratch.translate("dragged target"),
           },
           {
             opcode: "allTargets",
@@ -735,6 +742,14 @@
       }
     }
 
+    _getTargetLink(target) {
+      if (target[TARGET_LINK_PROP_SMBL]) return target[TARGET_LINK_PROP_SMBL];
+
+      const targetLink = new TargetLink(target);
+      target[TARGET_LINK_PROP_SMBL] = targetLink;
+      return targetLink;
+    }
+
     _isActualTargetLink(targetLink) {
       return !!(
         targetLink instanceof TargetLink &&
@@ -743,14 +758,28 @@
     }
 
     // Block Functions
+    targetLinkByName(args, util) {
+      const target = this._getTarget(args.TARGET_NAME, util);
+      if (!target) return "";
+
+      return this._getTargetLink(target);
+    }
+
+    draggedTarget() {
+      const target = vm._dragTarget;
+      if (!target) return "";
+
+      return this._getTargetLink(target);
+    }
+
     allTargets() {
-      return new NormalArray(runtime.targets.map((target) => new TargetLink(target)));
+      return new NormalArray(runtime.targets.map((target) => this._getTargetLink(target)));
     }
 
     allSprites() {
       const sprites = new NormalArray();
       runtime.targets.forEach((target) => {
-        if (!target.isStage && target.isOriginal) sprites.push(new TargetLink(target));
+        if (!target.isStage && target.isOriginal) sprites.push(this._getTargetLink(target));
       });
       return sprites;
     }
@@ -759,18 +788,11 @@
       const sprites = new NormalObject();
       runtime.targets.forEach((target) => {
         if (!target.isStage && target.isOriginal)
-          sprites.set(target.getName(), new TargetLink(target));
+          sprites.set(target.getName(), this._getTargetLink(target));
       });
       return sprites;
     }
-
-    targetLinkByName(args, util) {
-      const target = this._getTarget(args.TARGET_NAME, util);
-      if (!target) return "";
-
-      return new TargetLink(target);
-    }
-
+    
     createCloneOfTargetAndReturn(args) {
       if (!this._isActualTargetLink(args.TARGET)) return "";
       const target = args.TARGET.target;
@@ -780,7 +802,7 @@
 
       runtime.addTarget(cloneTarget);
       cloneTarget.goBehindOther(target);
-      return new TargetLink(cloneTarget);
+      return this._getTargetLink(cloneTarget);
     }
 
     createCloneOfTarget(args) {
@@ -869,7 +891,7 @@
           !target2.isStage &&
           target1.isTouchingTarget(target2)
         )
-          targets.push(new TargetLink(target2));
+          targets.push(this._getTargetLink(target2));
       });
       return targets;
     }
