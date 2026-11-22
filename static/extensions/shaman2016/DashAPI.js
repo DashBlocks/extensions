@@ -50,7 +50,7 @@
       "info.projects.description": "описание проекта [PROJECT]",
       "info.projects.stats.fires": "огни проекта [PROJECT]",
       "info.projects.trumbnail": "URL обложки проекта [PROJECT]",
-      "info.projects.forks": "форки проект [PROJECT] используя смещение: [OFFSET] лимит: [LIMIT]",
+      "info.projects.forks": "форки проекта [PROJECT] используя смещение: [OFFSET] лимит: [LIMIT]",
       "info.projects.stats.forks": "количество форков проекта [PROJECT]",
       "info.projects.stats.views": "количество просмотров проекта [PROJECT]"
     },
