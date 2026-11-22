@@ -176,6 +176,186 @@ const extensions = [
         creator: { name: "ABDev", link: "_github_" },
         scratchCompatible: false
     },
+    {
+        name: "3d",
+        id: "abdev3d",
+        description: "3d extension by ABDev.",
+        code: "ABDev/3d.js",
+        banner: "ABDev/3d.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "Claviatura+++",
+        id: "abdevClaviatura",
+        description: "Claviatura+++ extension by ABDev.",
+        code: "ABDev/Claviatura+++.js",
+        banner: "ABDev/Claviatura+++.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "clavi",
+        id: "abdevclavi",
+        description: "clavi extension by ABDev.",
+        code: "ABDev/clavi.js",
+        banner: "ABDev/clavi.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "col",
+        id: "abdevcol",
+        description: "col extension by ABDev.",
+        code: "ABDev/col.js",
+        banner: "ABDev/col.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "col1",
+        id: "abdevcol1",
+        description: "col1 extension by ABDev.",
+        code: "ABDev/col1.js",
+        banner: "ABDev/col1.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "console",
+        id: "abdevconsole",
+        description: "console extension by ABDev.",
+        code: "ABDev/console.js",
+        banner: "ABDev/console.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "download-server",
+        id: "abdevdownloadserver",
+        description: "download-server extension by ABDev.",
+        code: "ABDev/download-server.js",
+        banner: "ABDev/download-server.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "localstorage",
+        id: "abdevlocalstorage",
+        description: "localstorage extension by ABDev.",
+        code: "ABDev/localstorage.js",
+        banner: "ABDev/localstorage.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mish",
+        id: "abdevmish",
+        description: "mish extension by ABDev.",
+        code: "ABDev/mish.js",
+        banner: "ABDev/mish.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-ads",
+        id: "abdevmobileappads",
+        description: "mobile-app-ads extension by ABDev.",
+        code: "ABDev/mobile-app-ads.js",
+        banner: "ABDev/mobile-app-ads.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-analytics",
+        id: "abdevmobileappanalytics",
+        description: "mobile-app-analytics extension by ABDev.",
+        code: "ABDev/mobile-app-analytics.js",
+        banner: "ABDev/mobile-app-analytics.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-audio",
+        id: "abdevmobileappaudio",
+        description: "mobile-app-audio extension by ABDev.",
+        code: "ABDev/mobile-app-audio.js",
+        banner: "ABDev/mobile-app-audio.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-core",
+        id: "abdevmobileappcore",
+        description: "mobile-app-core extension by ABDev.",
+        code: "ABDev/mobile-app-core.js",
+        banner: "ABDev/mobile-app-core.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-location",
+        id: "abdevmobileapplocation",
+        description: "mobile-app-location extension by ABDev.",
+        code: "ABDev/mobile-app-location.js",
+        banner: "ABDev/mobile-app-location.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-media",
+        id: "abdevmobileappmedia",
+        description: "mobile-app-media extension by ABDev.",
+        code: "ABDev/mobile-app-media.js",
+        banner: "ABDev/mobile-app-media.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-notifications",
+        id: "abdevmobileappnotifications",
+        description: "mobile-app-notifications extension by ABDev.",
+        code: "ABDev/mobile-app-notifications.js",
+        banner: "ABDev/mobile-app-notifications.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-sensors",
+        id: "abdevmobileappsensors",
+        description: "mobile-app-sensors extension by ABDev.",
+        code: "ABDev/mobile-app-sensors.js",
+        banner: "ABDev/mobile-app-sensors.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-social",
+        id: "abdevmobileappsocial",
+        description: "mobile-app-social extension by ABDev.",
+        code: "ABDev/mobile-app-social.js",
+        banner: "ABDev/mobile-app-social.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-storage",
+        id: "abdevmobileappstorage",
+        description: "mobile-app-storage extension by ABDev.",
+        code: "ABDev/mobile-app-storage.js",
+        banner: "ABDev/mobile-app-storage.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "mobile-app-system",
+        id: "abdevmobileappsystem",
+        description: "mobile-app-system extension by ABDev.",
+        code: "ABDev/mobile-app-system.js",
+        banner: "ABDev/mobile-app-system.svg",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
 ];
 
 // In below array, there is some extensions that were taken from MistWarp and PenguinMod
