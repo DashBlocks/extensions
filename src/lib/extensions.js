@@ -172,7 +172,7 @@ const extensions = [
         id: "dashconsoleplusplus",
         description: "Advanced ANSI pseudo-console for DashBlocks with colors, line editor, and stage switching.",
         code: "ABDev/Console+.js",
-        banner: "ABDev/Console+.png",
+        banner: "ABDev/Console+.svg",
         creator: { name: "ABDev", link: "_github_" },
         scratchCompatible: false
     },
@@ -655,17 +655,11 @@ const otherExtensions = [
         id: "dashFXUltra",
         description: "Animations, 22 animated text styles, 57 fonts, 21 particle types, and screen effects.",
         code: "ABDev/DashFX_Ultra.js",
-        banner: "ABDev/DashFX_Ultra.png",
+        banner: "ABDev/DashFX_Ultra.svg",
         creator: { name: "ABDev", link: "_github_" },
         scratchCompatible: false
     },
-    {
-        name: "DashAI",
-        id: "dashAI",
-        description: "AI ChatBot extension with Pollinations, Groq, OpenRouter, OpenAI, Anthropic, and custom APIs.",
-        code: "ABDev/DashAI.js",
-        banner: "ABDev/DashAI.png",
-        creator: { name: "ABDev", link: "_github_" },
+    
         scratchCompatible: false,
         internetConnectionRequired: true
     },
