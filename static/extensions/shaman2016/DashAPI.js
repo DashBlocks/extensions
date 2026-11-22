@@ -20,6 +20,7 @@
     ru: {
       getFeaturedProjects: "избранные проекты",
       getFeaturedStudios: "избранные студии",
+      getLatestProjects: "последнии проекты",
       "titles.session": "Cессия и моя информация",
       "session.isLogin": "вошел?",
       "session.username": "имя пользователя",
@@ -84,6 +85,14 @@
             text: Scratch.translate({
               id: "getFeaturedStudios",
               default: "featured studios",
+            }),
+          },
+          {
+            opcode: "getLatestProjects",
+            blockType: Scratch.BlockType.ARRAY,
+            text: Scratch.translate({
+              id: "getLatestProjects",
+              default: "latest projects",
             }),
           },
           {
@@ -581,6 +590,13 @@
       const data = await this._makeRequest("featured/studios");
       if (data.ok) {
         return new NormalArray(data.studios);
+      }
+      return new NormalArray();
+    }
+    async getLatestProjects() {
+      const data = await this._makeRequest("projects/latest");
+      if (data.ok) {
+        return new NormalArray(data.projects);
       }
       return new NormalArray();
     }
