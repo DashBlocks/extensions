@@ -20,7 +20,7 @@
     ru: {
       getFeaturedProjects: "избранные проекты",
       getFeaturedStudios: "избранные студии",
-      getLatestProjects: "последнии проекты",
+      getLatestProjects: "последниe проекты",
       "titles.session": "Cессия и моя информация",
       "session.isLogin": "вошел?",
       "session.username": "имя пользователя",
