@@ -167,6 +167,15 @@ const extensions = [
         banner: "QBacks/AutoSave.svg",
         creator: { name: "QBacks", link: "_scratch_" },
     },
+    {
+        name: "Console++++",
+        id: "dashconsoleplusplus",
+        description: "Advanced ANSI pseudo-console for DashBlocks with colors, line editor, and stage switching.",
+        code: "ABDev/Console+.js",
+        banner: "ABDev/Console+.png",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
 ];
 
 // In below array, there is some extensions that were taken from MistWarp and PenguinMod
@@ -655,7 +664,7 @@ const otherExtensions = [
         id: "dashAI",
         description: "AI ChatBot extension with Pollinations, Groq, OpenRouter, OpenAI, Anthropic, and custom APIs.",
         code: "ABDev/DashAI.js",
-        banner: "ABDev/DashFX_Ultra.png",
+        banner: "ABDev/DashAI.png",
         creator: { name: "ABDev", link: "_github_" },
         scratchCompatible: false,
         internetConnectionRequired: true
