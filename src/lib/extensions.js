@@ -640,6 +640,26 @@ const otherExtensions = [
         isGitHub: true,
         creatorAlias: "gaimerI17",
     },
+
+    {
+        name: "DashFX Ultra",
+        id: "dashFXUltra",
+        description: "Animations, 22 animated text styles, 57 fonts, 21 particle types, and screen effects.",
+        code: "ABDev/DashFX_Ultra.js",
+        banner: "ABDev/DashFX_Ultra.png",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false
+    },
+    {
+        name: "DashAI",
+        id: "dashAI",
+        description: "AI ChatBot extension with Pollinations, Groq, OpenRouter, OpenAI, Anthropic, and custom APIs.",
+        code: "ABDev/DashAI.js",
+        banner: "ABDev/DashFX_Ultra.png",
+        creator: { name: "ABDev", link: "_github_" },
+        scratchCompatible: false,
+        internetConnectionRequired: true
+    },
 ];
 
 export {extensions, otherExtensions}
