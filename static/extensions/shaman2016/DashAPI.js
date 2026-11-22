@@ -262,6 +262,20 @@
             },
           },
           {
+            opcode: "getAvatarFrameUser",
+            blockType: Scratch.BlockType.REPORTER,
+            text: Scratch.translate({
+              id: "info.users.avatarFrame",
+              default: "avatar frame of user [USER]"
+            }),
+            arguments: {
+              USER: {
+                defaultValue: "polzovatel_8787",
+                type: Scratch.ArgumentType.STRING,
+              },
+            },
+          },
+          {
             opcode: "getUserLinks",
             blockType: Scratch.BlockType.ARRAY,
             text: Scratch.translate({
@@ -709,6 +723,14 @@
         return this.API_ORIGIN + "users/avatars/" + result.profile.avatarId;
       }
       return this.API_ORIGIN + "users/avatars/1";
+    }
+    async getAvatarFrameUser(args) {
+      const user = Cast.toString(args.USER);
+      const result = await this._getUserInfo(user);
+      if (Object.entries(result).length > 0) {
+        return result.profile.avatarFrame;
+      }
+      return null;
     }
     async getUserLinks(args) {
       const user = Cast.toString(args.USER);
