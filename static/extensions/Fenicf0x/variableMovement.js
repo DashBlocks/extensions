@@ -181,7 +181,7 @@
     getInfo () {
       return {
         id: 'variablewindowmover',
-        name: 'Variable Windows',
+        name: 'Variable Movement',
         color1: '#ff8c1a',
         color2: '#db6e00',
         color3: '#c25f00',
