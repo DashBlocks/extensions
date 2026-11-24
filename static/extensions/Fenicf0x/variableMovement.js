@@ -1,25 +1,23 @@
-// Name: Variable Movement
-// ID: variablemovemer
-// Description: Move variable and lists ("variable windows") around the stage with blocks.
-// By: Fenicf0x <https://scratch.mit.edu/users/me/>
+// Name: Variable Window Mover
+// ID: variablewindowmover
+// Description: Move variable and list monitors ("variable windows") around the stage with blocks.
+// By: Fenicf0x <https://scratch.mit.edu/users/Fenicf0x>
 // License: MIT
- 
+
 (function (Scratch) {
   'use strict';
- 
+
   if (!Scratch.extensions.unsandboxed) {
     throw new Error('Variable Window Mover must be loaded unsandboxed (check "Run without sandbox" when loading it).');
   }
- 
   const vm = Scratch.vm;
   const runtime = vm.runtime;
-  
-//Uses same cordinates as scratch/turbowarp
- 
+  const iconURI = 'data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI1NTguODkxMjEiIGhlaWdodD0iNDIyLjE3MTY2IiB2aWV3Qm94PSIwLDAsNTU4Ljg5MTIxLDQyMi4xNzE2NiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzUuOTI3NTIsMjUuODYxMTIpIj48ZyBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiPjxwYXRoIGQ9Ik0tMzAuOTI3NTEsMzk2LjMxMDU1Yy0yLjc2MTQyLDAgLTUsLTIuMjM4NTggLTUsLTV2LTQxMi4xNzE2NmMwLC0yLjc2MTQyIDIuMjM4NTgsLTUgNSwtNWg1NDguODkxMjFjMi43NjE0MiwwIDUsMi4yMzg1OCA1LDV2NDEyLjE3MTY2YzAsMi43NjE0MiAtMi4yMzg1OCw1IC01LDV6IiBmaWxsPSIjZmY2ZjBiIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iTmFOIiBzdHJva2UtbGluZWNhcD0iYnV0dCIvPjxnIHN0cm9rZS1saW5lY2FwPSJidXR0Ij48cGF0aCBkPSJNNTQuNTA3OTEsMjE2LjAzOTA1Yy0yLjc2MTQyLDAgLTUsLTIuMjM4NTggLTUsLTV2LTYyLjA3ODA5YzAsLTIuNzYxNDIgMi4yMzg1OCwtNSA1LC01aDM3MC45ODQxOGMyLjc2MTQyLDAgNSwyLjIzODU4IDUsNXY2Mi4wNzgwOWMwLDIuNzYxNDIgLTIuMjM4NTgsNSAtNSw1eiIgZmlsbD0iI2U2ZjBmZiIgc3Ryb2tlPSIjYzNjY2Q5IiBzdHJva2Utd2lkdGg9IjQuNSIvPjx0ZXh0IHRyYW5zZm9ybT0idHJhbnNsYXRlKDc3LjUzODI4LDE5Mi4xOTAyMSkgc2NhbGUoMC43ODYwOCwwLjc4NjA4KSIgZm9udC1zaXplPSI0MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgZmlsbD0iIzU3NWU3NSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZvbnQtZmFtaWx5PSJTYW5zIFNlcmlmIiBmb250LXdlaWdodD0ibm9ybWFsIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPjx0c3BhbiB4PSIwIiBkeT0iMCI+bXkgdmFyaWFibGU8L3RzcGFuPjwvdGV4dD48cGF0aCBkPSJNMzA0LjQ5MzAzLDIwMS43Mzc4NWMtMi43NjE0MiwwIC01LC0yLjIzODU4IC01LC01di0zNS43NjM4N2MwLC0yLjc2MTQyIDIuMjM4NTgsLTUgNSwtNWg5OC42ODkxOGMyLjc2MTQyLDAgNSwyLjIzODU4IDUsNXYzNS43NjM4N2MwLDIuNzYxNDIgLTIuMjM4NTgsNSAtNSw1eiIgZmlsbD0iI2ZmOGMxYSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjAiLz48dGV4dCB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNDUuMjU2ODksMTg5LjM5OTYxKSBzY2FsZSgwLjc3NjEsMC43NzYxKSIgZm9udC1zaXplPSI0MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZvbnQtZmFtaWx5PSJTYW5zIFNlcmlmIiBmb250LXdlaWdodD0ibm9ybWFsIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPjx0c3BhbiB4PSIwIiBkeT0iMCI+MDwvdHNwYW4+PC90ZXh0PjwvZz48cGF0aCBkPSJNNDE4LjkzNjcxLDEzMy44MTY2NGwtNzIuNjUwMTQsLTY1LjIxMzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2MzY2NkOSIgc3Ryb2tlLXdpZHRoPSI0LjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik00Mi4zODA0NywxMzguODE2NjRsLTE1LjI5NDc2LC0xMy43MjkxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjY2Q5IiBzdHJva2Utd2lkdGg9IjQuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEyOS4xODMzOCwxMTkuNzkwNmwtMjYuNzM1NzMsLTIzLjk5OSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjY2Q5IiBzdHJva2Utd2lkdGg9IjQuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTI0OS4xNjUwOSwxMzYuODAzNjJsLTM3LjAzMjYsLTMzLjI0MTg2IiBmaWxsPSJub25lIiBzdHJva2U9IiNjM2NjZDkiIHN0cm9rZS13aWR0aD0iNC41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L2c+PC9nPjwvc3ZnPjwhLS1yb3RhdGlvbkNlbnRlcjoyNzUuOTI3NTE0OTk5OTk5OTc6MjA1Ljg2MTExNS0tPg==';
 
- 
+ //Cordinates use the cordinates from scratch/turbowarp
+
   const VAR_TYPES = ['', 'list'];
- 
+
   const findVariable = (name, target) => {
     name = Scratch.Cast.toString(name);
     if (target) {
@@ -28,7 +26,7 @@
         if (v) return v;
       }
     }
-    // Fall back to local variable
+    // Fall back to any sprite's local variable with that name.
     for (const t of runtime.targets) {
       if (!t.isOriginal) continue;
       for (const id of Object.keys(t.variables)) {
@@ -38,12 +36,12 @@
     }
     return null;
   };
- 
+
   const getRecord = (id) => runtime._monitorState.get(id);
- 
+
   const num = (v) => (typeof v === 'number' && !isNaN(v) ? v : 0);
- 
-  //Keeps variables hidden if moved
+
+//Makes monitor move, even if invsisble
   const ensureMonitor = (variable, target) => {
     if (getRecord(variable.id)) return true;
     const isList = variable.type === 'list';
@@ -81,8 +79,8 @@
     }
     return !!getRecord(variable.id);
   };
- 
-  //Keeps locations consistent
+
+//Makes x/y work properly
  
   let cachedStore = null;
   const getReduxStore = () => {
@@ -102,18 +100,18 @@
     }
     return null;
   };
- 
+
   const parseTranslate = (el) => {
     const m = /translate\(\s*(-?[\d.]+)px,\s*(-?[\d.]+)px\s*\)/.exec(el.style.transform || '');
     return m ? {x: parseFloat(m[1]), y: parseFloat(m[2])} : {x: 0, y: 0};
   };
- 
+
   const syncEditor = (id, x, y) => {
     if (typeof document === 'undefined') return;
     try {
       const sel = `.monitor-overlay [data-id="${CSS.escape(id)}"]`;
       for (const el of document.querySelectorAll(sel)) {
-        // makes draggable work
+        // react-draggable leaves a translate() on the element after a drag.
         const t = parseTranslate(el);
         el.style.left = `${Math.round(x - t.x)}px`;
         el.style.top = `${Math.round(y - t.y)}px`;
@@ -128,7 +126,7 @@
       if (layout.monitors[id]) {
         store.dispatch({type: 'scratch-gui/monitors/MOVE_MONITOR_RECT', monitorId: id, newX: rx, newY: ry});
       } else {
-        // Makes the monitor keep new position, even if hidden
+        //remembers position when hidden
         store.dispatch({
           type: 'scratch-gui/monitors/ADD_MONITOR_RECT',
           monitorId: id,
@@ -142,9 +140,9 @@
       console.warn('Variable Window Mover: editor sync failed', e);
     }
   };
- 
-  //Core movement blocks
- 
+
+  //Core blocks
+
   const moveMonitor = (name, target, x, y) => {
     const variable = findVariable(name, target);
     if (!variable) return;
@@ -154,7 +152,7 @@
     runtime.requestUpdateMonitor({id: variable.id, x, y});
     syncEditor(variable.id, x, y);
   };
- 
+
   const getPosition = (name, target) => {
     const variable = findVariable(name, target);
     if (!variable) return null;
@@ -162,7 +160,7 @@
     if (!record) return null;
     return {x: num(record.get('x')), y: num(record.get('y'))};
   };
- 
+
   const getSize = (name, target) => {
     const variable = findVariable(name, target);
     if (!variable) return null;
@@ -176,12 +174,13 @@
     if (!record) return null;
     return {width: num(record.get('width')), height: num(record.get('height'))};
   };
- 
+
   class VariableWindowMover {
     getInfo () {
       return {
         id: 'variablewindowmover',
         name: 'Variable Movement',
+        menuIconURI: iconURI,
         color1: '#ff8c1a',
         color2: '#db6e00',
         color3: '#c25f00',
@@ -272,7 +271,7 @@
         }
       };
     }
- 
+
     getVariableMenu () {
       const names = [];
       const add = (target) => {
@@ -287,11 +286,11 @@
       if (names.length === 0) return [{text: '(no variables)', value: ''}];
       return names.sort((a, b) => a.localeCompare(b));
     }
- 
+
     moveTo (args, util) {
       moveMonitor(args.VAR, util.target, args.X, args.Y);
     }
- 
+
     glideTo (args, util) {
       if (!util.stackFrame.timer) {
         const start = getPosition(args.VAR, util.target);
@@ -321,21 +320,21 @@
         moveMonitor(args.VAR, util.target, f.endX, f.endY);
       }
     }
- 
+
     changeBy (args, util) {
       const pos = getPosition(args.VAR, util.target) || {x: 0, y: 0};
       const n = Scratch.Cast.toNumber(args.N);
       if (args.AXIS === 'y') moveMonitor(args.VAR, util.target, pos.x, pos.y + n);
       else moveMonitor(args.VAR, util.target, pos.x + n, pos.y);
     }
- 
+
     setTo (args, util) {
       const pos = getPosition(args.VAR, util.target) || {x: 0, y: 0};
       const n = Scratch.Cast.toNumber(args.N);
       if (args.AXIS === 'y') moveMonitor(args.VAR, util.target, pos.x, n);
       else moveMonitor(args.VAR, util.target, n, pos.y);
     }
- 
+
     center (args, util) {
       const size = getSize(args.VAR, util.target) || {width: 0, height: 0};
       moveMonitor(
@@ -345,7 +344,7 @@
         (runtime.stageHeight - size.height) / 2
       );
     }
- 
+
     getProp (args, util) {
       if (args.PROP === 'width' || args.PROP === 'height') {
         const size = getSize(args.VAR, util.target);
@@ -355,14 +354,14 @@
       if (!pos) return 0;
       return args.PROP === 'y' ? pos.y : pos.x;
     }
- 
+
     isShown (args, util) {
       const variable = findVariable(args.VAR, util.target);
       if (!variable) return false;
       const record = getRecord(variable.id);
       return !!(record && record.get('visible'));
     }
- 
+
     setShown (args, util) {
       const variable = findVariable(args.VAR, util.target);
       if (!variable) return;
@@ -373,7 +372,6 @@
       );
     }
   }
- 
+
   Scratch.extensions.register(new VariableWindowMover());
 })(Scratch);
- 
