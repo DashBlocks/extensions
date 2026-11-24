@@ -1,12 +1,12 @@
-<svg version="1.1" xmlns="http://w3.org" xmlns:xlink="http://w3.org" width="558.89121" height="422.17166" viewBox="0 0 558.89121 422.17166">
+<svg width="559" height="422" viewBox="0 0 558.89121 422.17166" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g transform="translate(35.92752,25.86112)">
     <g stroke-miterlimit="10">
       <path d="M-30.92751,396.31055c-2.76142,0 -5,-2.23858 -5,-5v-412.17166c0,-2.76142 2.23858,-5 5,-5h548.89121c2.76142,0 5,2.23858 5,5v412.17166c0,2.76142 -2.23858,5 -5,5z" fill="#ff6f0b" stroke="none" stroke-width="0" stroke-linecap="butt"/>
       <g stroke-linecap="butt">
         <path d="M54.50791,216.03905c-2.76142,0 -5,-2.23858 -5,-5v-62.07809c0,-2.76142 2.23858,-5 5,-5h370.98418c2.76142,0 5,2.23858 5,5v62.07809c0,2.76142 -2.23858,5 -5,5z" fill="#e6f0ff" stroke="#c3ccd9" stroke-width="4.5"/>
-        <text transform="translate(77.53828,192.19021) scale(0.78608,0.78608)" font-size="40" xml:space="preserve" fill="#575e75" stroke="none" stroke-width="1" font-family="sans-serif" font-weight="normal" text-anchor="start"><tspan x="0" dy="0">my variable</tspan></text>
+        <text transform="translate(77.53828,192.19021) scale(0.78608,0.78608)" font-size="40" fill="#575e75" stroke="none" stroke-width="1" font-family="sans-serif" font-weight="normal" text-anchor="start"><tspan x="0" dy="0">my variable</tspan></text>
         <path d="M304.49303,201.73785c-2.76142,0 -5,-2.23858 -5,-5v-35.76387c0,-2.76142 2.23858,-5 5,-5h98.68918c2.76142,0 5,2.23858 5,5v35.76387c0,2.76142 -2.23858,5 -5,5z" fill="#ff8c1a" stroke="none" stroke-width="0"/>
-        <text transform="translate(345.25689,189.39961) scale(0.7761,0.7761)" font-size="40" xml:space="preserve" fill="#ffffff" stroke="none" stroke-width="1" font-family="sans-serif" font-weight="normal" text-anchor="start"><tspan x="0" dy="0">0</tspan></text>
+        <text transform="translate(345.25689,189.39961) scale(0.7761,0.7761)" font-size="40" fill="#ffffff" stroke="none" stroke-width="1" font-family="sans-serif" font-weight="normal" text-anchor="start"><tspan x="0" dy="0">0</tspan></text>
       </g>
       <path d="M418.93671,133.81664l-72.65014,-65.2135" fill="none" stroke="#c3ccd9" stroke-width="4.5" stroke-linecap="round"/>
       <path d="M42.38047,138.81664l-15.29476,-13.72915" fill="none" stroke="#c3ccd9" stroke-width="4.5" stroke-linecap="round"/>
