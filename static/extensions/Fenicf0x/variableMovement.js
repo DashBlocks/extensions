@@ -1,0 +1,379 @@
+// Name: Variable Movement
+// ID: variablemovemer
+// Description: Move variable and lists ("variable windows") around the stage with blocks.
+// By: Fenicf0x <https://scratch.mit.edu/users/me/>
+// License: MIT
+ 
+(function (Scratch) {
+  'use strict';
+ 
+  if (!Scratch.extensions.unsandboxed) {
+    throw new Error('Variable Window Mover must be loaded unsandboxed (check "Run without sandbox" when loading it).');
+  }
+ 
+  const vm = Scratch.vm;
+  const runtime = vm.runtime;
+  
+//Uses same cordinates as scratch/turbowarp
+ 
+
+ 
+  const VAR_TYPES = ['', 'list'];
+ 
+  const findVariable = (name, target) => {
+    name = Scratch.Cast.toString(name);
+    if (target) {
+      for (const type of VAR_TYPES) {
+        const v = target.lookupVariableByNameAndType(name, type);
+        if (v) return v;
+      }
+    }
+    // Fall back to local variable
+    for (const t of runtime.targets) {
+      if (!t.isOriginal) continue;
+      for (const id of Object.keys(t.variables)) {
+        const v = t.variables[id];
+        if (v.name === name && VAR_TYPES.includes(v.type)) return v;
+      }
+    }
+    return null;
+  };
+ 
+  const getRecord = (id) => runtime._monitorState.get(id);
+ 
+  const num = (v) => (typeof v === 'number' && !isNaN(v) ? v : 0);
+ 
+  //Keeps variables hidden if moved
+  const ensureMonitor = (variable, target) => {
+    if (getRecord(variable.id)) return true;
+    const isList = variable.type === 'list';
+    const opcode = isList ? 'data_listcontents' : 'data_variable';
+    const field = isList ? 'LIST' : 'VARIABLE';
+    const isLocal = !runtime.getTargetForStage().variables[variable.id];
+    let owner = null;
+    if (isLocal) {
+      owner = runtime.targets.find((t) => t.isOriginal && t.variables[variable.id]) || target;
+    }
+    try {
+      if (!runtime.monitorBlocks.getBlock(variable.id)) {
+        runtime.monitorBlocks.createBlock({
+          id: variable.id,
+          opcode,
+          inputs: {},
+          fields: {[field]: {name: field, id: variable.id, value: variable.name, variableType: variable.type}},
+          next: null,
+          parent: null,
+          topLevel: true,
+          shadow: false,
+          x: 0,
+          y: 0,
+          isMonitored: false,
+          targetId: owner ? owner.id : null
+        });
+      }
+      const block = runtime.monitorBlocks.getBlock(variable.id);
+      if (owner) block.targetId = owner.id;
+      // Show then hide in the same frame: creates the monitor record without flicker.
+      runtime.monitorBlocks.changeBlock({id: variable.id, element: 'checkbox', value: true}, runtime);
+      runtime.monitorBlocks.changeBlock({id: variable.id, element: 'checkbox', value: false}, runtime);
+    } catch (e) {
+      console.warn('Variable Window Mover: could not create monitor', e);
+    }
+    return !!getRecord(variable.id);
+  };
+ 
+  //Keeps locations consistent
+ 
+  let cachedStore = null;
+  const getReduxStore = () => {
+    if (cachedStore) return cachedStore;
+    if (typeof document === 'undefined') return null;
+    const start = document.querySelector('.monitor-overlay') || document.querySelector('[class*="stage-wrapper"]');
+    if (!start) return null;
+    const key = Object.keys(start).find((k) => k.startsWith('__reactInternalInstance$') || k.startsWith('__reactFiber$'));
+    let fiber = key ? start[key] : null;
+    while (fiber) {
+      const props = fiber.memoizedProps;
+      if (props && props.store && typeof props.store.dispatch === 'function' && typeof props.store.getState === 'function') {
+        cachedStore = props.store;
+        return cachedStore;
+      }
+      fiber = fiber.return;
+    }
+    return null;
+  };
+ 
+  const parseTranslate = (el) => {
+    const m = /translate\(\s*(-?[\d.]+)px,\s*(-?[\d.]+)px\s*\)/.exec(el.style.transform || '');
+    return m ? {x: parseFloat(m[1]), y: parseFloat(m[2])} : {x: 0, y: 0};
+  };
+ 
+  const syncEditor = (id, x, y) => {
+    if (typeof document === 'undefined') return;
+    try {
+      const sel = `.monitor-overlay [data-id="${CSS.escape(id)}"]`;
+      for (const el of document.querySelectorAll(sel)) {
+        // makes draggable work
+        const t = parseTranslate(el);
+        el.style.left = `${Math.round(x - t.x)}px`;
+        el.style.top = `${Math.round(y - t.y)}px`;
+      }
+      const store = getReduxStore();
+      if (!store) return;
+      const state = store.getState();
+      const layout = state && state.scratchGui && state.scratchGui.monitorLayout;
+      if (!layout) return;
+      const rx = Math.round(x);
+      const ry = Math.round(y);
+      if (layout.monitors[id]) {
+        store.dispatch({type: 'scratch-gui/monitors/MOVE_MONITOR_RECT', monitorId: id, newX: rx, newY: ry});
+      } else {
+        // Makes the monitor keep new position, even if hidden
+        store.dispatch({
+          type: 'scratch-gui/monitors/ADD_MONITOR_RECT',
+          monitorId: id,
+          upperStart: {x: rx, y: ry},
+          lowerEnd: {x: rx + 1, y: ry + 1},
+          savePosition: true
+        });
+        store.dispatch({type: 'scratch-gui/monitors/REMOVE_MONITOR_RECT', monitorId: id});
+      }
+    } catch (e) {
+      console.warn('Variable Window Mover: editor sync failed', e);
+    }
+  };
+ 
+  //Core movement blocks
+ 
+  const moveMonitor = (name, target, x, y) => {
+    const variable = findVariable(name, target);
+    if (!variable) return;
+    if (!ensureMonitor(variable, target)) return;
+    x = Scratch.Cast.toNumber(x);
+    y = Scratch.Cast.toNumber(y);
+    runtime.requestUpdateMonitor({id: variable.id, x, y});
+    syncEditor(variable.id, x, y);
+  };
+ 
+  const getPosition = (name, target) => {
+    const variable = findVariable(name, target);
+    if (!variable) return null;
+    const record = getRecord(variable.id);
+    if (!record) return null;
+    return {x: num(record.get('x')), y: num(record.get('y'))};
+  };
+ 
+  const getSize = (name, target) => {
+    const variable = findVariable(name, target);
+    if (!variable) return null;
+    if (typeof document !== 'undefined') {
+      const el = document.querySelector(
+        `.monitor-overlay [data-id="${CSS.escape(variable.id)}"], .sc-monitor-root[data-id="${CSS.escape(variable.id)}"]`
+      );
+      if (el && el.offsetWidth) return {width: el.offsetWidth, height: el.offsetHeight};
+    }
+    const record = getRecord(variable.id);
+    if (!record) return null;
+    return {width: num(record.get('width')), height: num(record.get('height'))};
+  };
+ 
+  class VariableWindowMover {
+    getInfo () {
+      return {
+        id: 'variablewindowmover',
+        name: 'Variable Windows',
+        color1: '#ff8c1a',
+        color2: '#db6e00',
+        color3: '#c25f00',
+        blocks: [
+          {
+            opcode: 'moveTo',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'move window of [VAR] to x: [X] y: [Y]',
+            arguments: {
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'},
+              X: {type: Scratch.ArgumentType.NUMBER, defaultValue: 10},
+              Y: {type: Scratch.ArgumentType.NUMBER, defaultValue: 10}
+            }
+          },
+          {
+            opcode: 'glideTo',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'glide window of [VAR] to x: [X] y: [Y] in [SECS] secs',
+            arguments: {
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'},
+              X: {type: Scratch.ArgumentType.NUMBER, defaultValue: 200},
+              Y: {type: Scratch.ArgumentType.NUMBER, defaultValue: 150},
+              SECS: {type: Scratch.ArgumentType.NUMBER, defaultValue: 1}
+            }
+          },
+          '---',
+          {
+            opcode: 'changeBy',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'change window of [VAR] [AXIS] by [N]',
+            arguments: {
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'},
+              AXIS: {type: Scratch.ArgumentType.STRING, menu: 'axis', defaultValue: 'x'},
+              N: {type: Scratch.ArgumentType.NUMBER, defaultValue: 10}
+            }
+          },
+          {
+            opcode: 'setTo',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'set window of [VAR] [AXIS] to [N]',
+            arguments: {
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'},
+              AXIS: {type: Scratch.ArgumentType.STRING, menu: 'axis', defaultValue: 'x'},
+              N: {type: Scratch.ArgumentType.NUMBER, defaultValue: 0}
+            }
+          },
+          {
+            opcode: 'center',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'move window of [VAR] to center of stage',
+            arguments: {
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'}
+            }
+          },
+          '---',
+          {
+            opcode: 'getProp',
+            blockType: Scratch.BlockType.REPORTER,
+            text: '[PROP] of window of [VAR]',
+            arguments: {
+              PROP: {type: Scratch.ArgumentType.STRING, menu: 'props', defaultValue: 'x'},
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'}
+            }
+          },
+          {
+            opcode: 'isShown',
+            blockType: Scratch.BlockType.BOOLEAN,
+            text: 'window of [VAR] shown?',
+            arguments: {
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'}
+            }
+          },
+          {
+            opcode: 'setShown',
+            blockType: Scratch.BlockType.COMMAND,
+            text: '[ACTION] window of [VAR]',
+            arguments: {
+              ACTION: {type: Scratch.ArgumentType.STRING, menu: 'showHide', defaultValue: 'show'},
+              VAR: {type: Scratch.ArgumentType.STRING, menu: 'variables'}
+            }
+          }
+        ],
+        menus: {
+          variables: {acceptReporters: true, items: 'getVariableMenu'},
+          axis: {acceptReporters: false, items: ['x', 'y']},
+          props: {acceptReporters: false, items: ['x', 'y', 'width', 'height']},
+          showHide: {acceptReporters: false, items: ['show', 'hide']}
+        }
+      };
+    }
+ 
+    getVariableMenu () {
+      const names = [];
+      const add = (target) => {
+        if (!target) return;
+        for (const id of Object.keys(target.variables)) {
+          const v = target.variables[id];
+          if (VAR_TYPES.includes(v.type) && !names.includes(v.name)) names.push(v.name);
+        }
+      };
+      add(runtime.getTargetForStage());
+      add(runtime.getEditingTarget());
+      if (names.length === 0) return [{text: '(no variables)', value: ''}];
+      return names.sort((a, b) => a.localeCompare(b));
+    }
+ 
+    moveTo (args, util) {
+      moveMonitor(args.VAR, util.target, args.X, args.Y);
+    }
+ 
+    glideTo (args, util) {
+      if (!util.stackFrame.timer) {
+        const start = getPosition(args.VAR, util.target);
+        const secs = Scratch.Cast.toNumber(args.SECS);
+        const endX = Scratch.Cast.toNumber(args.X);
+        const endY = Scratch.Cast.toNumber(args.Y);
+        if (!start || secs <= 0) {
+          moveMonitor(args.VAR, util.target, endX, endY);
+          return;
+        }
+        util.stackFrame.timer = {start: runtime.currentMSecs};
+        util.stackFrame.duration = secs * 1000;
+        util.stackFrame.startX = start.x;
+        util.stackFrame.startY = start.y;
+        util.stackFrame.endX = endX;
+        util.stackFrame.endY = endY;
+        util.yield();
+        return;
+      }
+      const f = util.stackFrame;
+      const elapsed = runtime.currentMSecs - f.timer.start;
+      if (elapsed < f.duration) {
+        const t = elapsed / f.duration;
+        moveMonitor(args.VAR, util.target, f.startX + (f.endX - f.startX) * t, f.startY + (f.endY - f.startY) * t);
+        util.yield();
+      } else {
+        moveMonitor(args.VAR, util.target, f.endX, f.endY);
+      }
+    }
+ 
+    changeBy (args, util) {
+      const pos = getPosition(args.VAR, util.target) || {x: 0, y: 0};
+      const n = Scratch.Cast.toNumber(args.N);
+      if (args.AXIS === 'y') moveMonitor(args.VAR, util.target, pos.x, pos.y + n);
+      else moveMonitor(args.VAR, util.target, pos.x + n, pos.y);
+    }
+ 
+    setTo (args, util) {
+      const pos = getPosition(args.VAR, util.target) || {x: 0, y: 0};
+      const n = Scratch.Cast.toNumber(args.N);
+      if (args.AXIS === 'y') moveMonitor(args.VAR, util.target, pos.x, n);
+      else moveMonitor(args.VAR, util.target, n, pos.y);
+    }
+ 
+    center (args, util) {
+      const size = getSize(args.VAR, util.target) || {width: 0, height: 0};
+      moveMonitor(
+        args.VAR,
+        util.target,
+        (runtime.stageWidth - size.width) / 2,
+        (runtime.stageHeight - size.height) / 2
+      );
+    }
+ 
+    getProp (args, util) {
+      if (args.PROP === 'width' || args.PROP === 'height') {
+        const size = getSize(args.VAR, util.target);
+        return size ? size[args.PROP] : 0;
+      }
+      const pos = getPosition(args.VAR, util.target);
+      if (!pos) return 0;
+      return args.PROP === 'y' ? pos.y : pos.x;
+    }
+ 
+    isShown (args, util) {
+      const variable = findVariable(args.VAR, util.target);
+      if (!variable) return false;
+      const record = getRecord(variable.id);
+      return !!(record && record.get('visible'));
+    }
+ 
+    setShown (args, util) {
+      const variable = findVariable(args.VAR, util.target);
+      if (!variable) return;
+      if (!ensureMonitor(variable, util.target)) return;
+      runtime.monitorBlocks.changeBlock(
+        {id: variable.id, element: 'checkbox', value: args.ACTION !== 'hide'},
+        runtime
+      );
+    }
+  }
+ 
+  Scratch.extensions.register(new VariableWindowMover());
+})(Scratch);
+ 
